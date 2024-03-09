@@ -7,7 +7,7 @@ self.addEventListener('install', event => {
             return cache.addAll([
                 '/',
                 '/index.html',
-                // Add other assets your app needs to work offline
+                // Add other assets the app needs to work offline
             ]);
         })
     );
