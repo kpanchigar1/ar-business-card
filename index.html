@@ -52,7 +52,11 @@
                   url='https://startling-hummingbird-a198e7.netlify.app/marker/pattern-12.patt'>
 
             <!-- Here we define the content to show on the marker when it gets detected: a unit cube that lies on the floor and that is red -->
-            <a-box position='0 0.5 0' color="green" scale="2 2 2"></a-box>
+            <a-assets>
+                <a-asset-item id="john" src="/models/john.glb"></a-asset-item>
+            </a-assets>
+            <!-- use your gltf model -->
+            <a-entity gltf-model="##john"></a-entity>
 
         </a-marker>
 
