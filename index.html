@@ -2,10 +2,10 @@
 <head>
     <meta charset="UTF-8">
 
-    <!-- Initialize the viewport -->
+    <!-- initialising the viewport -->
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
-    <!-- Load the required dependencies: A-frame and AR.js -->
+    <!-- load a-frame and ar.js-->
     <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
 
@@ -41,22 +41,19 @@
 </head>
 
 <body style='margin : 0px; overflow: hidden;'>
-    <!-- a-scene defines the scene that we are agoing to use. After arjs= there are various options that can be customized  -->
-    <!-- depending on your needs. For now just stick with these ones -->
+    <!-- define the scene  -->
     <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
 
-        <!-- Defines the marker that we are going to use. Notice that we are not providing the image file, but the  -->
-        <!-- "compiled" .patt file that we got from the online tool. the marker MUST BE ACCESSIBLE VIA HTTPS -->
-
-            <!-- Here we define the content to show on the marker when it gets detected: a unit cube that lies on the floor and that is red -->
-
+            <!-- defining the content to appear (avatar of john) -->
             <a-assets>
                 <a-asset-item id="john" src="/models/john.glb"></a-asset-item>
             </a-assets>
 
+            <!-- defining the marker to scan using a .patt file -->
             <a-marker preset='custom' type='pattern'
                       url='https://startling-hummingbird-a198e7.netlify.app/marker/pattern-12.patt'>
 
+                <!-- linking the marker to the model we want to show -->
                 <a-entity gltf-model="#john"></a-entity>
 
             </a-marker>
