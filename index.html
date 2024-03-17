@@ -55,9 +55,10 @@
 
                 <!-- linking the marker to the model we want to show -->
                 <a-entity gltf-model="#john" scale="1 1 1"></a-entity>
-                <a-text value="TEXT" position="10 10 10"></a-text>
-                <a-text value="TEXT" position="10 10 0"></a-text>
-                <a-text value="TEXT" position="0 10 10"></a-text>
+                <a-entity id="speechBubble1" position="1 0 -2" text="value: Click me!" look-at="#avatar" clickable></a-entity>
+                <a-entity id="speechBubble2" position="-1 0 -2" text="value: Click me too!" look-at="#avatar" clickable></a-entity>
+                <a-entity id="speechBubble3" position="0 1 -2" text="value: And me!" look-at="#avatar" clickable></a-entity>
+            </a-marker>
 
 
                 <script>
@@ -71,4 +72,32 @@
 
             <a-entity camera></a-entity>
     </a-scene>
+    <script>
+        // Function to handle click events on speech bubbles
+        function handleClick(event) {
+            var targetId = event.target.id;
+            switch (targetId) {
+                case "speechBubble1":
+                    // Define action for speech bubble 1
+                    console.log("Clicked on speech bubble 1");
+                    break;
+                case "speechBubble2":
+                    // Define action for speech bubble 2
+                    console.log("Clicked on speech bubble 2");
+                    break;
+                case "speechBubble3":
+                    // Define action for speech bubble 3
+                    console.log("Clicked on speech bubble 3");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // Add click event listeners to speech bubbles
+        document.querySelectorAll('[clickable]').forEach(function (bubble) {
+            bubble.addEventListener('click', handleClick);
+        });
+    </script>
 </body>
+</html>
