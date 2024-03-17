@@ -62,11 +62,11 @@
 
 
                 <script>
-                    let audioPlayed = false;
+                    var audioPlayed = false;
 
                     document.querySelector('a-marker').addEventListener('markerFound', function() {
                         // Checks if overview audio played already
-                        if (!audioPlayed) {
+                        if (audioPlayed === false) {
                             console.log("Playing overview audio");
                             var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/js/overview.wav');
                             audio.play();
@@ -87,7 +87,7 @@
         // this is to check that the code actually displays an image
         var debugImg1 = document.createElement('img');
         debugImg1.src = "imgs/Peterdead.PNG";
-        document.body.appendChild(debugImg1);
+        document.body.(debugImg1);
         // Function to handle click events on speech bubbles
         function handleClick(event) {
             var targetId = event.target.id;
