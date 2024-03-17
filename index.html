@@ -59,6 +59,13 @@
                 <a-text value="TEXT" position="10 10 0"></a-text>
                 <a-text value="TEXT" position="0 10 10"></a-text>
 
+
+                <script>
+                    document.querySelector('a-marker').addEventListener('markerFound', function() {
+                        var audio = new Audio('./js/overwiew.wav');
+                        audio.play();
+                    })
+                </script>
             </a-marker>
 
             <a-entity camera></a-entity>
