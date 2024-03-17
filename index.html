@@ -91,7 +91,7 @@
             // Set position and rotation of entity
             entity.setAttribute('position', '0 0 0');
             entity.setAttribute('rotation', '0 0 0');
-            
+
             switch (targetId) {
                 case "speechBubble1":
                     // Define action for speech bubble 1
@@ -113,9 +113,9 @@
                     break;
                 case "speechBubble3":
                     // Define action for speech bubble 3
-                    let debugImg3 = document.createElement('img');
-                    debugImg3.src = "imgs/Peterdead.PNG";
-                    document.body.appendChild(debugImg3);
+                    let audio = new
+                    Audio('https://startling-hummingbird-a198e7.netlify.app/js/overview.wav');
+                    audio.play();
                     console.log("Clicked on speech bubble 3");
                     break;
                 default:
