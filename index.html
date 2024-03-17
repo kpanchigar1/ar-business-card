@@ -66,18 +66,18 @@
 
 
                 <script>
-                    var audioPlayed = false;
+                    var audioPlayedCounter = 0;
 
                     document.querySelector('a-marker').addEventListener('markerFound', function() {
                         // Checks if overview audio played already
-                        if (audioPlayed === false) {
+                        if (audioPlayedCounter < 3) {
                             console.log("Playing overview audio");
                             let audio = new
                             Audio('https://startling-hummingbird-a198e7.netlify.app/js/overview.wav');
                             audio.play();
                             audioPlayed = true;
                         } else {
-                            console.log("Overview audio already played");
+                            audioPlayedCounter++;
                         }
                     })
                 </script>
