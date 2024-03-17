@@ -68,11 +68,17 @@
                         // Checks if overview audio played already
                         if (audioPlayed === false) {
                             console.log("Playing overview audio");
-                            var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/js/overview.wav');
+                            let audio = new
+                            Audio('https://startling-hummingbird-a198e7.netlify.app/js/overview.wav');
                             audio.play();
                             audioPlayed = true;
                         } else {
+                            console.log("Playing overview audio");
+                            let audio = new
+                            Audio('https://startling-hummingbird-a198e7.netlify.app/js/overview.wav');
+                            audio.play();
                             console.log("Overview audio already played");
+                            audioPlayed = false;
                         }
                     })
                 </script>
@@ -80,7 +86,7 @@
 
             <a-entity camera></a-entity>
     </a-scene>
-    
+
     <script>
         // Function to handle click events on speech bubbles
         function handleClick(event) {
