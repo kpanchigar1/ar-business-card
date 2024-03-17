@@ -62,7 +62,8 @@
 
                 <script>
                     document.querySelector('a-marker').addEventListener('markerFound', function() {
-                        var audio = new Audio('./js/overwiew.wav');
+                        console.log("Playing audio");
+                        var audio = new Audio('./js/overview.wav');
                         audio.play();
                     })
                 </script>
