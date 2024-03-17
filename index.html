@@ -73,15 +73,16 @@
             <a-entity camera></a-entity>
     </a-scene>
     <script>
+        // this is to check that the code actually displays an image
+        var debugImg1 = document.createElement('img');
+        debugImg1.src = "imgs/Peterdead.PNG";
+        document.body.appendChild(debugImg1);
         // Function to handle click events on speech bubbles
         function handleClick(event) {
             var targetId = event.target.id;
             switch (targetId) {
                 case "speechBubble1":
                     // Define action for speech bubble 1
-                    var debugImg1 = document.createElement('img');
-                    debugImg1.src = "imgs/Peterdead.PNG";
-                    document.body.appendChild(debugImg1);
                     console.log("Clicked on speech bubble 1");
                     break;
                 case "speechBubble2":
