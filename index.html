@@ -65,7 +65,7 @@
                 </a-entity>
                 <script>
                     // Function to handle click events on speech bubbles
-                    function handleClick(event) {
+                    function handleTouch(event) {
                         var targetId = event.target.id;
                         var marker = event.currentTarget.parentElement;
                         var entity = document.createElement('a-entity');
@@ -103,6 +103,11 @@
                                 break;
                         }
                     }
+
+                    // Add touch event listeners to the buttons
+                    document.getElementById("speechBubble1").addEventListener("touchstart", handleTouch);
+                    document.getElementById("speechBubble2").addEventListener("touchstart", handleTouch);
+                    document.getElementById("speechBubble3").addEventListener("touchstart", handleTouch);
                 </script>     
             </a-marker>
                 <script>
