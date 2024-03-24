@@ -94,8 +94,7 @@
                                 break;
                             case "speechBubble3":
                                 // Define action for speech bubble 3
-                                let audio = new
-                                Audio('https://startling-hummingbird-a198e7.netlify.app/js/overview.wav');
+                                let audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/js/overview.wav');
                                 audio.play();
                                 console.log("Clicked on speech bubble 3");
                                 break;
@@ -115,10 +114,9 @@
 
                     document.querySelector('a-marker').addEventListener('markerFound', function() {
                         // Checks if overview audio played already
-                        if (audioPlayedCounter < 10) {
+                        if (audioPlayedCounter === 0) {
                             console.log("Playing overview audio");
-                            let audio = new
-                            Audio('https://startling-hummingbird-a198e7.netlify.app/js/overview.wav');
+                            let audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/js/overview.wav');
                             audio.play();
                         }
                         audioPlayedCounter++;
