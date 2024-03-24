@@ -56,17 +56,19 @@
 
                 <!-- linking the marker to the model we want to show -->
                 <a-entity gltf-model="#john" scale="1 1 1"></a-entity>
-                <a-entity id="speechBubble1" position="1 0 -2" scale="8 8 8" text="value: Click me!" look-at="#john" clickable></a-entity>
-                <a-entity id="speechBubble2" position="-1 0 -2" scale="8 8 8" text="value: Click me too!" look-at="#john" clickable></a-entity>
-                <a-entity id="speechBubble3" position="0 1 -2" scale="8 8 8" text="value: And me!" look-at="#john" clickable></a-entity>
+                <a-entity id="speechBubble1" position="1 0 -2" scale="8 8 8" text="value: Click me!" look-at="#john"></a-entity>
+                <a-entity id="speechBubble2" position="-1 0 -2" scale="8 8 8" text="value: Click me too!" look-at="#john"></a-entity>
+                <a-entity id="speechBubble3" position="0 1 -2" scale="8 8 8" text="value: And me!" look-at="#john"></a-entity>
                 <a-entity id="peter" position="0 3 3" scale="3 3 3" look-at="#john">
                     <a-image src="imgs/Peterded.PNG"></a-image>
                 </a-entity>
                 <script>
-                    // Add touch event listeners to the buttons
-                    document.getElementById("speechBubble1").addEventListener("touchstart", handleTouch);
-                    document.getElementById("speechBubble2").addEventListener("touchstart", handleTouch);
-                    document.getElementById("speechBubble3").addEventListener("touchstart", handleTouch);
+                    window.onload = function() {
+                        // Add click event listeners to the buttons
+                        document.getElementById("speechBubble1").addEventListener("click", handleTouch);
+                        document.getElementById("speechBubble2").addEventListener("click", handleTouch);
+                        document.getElementById("speechBubble3").addEventListener("click", handleTouch);
+                    };
 
                     // Function to handle click events on speech bubbles
                     function handleTouch(event) {
@@ -109,7 +111,7 @@
                 </script>     
             </a-marker>
                 <script>
-                    var audioPlayedCounter = false;
+                    let audioPlayedCounter = false;
 
                     document.querySelector('a-marker').addEventListener('markerFound', function() {
                         // Checks if overview audio played already
@@ -118,7 +120,6 @@
                             let audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/js/overview.wav');
                             audio.play();
                         }
-                        audioPlayedCounter++;
                     })
                 </script>
             </a-marker>
