@@ -59,11 +59,15 @@
                 <a-entity id="speechBubble1" position="1 0 -2" scale="8 8 8" text="value: Click me!" look-at="#john" clickable></a-entity>
                 <a-entity id="speechBubble2" position="-1 0 -2" scale="8 8 8" text="value: Click me too!" look-at="#john" clickable></a-entity>
                 <a-entity id="speechBubble3" position="0 1 -2" scale="8 8 8" text="value: And me!" look-at="#john" clickable></a-entity>
-                <a-entity id="peter" position="0 3 3" scale="3 3 3"
-                          look-at="#john">
+                <a-entity id="peter" position="0 3 3" scale="3 3 3" look-at="#john">
                     <a-image src="imgs/Peterded.PNG"></a-image>
                 </a-entity>
                 <script>
+                    // Add touch event listeners to the buttons
+                    document.getElementById("speechBubble1").addEventListener("touchstart", handleTouch);
+                    document.getElementById("speechBubble2").addEventListener("touchstart", handleTouch);
+                    document.getElementById("speechBubble3").addEventListener("touchstart", handleTouch);
+
                     // Function to handle click events on speech bubbles
                     function handleTouch(event) {
                         var targetId = event.target.id;
@@ -102,11 +106,6 @@
                                 break;
                         }
                     }
-
-                    // Add touch event listeners to the buttons
-                    document.getElementById("speechBubble1").addEventListener("touchstart", handleTouch);
-                    document.getElementById("speechBubble2").addEventListener("touchstart", handleTouch);
-                    document.getElementById("speechBubble3").addEventListener("touchstart", handleTouch);
                 </script>     
             </a-marker>
                 <script>
