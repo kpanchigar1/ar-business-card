@@ -110,11 +110,11 @@
                 </script>     
             </a-marker>
                 <script>
-                    var audioPlayedCounter = 0;
+                    var audioPlayedCounter = false;
 
                     document.querySelector('a-marker').addEventListener('markerFound', function() {
                         // Checks if overview audio played already
-                        if (audioPlayedCounter === 0) {
+                        if (!audioPlayedCounter) {
                             console.log("Playing overview audio");
                             let audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/js/overview.wav');
                             audio.play();
