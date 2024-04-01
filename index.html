@@ -59,7 +59,7 @@
                 <a-entity id="speechBubble1" position="1 0 -2" scale="8 8 8" text="value: Click me!" look-at="#john"></a-entity>
                 <a-entity id="speechBubble2" position="-1 0 -2" scale="8 8 8" text="value: Click me too!" look-at="#john"></a-entity>
                 <a-entity id="speechBubble3" position="0 1 -2" scale="8 8 8" text="value: And me!" look-at="#john"></a-entity>
-                <a-entity id="peter" position="0 3 3" scale="3 3 3" look-at="#john">
+                <a-entity id="peter" position="0 3 3" scale="1 1 1" look-at="#john">
                     <a-image src="imgs/Peterded.PNG"></a-image>
                 </a-entity>
                 <script>
@@ -87,45 +87,6 @@
                             console.log("PETAH");
                         });
                     });
-
-                    // Deprecated function to handle click events on speech bubbles
-                    function handleTouch(event) {
-                        var targetId = event.target.id;
-                        var marker = event.currentTarget.parentElement;
-                        var entity = document.createElement('a-entity');
-                        // Set position and rotation of entity
-                        entity.setAttribute('position', '0 0 0');
-                        entity.setAttribute('rotation', '0 0 0');
-
-                        switch (targetId) {
-                            case "speechBubble1":
-                                // Define action for speech bubble 1
-                                let img = document.createElement('a-image');
-                                img.setAttribute('src', 'imgs/Peterdead.PNG');
-                                entity.appendChild(img);
-
-                                marker.appendChild(entity);
-
-                                console.log("Clicked on speech bubble 1");
-                                break;
-                            case "speechBubble2":
-                                // Define action for speech bubble 2
-                                let debugImg2 = document.createElement('img');
-                                debugImg2.src = "imgs/Shrek.PNG";
-                                document.body.appendChild(debugImg2);
-
-                                console.log("Clicked on speech bubble 2");
-                                break;
-                            case "speechBubble3":
-                                // Define action for speech bubble 3
-                                let audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/js/overview.wav');
-                                audio.play();
-                                console.log("Clicked on speech bubble 3");
-                                break;
-                            default:
-                                break;
-                        }
-                    }
                 </script>     
             </a-marker>
                 <script>
