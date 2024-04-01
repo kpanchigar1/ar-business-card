@@ -65,16 +65,27 @@
                 <script>
                     window.onload = function() {
                         // Add click event listeners to the buttons
-                        document.getElementById("speechBubble1").addEventListener("touchstart", handleTouch);
-                        document.getElementById("speechBubble2").addEventListener("touchstart", handleTouch);
-                        document.getElementById("speechBubble3").addEventListener("touchstart", handleTouch);
+                        document.getElementById("speechBubble1").addEventListener("touchstart", function(event) {
+                            event.preventDefault();
 
-                        document.addEventListener("touchstart", e => {
-                            console.log(e);
+                            // For debugging purposes
+                            console.log("Clicked on speech bubble 1");
+                        });
+                        document.getElementById("speechBubble2").addEventListener("touchstart", function(event) {
+                            event.preventDefault();
+
+                            // For debugging purposes
+                            console.log("Clicked on speech bubble 2");
+                        });
+                        document.getElementById("speechBubble3").addEventListener("touchstart", function(event) {
+                            event.preventDefault();
+
+                            // For debugging purposes
+                            console.log("Clicked on speech bubble 3");
                         });
                     };
 
-                    // Function to handle click events on speech bubbles
+                    // Deprecated function to handle click events on speech bubbles
                     function handleTouch(event) {
                         var targetId = event.target.id;
                         var marker = event.currentTarget.parentElement;
@@ -82,16 +93,16 @@
                         // Set position and rotation of entity
                         entity.setAttribute('position', '0 0 0');
                         entity.setAttribute('rotation', '0 0 0');
-            
+
                         switch (targetId) {
                             case "speechBubble1":
                                 // Define action for speech bubble 1
                                 let img = document.createElement('a-image');
                                 img.setAttribute('src', 'imgs/Peterdead.PNG');
                                 entity.appendChild(img);
-            
+
                                 marker.appendChild(entity);
-            
+
                                 console.log("Clicked on speech bubble 1");
                                 break;
                             case "speechBubble2":
@@ -99,7 +110,7 @@
                                 let debugImg2 = document.createElement('img');
                                 debugImg2.src = "imgs/Shrek.PNG";
                                 document.body.appendChild(debugImg2);
-            
+
                                 console.log("Clicked on speech bubble 2");
                                 break;
                             case "speechBubble3":
