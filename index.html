@@ -44,66 +44,65 @@
 <body style='margin : 0px; overflow: hidden;'>
     <!-- define the scene  -->
     <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
+        <!-- defining the content to appear (avatar of john) -->
+        <a-assets>
+            <a-asset-item id="john" src="/models/john_in_suit.glb"></a-asset-item>
+        </a-assets>
 
-            <!-- defining the content to appear (avatar of john) -->
-            <a-assets>
-                <a-asset-item id="john" src="/models/john_in_suit.glb"></a-asset-item>
-            </a-assets>
+        <!-- defining the marker to scan using a .patt file -->
+        <a-marker preset='custom' type='pattern'
+                  url='https://startling-hummingbird-a198e7.netlify.app/marker/pattern-12.patt'>
 
-            <!-- defining the marker to scan using a .patt file -->
-            <a-marker preset='custom' type='pattern'
-                      url='https://startling-hummingbird-a198e7.netlify.app/marker/pattern-12.patt'>
+            <!-- linking the marker to the model we want to show -->
+            <a-entity gltf-model="#john" scale="1 1 1"></a-entity>
+            <a-entity id="speechBubble1" position="1 0 -2" scale="8 8 8" text="value: Click me!" look-at="#john"></a-entity>
+            <a-entity id="speechBubble2" position="-1 0 -2" scale="8 8 8" text="value: Click me too!" look-at="#john"></a-entity>
+            <a-entity id="speechBubble3" position="0 1 -2" scale="8 8 8" text="value: And me!" look-at="#john"></a-entity>
+            <a-entity id="peter" position="0 3 3" scale="1 1 1" look-at="#john">
+                <a-image src="imgs/Peterded.PNG"></a-image>
+            </a-entity>
 
-                <!-- linking the marker to the model we want to show -->
-                <a-entity gltf-model="#john" scale="1 1 1"></a-entity>
-                <a-entity id="speechBubble1" position="1 0 -2" scale="8 8 8" text="value: Click me!" look-at="#john"></a-entity>
-                <a-entity id="speechBubble2" position="-1 0 -2" scale="8 8 8" text="value: Click me too!" look-at="#john"></a-entity>
-                <a-entity id="speechBubble3" position="0 1 -2" scale="8 8 8" text="value: And me!" look-at="#john"></a-entity>
-                <a-entity id="peter" position="0 3 3" scale="1 1 1" look-at="#john">
-                    <a-image src="imgs/Peterded.PNG"></a-image>
-                </a-entity>
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        // Add click event listeners to the buttons
-                        document.getElementById("speechBubble1").addEventListener("touchstart", function(event) {
-                            event.preventDefault();
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Add click event listeners to the buttons
+                    document.getElementById("speechBubble1").addEventListener("touchstart", e => {
+                        e.preventDefault();
 
-                            // For debugging purposes
-                            console.log("Clicked on speech bubble 1");
-                        });
-                        document.getElementById("speechBubble2").addEventListener("touchstart", function(event) {
-                            event.preventDefault();
-
-                            // For debugging purposes
-                            console.log("Clicked on speech bubble 2");
-                        });
-                        document.getElementById("speechBubble3").addEventListener("touchstart", function(event) {
-                            event.preventDefault();
-
-                            // For debugging purposes
-                            console.log("Clicked on speech bubble 3");
-                        });
-                        document.getElementById("peter").addEventListener("touchstart", function(event) {
-                            console.log("PETAH");
-                        });
+                        // For debugging purposes
+                        console.log("Clicked on speech bubble 1");
                     });
-                </script>     
-            </a-marker>
-                <script>
-                    let audioPlayedCounter = false;
+                    document.getElementById("speechBubble2").addEventListener("touchstart", e => {
+                        e.preventDefault();
 
-                    document.querySelector('a-marker').addEventListener('markerFound', function() {
-                        // Checks if overview audio played already
-                        if (!audioPlayedCounter) {
-                            console.log("Playing overview audio");
-                            let audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/js/overview.wav');
-                            audio.play();
-                        }
-                        audioPlayedCounter = true;
-                    })
-                </script>
-            </a-marker>
-            <a-entity camera></a-entity>
+                        // For debugging purposes
+                        console.log("Clicked on speech bubble 2");
+                    });
+                    document.getElementById("speechBubble3").addEventListener("touchstart", e => {
+                        e.preventDefault();
+
+                        // For debugging purposes
+                        console.log("Clicked on speech bubble 3");
+                    });
+                    document.getElementById("peter").addEventListener("touchstart", e => {
+                        // For debugging purposes
+                        console.log("PETAH");
+                    });
+                });
+
+                let audioPlayedCounter = false;
+
+                document.querySelector('a-marker').addEventListener('markerFound', function() {
+                    // Checks if overview audio played already
+                    if (!audioPlayedCounter) {
+                        console.log("Playing overview audio");
+                        let audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/js/overview.wav');
+                        audio.play();
+                    }
+                    audioPlayedCounter = true;
+                })
+            </script>
+        </a-marker>
+        <a-entity camera></a-entity>
     </a-scene>
 </body>
 </html>
