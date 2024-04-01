@@ -65,9 +65,13 @@
                 <script>
                     window.onload = function() {
                         // Add click event listeners to the buttons
-                        document.getElementById("speechBubble1").addEventListener("click", handleTouch);
-                        document.getElementById("speechBubble2").addEventListener("click", handleTouch);
-                        document.getElementById("speechBubble3").addEventListener("click", handleTouch);
+                        document.getElementById("speechBubble1").addEventListener("touchstart", handleTouch);
+                        document.getElementById("speechBubble2").addEventListener("touchstart", handleTouch);
+                        document.getElementById("speechBubble3").addEventListener("touchstart", handleTouch);
+
+                        document.addEventListener("touchstart", e => {
+                            console.log(e);
+                        });
                     };
 
                     // Function to handle click events on speech bubbles
