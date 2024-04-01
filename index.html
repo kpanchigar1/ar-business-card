@@ -55,14 +55,29 @@
 
             <!-- linking the marker to the model we want to show -->
             <a-entity gltf-model="#john" scale="1 1 1"></a-entity>
-            <a-entity id="speechBubble1" position="1 0 -2" scale="8 8 8" text="value: Click me!" look-at="#john"></a-entity>
-            <a-entity id="speechBubble2" position="-1 0 -2" scale="8 8 8" text="value: Click me too!" look-at="#john"></a-entity>
-            <a-entity id="speechBubble3" position="0 1 -2" scale="8 8 8" text="value: And me!" look-at="#john"></a-entity>
+            <a-entity id="speechBubble1" position="1 0 -2" scale="8 8 8"
+                      text="value: Click me!" look-at="#john"
+                      geometry="primitive: box" material="color: #FF0000">
+            </a-entity>
+            <a-entity id="speechBubble2" position="-1 0 -2" scale="8 8 8"
+                      text="value: Click me too!" look-at="#john"
+                      geometry="primitive: box" material="color: #FF0000">
+            </a-entity>
+            <a-entity id="speechBubble3" position="0 1 -2" scale="8 8 8"
+                      text="value: And me!" look-at="#john"
+                      geometry="primitive: box" material="color: #FF0000">
+            </a-entity>
             <a-entity id="peter" position="0 3 3" scale="1 1 1" look-at="#john">
                 <a-image src="imgs/Peterded.PNG"></a-image>
             </a-entity>
 
             <script>
+                /**
+                    Note to coder,
+                    Event listeners are being added to the bubbles, however, due
+                    to the nature of the element, the bubbles are unclickable.
+                 */
+
                 document.addEventListener('DOMContentLoaded', function() {
                     console.log("Added event listeners to the bubbles");
 
