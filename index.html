@@ -68,7 +68,7 @@
         <a-link class="clickable" href="mailto:j0nnymac@uk.ibm.com" title="" image="" position="-.7 0 1" rotation="-67.42 0 0" scale="0.6 0.6 0.6" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" link="title:."><a-box scale="0.8 0.8 1.05" material="src:#emailTexture" position="-0.09854454977856898 -0.0036935886841299587 -0.2155814669584256" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
             <a-animation attribute="rotation" begin="mouseenter" loop="true" end="mouseleave" dur="2000" fill="backwards" to="335 360 360" ease="linear"></a-animation>
         </a-box></a-link>
-
+        </a-marker>
 
         <a-entity camera="" position="" rotation="" scale="" visible=""></a-entity>
         <a-entity cursor="fuse: true; fuseTimeout: 2000" raycaster="objects: .clickable" position="0 0 -1" scale="0.01 0.01 0.01" geometry="primitive: ring" material="color: white; shader: flat" rotation="" visible="">
@@ -84,23 +84,23 @@
                     to the nature of the element, the bubbles are unclickable.
                  */
 
-                var gotitBtn = $(".gotit");
-                gotitBtn.click(function() {
-                    gotitBtn.parent().css({
-                        display: "none"
-                    });
-                });
+                // var gotitBtn = $(".gotit");
+                // gotitBtn.click(function() {
+                //     gotitBtn.parent().css({
+                //         display: "none"
+                //     });
+                // });
                 //Camera feature check
-                function hasGetUserMedia() {
-                    return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
-                        navigator.mozGetUserMedia || navigator.msGetUserMedia);
-                }
-
-                if (hasGetUserMedia()) {
-                    $('#splashScreen').css('display', 'block');
-                } else {
-                    // TODO: add a message to the user that the camera is not supported
-                }
+                // function hasGetUserMedia() {
+                //     return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+                //         navigator.mozGetUserMedia || navigator.msGetUserMedia);
+                // }
+                //
+                // if (hasGetUserMedia()) {
+                //     $('#splashScreen').css('display', 'block');
+                // } else {
+                //     // TODO: add a message to the user that the camera is not supported
+                // }
 
                 // document.addEventListener('DOMContentLoaded', function() {
                 //     console.log("Added event listeners to the bubbles");
