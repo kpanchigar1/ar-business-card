@@ -9,16 +9,29 @@ const assistant = new AssistantV2({
   serviceUrl: 'https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/cd153831-2882-424a-921f-cd367fc10c99',
 });
 
-assistant.messageStateless({
-  assistantId: 'dd0e8243-5e9b-474f-9e67-b07a0eec17df',
-  input: {
-    'message_type': 'text',
-    'text': 'Work history'
-    }
-  })
-  .then(res => {
-    console.log(JSON.stringify(res.result, null, 2));
-  })
+
+function chatbot(question){
+    return assistant.messageStateless({  // calls the chatbot assistant with whatever question is passed in
+        assistantId: 'dd0e8243-5e9b-474f-9e67-b07a0eec17df',
+        input: {
+            'message_type': 'text',
+            'text': question
+            }
+    })
+    .then(res => {
+        let responseText = res.result.output.generic[0].text; // saves the chatbot's response in responseText
+        return responseText;
+    })
   .catch(err => {
     console.log(err);
   });
+};
+
+chatbot("Work History") // calls the chatbot function with a "Work History" question, this needs to be removed and
+                        //implemented elsewhere when needed
+    .then(response => {
+        console.log(response);
+    })
+    .catch(err => {
+        console.error("Error:", err);
+    });
