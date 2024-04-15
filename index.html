@@ -71,15 +71,11 @@
 
 
         <a-entity camera look-controls>
-            <a-entity cursor="fuse: true; fuseTimeout: 1000"
-                      position="0 0 -1"
-                      geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-                      material="color: black; shader: flat">
-            </a-entity>
+            <a-cursor fuse="true" fuse-timeout="1500"></a-cursor>
         </a-entity>
 
         <a-entity id="box" cursor-listener geometry="primitive: box" material="color: blue"></a-entity>
-        </a-scene>
+    </a-scene>
 
             <script>
                 /**
