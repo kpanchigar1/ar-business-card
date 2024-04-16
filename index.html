@@ -61,10 +61,10 @@
         <a-entity gltf-model="#john" scale="2 2 2" position="0 0 0"></a-entity>
 
         <!-- Adding some test links -- can be replaced with speech bubbles -->
-            <a-link id="email" target="_blank" class="clickable" title="" image="" position="-5 -5 1" rotation="-67.42 0 0" scale="0.6 0.6 0.6" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" link="title:." visible="false"><a-box scale="0.8 0.8 1.05" material="src:#emailTexture" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
+            <a-link id="email" target="_blank" class="clickable" title="" image="" position="-2 -2 1" rotation="-67.42 0 0" scale="0.6 0.6 0.6" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" link="title:." visible="false"><a-box scale="0.8 0.8 1.05" material="src:#emailTexture" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
             </a-box></a-link>
 
-            <a-link id="linkedin" target="_blank" class="clickable" position="5 5 1" title="" image=""  rotation="-67.42 0 0" scale="0.6 0.6 0.6" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" link="title:." visible="false"><a-box scale="0.8 0.8 1.05" material="src:#linkedinTexture" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
+            <a-link id="linkedin" target="_blank" class="clickable" position="2 2 1" title="" image=""  rotation="-67.42 0 0" scale="0.6 0.6 0.6" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" link="title:." visible="false"><a-box scale="0.8 0.8 1.05" material="src:#linkedinTexture" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
             </a-box></a-link>
 
         </a-marker>
@@ -98,12 +98,14 @@
                 // }
 
                 let audioPlayedCounter = false;
-                document.getElementById('email').addEventListener('click', function() {
-                    console.log('email clicked');
-                });
+
+                // Disable the raycaster component when the page loads
+                document.querySelector('a-cursor').setAttribute('raycaster', 'enabled', false);
 
                 document.querySelector('a-marker').addEventListener('markerFound', function() {
-                    // Checks if overview audio played already
+                    // Enable the raycaster component when the marker is found
+                    document.querySelector('a-cursor').setAttribute('raycaster', 'enabled', true);
+
                     if (!audioPlayedCounter) {
                         console.log("Playing overview audio");
                         let audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/js/overview.wav');
@@ -117,7 +119,7 @@
                     document.getElementById('linkedin').setAttribute('visible', 'true');
                     document.getElementById('linkedin').setAttribute('href', 'https://uk.linkedin.com/in/jonmcnamara');
                     console.log('set linkedin visible and add href');
-                })
+                });
             </script>
         </a-marker>
 </body>
