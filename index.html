@@ -110,12 +110,10 @@
                         audio.play();
                     }
                     audioPlayedCounter = true;
-                    document.getElementById('email').addEventListener('click', function() {
-                        console.log('email clicked');
-                    });
-                    document.getElementById('linkedin').addEventListener('click', function() {
-                        console.log('linkedin clicked')
-                    });
+                    document.getElementById('email').setAttribute('visible', 'true');
+                    console.log('set email visible');
+                    document.getElementById('linkedin').setAttribute('visible', 'true');
+                    console.log('set linkedin visible');
                 })
             </script>
         </a-marker>
