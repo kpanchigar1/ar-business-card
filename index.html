@@ -111,9 +111,12 @@
                     }
                     audioPlayedCounter = true;
                     document.getElementById('email').setAttribute('visible', 'true');
-                    console.log('set email visible');
+                    document.getElementById('email').setAttribute('href', 'mailto:j0nnymac@uk.ibm.com');
+                    console.log('set email visible and add href');
+
                     document.getElementById('linkedin').setAttribute('visible', 'true');
-                    console.log('set linkedin visible');
+                    document.getElementById('linkedin').setAttribute('href', 'https://www.linkedin.com/in/john-mcnamara-ibm/');
+                    console.log('set linkedin visible and add href');
                 })
             </script>
         </a-marker>
