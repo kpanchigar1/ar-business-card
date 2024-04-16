@@ -101,6 +101,9 @@
                 // }
 
                 let audioPlayedCounter = false;
+                document.getElementById('email').addEventListener('click', function() {
+                    console.log('email clicked');
+                });
 
                 document.querySelector('a-marker').addEventListener('markerFound', function() {
                     // Checks if overview audio played already
