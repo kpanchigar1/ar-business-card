@@ -51,10 +51,6 @@
             <img crossorigin="anonymous" id="linkedinTexture" src="https://cdn.glitch.com/6f8b5a13-fd4d-445d-b9eb-57c735d720ea%2FPostLinkedin.png?1528821333139">
         </a-assets>
 
-        <a-camera>
-            <a-cursor color="#ffba70" position="0 0 -1" fuse="true"></a-cursor>
-        </a-camera>
-
         <!-- defining the marker to scan using a .patt file -->
         <a-marker camera="active:false" preset='custom' type='pattern'
                   url='https://startling-hummingbird-a198e7.netlify.app/marker/pattern-12.patt'>
@@ -72,6 +68,9 @@
             </a-box></a-link>
 
         </a-marker>
+        <a-camera>
+            <a-cursor color="#ffba70" position="0 0 -1" fuse="true"></a-cursor>
+        </a-camera>
     </a-scene>
 
             <script>
