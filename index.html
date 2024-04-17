@@ -70,17 +70,19 @@
             <a-link id="linkedin" target="_blank" class="clickable link" position="2 2 1" title="" image=""  rotation="-67.42 0 0" scale="0.6 0.6 0.6" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" link="title:." visible="false"><a-box scale="0.8 0.8 1.05" material="src:#linkedinTexture" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
             </a-box></a-link>
 
-            <a-entity id="speechBubbleA" position="1 1 0"
-                      scale="5 5 5" text="value: HELLO"
-                      look-at="#john"></a-entity>
+            <a-entity id="speechBubbleA" position="6 0 -2" scale="5 5 5"
+                      text="value: HELLO" look-at="#john"></a-entity>
+            <a-entity id="speechBubbleB" position="-7 0 -2" scale="8 8 8"
+                      text="value: HI" look-at="#john" clickable></a-entity>
+            <a-entity id="speechBubble3" position="0 5 -2" scale="8 8 8"
+                      text="value: WADDUP" look-at="#john" clickable></a-entity>
 
-            <a-entity id="speechBubbleB" position="-1 1 1"
-                      scale="5 5 5" look-at="#john">
-                <form>
-                    <label for="question">Ask me about anything:</label>
-                    <input type="text" id="question" name="question">
-                </form>
-            </a-entity>
+            <a-plane position="6 0 -2" color="#CCC" height="1"
+                     width="2"></a-plane>
+            <a-plane position="-7 0 -2" color="#CCC" height="2"
+                     width="3"></a-plane>
+            <a-plane position="0 5 -2" color="#CCC" height="0.5"
+                     width="1"></a-plane>
 
         </a-marker>
         <a-camera>
@@ -95,23 +97,8 @@
                         console.log("cursor-listener init");
                     }
                 })
-                // var gotitBtn = $(".gotit");
-                // gotitBtn.click(function() {
-                //     gotitBtn.parent().css({
-                //         display: "none"
-                //     });
-                // });
-                //Camera feature check
-                // function hasGetUserMedia() {
-                //     return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
-                //         navigator.mozGetUserMedia || navigator.msGetUserMedia);
-                // }
-                //
-                // if (hasGetUserMedia()) {
-                //     $('#splashScreen').css('display', 'block');
-                // } else {
-                //     // TODO: add a message to the user that the camera is not supported
-                // }
+                
+                // TODO: add a message to the user that the camera is not supported
 
                 let audioPlayedCounter = false;
 
@@ -129,6 +116,7 @@
                         console.log("Audio played")
                     }
                     audioPlayedCounter = true;
+
                     document.getElementById('email').setAttribute('visible', 'true');
                     document.getElementById('email').setAttribute('href', 'mailto:j0nnymac@uk.ibm.com');
                     console.log('set email visible and add href');
