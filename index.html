@@ -4,12 +4,28 @@
     <meta name="description" content="John McNamara's AR Business Card">
 
     <!-- initialising the viewport -->
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" type="text/css" href="styles/styles.css">
+
 
     <!-- load a-frame and ar.js-->
     <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+    <link rel="manifest" href="manifest.json">
+
+    <link href="splashscreens/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphonexr_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphonexsmax_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/ipad_splash.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/ipadpro1_splash.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/ipadpro3_splash.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- enabling splashscreen for all apple devices -->
 
     <!-- This is a hack because at the time of writing there are some distortions in the provided visuals until the  -->
     <!-- system receives a resize event. The resize event must be triggered when everything has been loaded and the  -->
@@ -26,7 +42,7 @@
         }, 3000);
     };
     </script>
-    <link rel="manifest" href="manifest.json">
+
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -71,17 +87,22 @@
             <a-link id="linkedin" target="_blank" class="clickable link" position="2 2 1" title="" image=""  rotation="-67.42 0 0" scale="0.6 0.6 0.6" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" link="title:." visible="false"><a-box scale="0.8 0.8 1.05" material="src:#linkedinTexture" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
             </a-box></a-link>
 
-            <a-entity id="speechBubbleA" position="1 1 0"
-                      scale="5 5 5" text="value: HELLO"
-                      look-at="#john"></a-entity>
 
-            <a-entity id="speechBubbleB" position="-1 1 1"
-                      scale="5 5 5" look-at="#john">
-                <form>
-                    <label for="question">Ask me about anything:</label>
-                    <input type="text" id="question" name="question">
-                </form>
-            </a-entity>
+
+
+
+            <a-plane position="6 0 -2" color="#CCC" height="1" width="2">
+                <a-entity id="speechBubbleA" scale="5 5 5"
+                          text="value: HELLO" look-at="#john"></a-entity>
+            </a-plane>
+            <a-plane position="-7 0 -2" color="#CCC" height="2" width="3">
+                <a-entity id="speechBubbleB" scale="8 8 8"
+                          text="value: HI" look-at="#john" clickable></a-entity>
+            </a-plane>
+            <a-plane position="0 5 -2" color="#CCC" height="0.5" width="1">
+                <a-entity id="speechBubble3" scale="8 8 8"
+                          text="value: WADDUP" look-at="#john" clickable></a-entity>
+            </a-plane>
 
         </a-marker>
         <a-camera>
@@ -124,13 +145,8 @@
                         console.log("cursor-listener init");
                     }
                 })
-
-                var gotitBtn = document.querySelector(".gotit");
-                gotitBtn.addEventListener('click', function() {
-                    gotitBtn.parentNode.style.display = "none";
-                });
-
-                //     // TODO: add a message to the user that the camera is not supported
+                
+                // TODO: add a message to the user that the camera is not supported
 
                 let audioPlayedCounter = false;
 
@@ -148,6 +164,7 @@
                         console.log("Audio played")
                     }
                     audioPlayedCounter = true;
+
                     document.getElementById('email').setAttribute('visible', 'true');
                     document.getElementById('email').setAttribute('href', 'mailto:j0nnymac@uk.ibm.com');
                     console.log('set email visible and add href');
