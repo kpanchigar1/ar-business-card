@@ -27,7 +27,7 @@ function chatbot(question){
   });
 };
 
-chatbot("Work History") // calls the chatbot function with a "Work History" question, this needs to be removed and
+chatbot("hobbies") // calls the chatbot function with a "Work History" question, this needs to be removed and
                         //implemented elsewhere when needed
     .then(response => {
         console.log(response);
