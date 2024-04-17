@@ -88,15 +88,18 @@
             </a-box></a-link>
 
 
-            <a-plane position="-2 4 0" color="#0000FF" height="1" width="2"></a-plane>
-            <a-plane position="0 6 0" color="#FF0000" height="1" width="2"></a-plane>
-            <a-plane position="2 4 0" color="#00FF00" height="1" width="2"></a-plane>
+            <a-plane id="box1" position="-2 4 0" color="#0000FF" height="1"
+                     width="2"></a-plane>
+            <a-plane id="box2" position="0 6 0" color="#FF0000" height="1"
+                     width="2"></a-plane>
+            <a-plane id="box3" position="2 4 0" color="#00FF00" height="1"
+                     width="2"></a-plane>
             <a-entity id="speechBubbleA" position="0 4 0.1" scale="5 5 5"
                       text="value: Work?" look-at="#john"></a-entity>
             <a-entity id="speechBubbleB" position="2 6 0.1" scale="5 5 5"
                       text="value: Education?" look-at="#john"
                       clickable></a-entity>
-            <a-entity id="speechBubble3" position="4 4 0.1" scale="5 5 5"
+            <a-entity id="speechBubbleC" position="4 4 0.1" scale="5 5 5"
                       text="value: Hobbies?" look-at="#john"
                       clickable></a-entity>
 
@@ -141,6 +144,31 @@
                         console.log("cursor-listener init");
                     }
                 })
+
+                // Function to show the hidden content after a delay
+                function showContent() {
+                    // Get the content element
+                    var contentElement1 = document.getElementById('box1');
+                    var contentElement2 = document.getElementById('box2');
+                    var contentElement3 = document.getElementById('box3');
+                    var contentElement4 =
+                        document.getElementById('speechBubbleA');
+                    var contentElement5 =
+                        document.getElementById('speechBubbleB');
+                    var contentElement6 =
+                        document.getElementById('speechBubbleC');
+
+                    // Show the content
+                    contentElement1.style.display = 'block';
+                    contentElement2.style.display = 'block';
+                    contentElement3.style.display = 'block';
+                    contentElement4.style.display = 'block';
+                    contentElement5.style.display = 'block';
+                    contentElement6.style.display = 'block';
+                }
+
+                // Call the showContent function after a delay of 2000 milliseconds (2 seconds)
+                setTimeout(showContent, 2000);
                 
                 // TODO: add a message to the user that the camera is not supported
 
