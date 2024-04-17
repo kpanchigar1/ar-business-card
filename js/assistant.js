@@ -11,7 +11,7 @@ const assistant = new AssistantV2({
 
 
 function chatbot(question){
-    return assistant.messageStateless({  // calls the watson assistant with whatever question is passed in
+    return assistant.messageStateless({  // calls the chatbot assistant with whatever question is passed in
         assistantId: 'dd0e8243-5e9b-474f-9e67-b07a0eec17df',
         input: {
             'message_type': 'text',
@@ -19,7 +19,7 @@ function chatbot(question){
             }
     })
     .then(res => {
-        let responseText = res.result.output.generic[0].text; // saves the watson assistant's response in responseText
+        let responseText = res.result.output.generic[0].text; // saves the chatbot's response in responseText
         return responseText;
     })
   .catch(err => {

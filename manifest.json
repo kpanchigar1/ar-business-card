@@ -1,8 +1,8 @@
 {
   "short_name": "Business Card",
   "name": "Augmented Reality Business Card",
-  "start_url": "index.html?fullscreen=true",
-  "display": "fullscreen",
+  "start_url": "./index.html",
+  "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff",
   "description": "Augmented Reality Business Card about John McNamara"
