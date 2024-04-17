@@ -71,6 +71,14 @@
                       scale="5 5 5" text="value: HELLO"
                       look-at="#john"></a-entity>
 
+            <a-entity id="speechBubbleB" position="-1 1 1"
+                      scale="5 5 5" look-at="#john">
+                <form>
+                    <label for="question">Ask me about anything:</label>
+                    <input type="text" id="question" name="question">
+                </form>
+            </a-entity>
+
         </a-marker>
         <a-camera>
             <a-cursor color="#ffba70" position="0 0 -1" fuse="true" fuse-timeout="2000"></a-cursor>
