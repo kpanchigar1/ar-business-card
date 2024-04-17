@@ -64,19 +64,27 @@
             <a-entity gltf-model="#john" scale="2 2 2" position="0 0 0"></a-entity>
 
             <!-- Adding some test links -- can be replaced with speech bubbles -->
-            <a-link id="email" target="_blank" class="clickable" title="" image="" position="-2 -2 1" rotation="-67.42 0 0" scale="0.6 0.6 0.6" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" link="title:." visible="false"><a-box scale="0.8 0.8 1.05" material="src:#emailTexture" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
+            <a-link id="email" target="_blank" class="clickable link" title="" image="" position="-2 -2 1" rotation="-67.42 0 0" scale="0.6 0.6 0.6" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" link="title:." visible="false"><a-box scale="0.8 0.8 1.05" material="src:#emailTexture" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
             </a-box></a-link>
 
-            <a-link id="linkedin" target="_blank" class="clickable" position="2 2 1" title="" image=""  rotation="-67.42 0 0" scale="0.6 0.6 0.6" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" link="title:." visible="false"><a-box scale="0.8 0.8 1.05" material="src:#linkedinTexture" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
+            <a-link id="linkedin" target="_blank" class="clickable link" position="2 2 1" title="" image=""  rotation="-67.42 0 0" scale="0.6 0.6 0.6" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" link="title:." visible="false"><a-box scale="0.8 0.8 1.05" material="src:#linkedinTexture" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
             </a-box></a-link>
 
             <a-entity id="speechBubbleA" position="1 1 0"
                       scale="5 5 5" text="value: HELLO"
                       look-at="#john"></a-entity>
 
+            <a-entity id="speechBubbleB" position="-1 1 1"
+                      scale="5 5 5" look-at="#john">
+                <form>
+                    <label for="question">Ask me about anything:</label>
+                    <input type="text" id="question" name="question">
+                </form>
+            </a-entity>
+
         </a-marker>
         <a-camera>
-            <a-cursor color="#ffba70" position="0 0 -1" fuse="true" fuse-timeout="2000"></a-cursor>
+            <a-cursor color="#ffba70" position="0 0 -1" fuse="true" fuse-timeout="2000" raycaster="objects: .link"></a-cursor>
         </a-camera>
 
     </a-scene>
@@ -118,6 +126,7 @@
                         console.log("Playing overview audio");
                         let audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/js/overview.wav');
                         audio.play();
+                        console.log("Audio played")
                     }
                     audioPlayedCounter = true;
                     document.getElementById('email').setAttribute('visible', 'true');
