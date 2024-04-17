@@ -87,23 +87,8 @@
                         console.log("cursor-listener init");
                     }
                 })
-                // var gotitBtn = $(".gotit");
-                // gotitBtn.click(function() {
-                //     gotitBtn.parent().css({
-                //         display: "none"
-                //     });
-                // });
-                //Camera feature check
-                // function hasGetUserMedia() {
-                //     return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
-                //         navigator.mozGetUserMedia || navigator.msGetUserMedia);
-                // }
-                //
-                // if (hasGetUserMedia()) {
-                //     $('#splashScreen').css('display', 'block');
-                // } else {
-                //     // TODO: add a message to the user that the camera is not supported
-                // }
+                
+                // TODO: add a message to the user that the camera is not supported
 
                 let audioPlayedCounter = false;
 
@@ -121,6 +106,7 @@
                         console.log("Audio played")
                     }
                     audioPlayedCounter = true;
+
                     document.getElementById('email').setAttribute('visible', 'true');
                     document.getElementById('email').setAttribute('href', 'mailto:j0nnymac@uk.ibm.com');
                     console.log('set email visible and add href');
