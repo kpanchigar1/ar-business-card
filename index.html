@@ -167,8 +167,6 @@
                     contentElement6.style.display = 'block';
                 }
 
-                // Call the showContent function after a delay of 6000 milliseconds (6 seconds)
-                setTimeout(showContent, 6000);
                 
                 // TODO: add a message to the user that the camera is not supported
 
@@ -180,6 +178,9 @@
                 document.querySelector('a-marker').addEventListener('markerFound', function() {
                     // Enable the raycaster component when the marker is found
                     document.querySelector('a-cursor').setAttribute('raycaster', 'enabled', true);
+
+                    // Call the showContent function after a delay of 10000 milliseconds (10 seconds)
+                    setTimeout(showContent, 10000);
 
                     if (!audioPlayedCounter) {
                         console.log("Playing overview audio");
