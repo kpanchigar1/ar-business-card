@@ -10,6 +10,11 @@
   "icons": [
     {
       "src": "imgs/ar_logo.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "imgs/ar_logo.png",
       "sizes": "192x",
       "type": "image/png"
     },
