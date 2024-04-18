@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<title>
+    Team05's AR Business Card
+</title>
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="John McNamara's AR Business Card">
@@ -90,11 +93,11 @@
 
 
             <a-plane id="box1" position="-2 4 0" color="#0000FF" height="1"
-                     width="2" visible="false"></a-plane>
+                     width="2" visible="false" clickable></a-plane>
             <a-plane id="box2" position="0 6 0" color="#FF0000" height="1"
-                     width="2" visible="false"></a-plane>
+                     width="2" visible="false" clickable></a-plane>
             <a-plane id="box3" position="2 4 0" color="#00FF00" height="1"
-                     width="2" visible="false"></a-plane>
+                     width="2" visible="false" clickable></a-plane>
             <a-entity id="speechBubbleA" position="0 4 0.1" scale="5 5 5"
                       text="value: Work?" look-at="#john"
                       clickable visible="false"></a-entity>
@@ -112,97 +115,101 @@
 
     </a-scene>
 
-            <script>
-                window.onload = function(){
-                    var popupContainer = document.getElementById('popup-container');
-                    var popupBox = document.createElement('div');
-                    var closeButton = document.createElement('span');
-                    var startButton = document.createElement('button');
+    <script>
+        window.onload = function(){
+            var popupContainer = document.getElementById('popup-container');
+            var popupBox = document.createElement('div');
+            var closeButton = document.createElement('span');
+            var startButton = document.createElement('button');
 
-                    popupBox.className = 'popup-box';
-                    closeButton.className = 'close-btn';
-                    startButton.id = 'startButton';
-                    startButton.innerText = 'Start';
+            popupBox.className = 'popup-box';
+            closeButton.className = 'close-btn';
+            startButton.id = 'startButton';
+            startButton.innerText = 'Start';
 
-                    popupBox.innerHTML = "<div class=popup-content><h2>Hi there!</h2><p>My name is John McNamara and I am a software engineer at IBM. I am passionate about technology and I am always looking for new challenges. If you want to know more about me, feel free to ask me anything!</p></div>";
-                    closeButton.innerHTML = "&times;";
+            popupBox.innerHTML = "<div class=popup-content><h2>Hi there!</h2><p>My name is John McNamara and I am a software engineer at IBM. I am passionate about technology and I am always looking for new challenges. If you want to know more about me, feel free to ask me anything!</p></div>";
+            closeButton.innerHTML = "&times;";
 
-                    closeButton.addEventListener('click', function() {
-                        popupContainer.removeChild(popupBox);
-                    });
+            closeButton.addEventListener('click', function() {
+                popupContainer.removeChild(popupBox);
+            });
 
-                    startButton.addEventListener('click', function() {
-                        popupContainer.removeChild(popupBox);
-                    });
+            startButton.addEventListener('click', function() {
+                popupContainer.removeChild(popupBox);
+            });
 
-                    popupBox.appendChild(closeButton);
-                    popupBox.appendChild(startButton);
-                    popupContainer.appendChild(popupBox);
-                };
+            popupBox.appendChild(closeButton);
+            popupBox.appendChild(startButton);
+            popupContainer.appendChild(popupBox);
+        };
 
 
-                AFRAME.registerComponent('cursor-listener', {
-                    init: function(){
-                        console.log("cursor-listener init");
-                    }
-                })
+        AFRAME.registerComponent('cursor-listener', {
+            init: function(){
+                console.log("cursor-listener init");
+            }
+        })
 
-                // Function to show the hidden content after a delay
-                function showContent() {
-                    console.log("Show content triggered.")
+        // Function to show the hidden content after a delay
+        function showContent() {
+            console.log("Show content triggered.")
 
-                    // Get the content element
-                    var contentElement1 = document.getElementById('box1');
-                    var contentElement2 = document.getElementById('box2');
-                    var contentElement3 = document.getElementById('box3');
-                    var contentElement4 =
-                        document.getElementById('speechBubbleA');
-                    var contentElement5 =
-                        document.getElementById('speechBubbleB');
-                    var contentElement6 =
-                        document.getElementById('speechBubbleC');
+            // Get the content element
+            var contentElement1 = document.getElementById('box1');
+            var contentElement2 = document.getElementById('box2');
+            var contentElement3 = document.getElementById('box3');
+            var contentElement4 =
+                document.getElementById('speechBubbleA');
+            var contentElement5 =
+                document.getElementById('speechBubbleB');
+            var contentElement6 =
+                document.getElementById('speechBubbleC');
 
-                    // Show the content
-                    contentElement1.setAttribute('visible', 'true');
-                    contentElement2.setAttribute('visible', 'true');
-                    contentElement3.setAttribute('visible', 'true');
-                    contentElement4.setAttribute('visible', 'true');
-                    contentElement5.setAttribute('visible', 'true');
-                    contentElement6.setAttribute('visible', 'true');
-                }
+            // Show the content
+            contentElement1.setAttribute('visible', 'true');
+            contentElement2.setAttribute('visible', 'true');
+            contentElement3.setAttribute('visible', 'true');
+            contentElement4.setAttribute('visible', 'true');
+            contentElement5.setAttribute('visible', 'true');
+            contentElement6.setAttribute('visible', 'true');
+        }
 
-                
-                // TODO: add a message to the user that the camera is not supported
 
-                let audioPlayedCounter = false;
+        // TODO: add a message to the user that the camera is not supported
 
-                // Disable the raycaster component when the page loads
-                document.querySelector('a-cursor').setAttribute('raycaster', 'enabled', false);
+        let audioPlayedCounter = false;
 
-                document.querySelector('a-marker').addEventListener('markerFound', function() {
-                    // Enable the raycaster component when the marker is found
-                    document.querySelector('a-cursor').setAttribute('raycaster', 'enabled', true);
+        // Disable the raycaster component when the page loads
+        document.querySelector('a-cursor').setAttribute('raycaster', 'enabled', false);
 
-                    // Call the showContent function after a delay of 10000 milliseconds (10 seconds)
-                    setTimeout(showContent, 10000);
+        document.querySelector('a-marker').addEventListener('markerFound', function() {
+            // Enable the raycaster component when the marker is found
+            document.querySelector('a-cursor').setAttribute('raycaster', 'enabled', true);
 
-                    if (!audioPlayedCounter) {
-                        console.log("Playing overview audio");
-                        let audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/overview.wav');
-                        audio.play();
-                        console.log("Audio played")
-                    }
-                    audioPlayedCounter = true;
+            // Call the showContent function after 10000 milliseconds (10 seconds)
+            setTimeout(showContent, 10000);
 
-                    document.getElementById('email').setAttribute('visible', 'true');
-                    document.getElementById('email').setAttribute('href', 'mailto:j0nnymac@uk.ibm.com');
-                    console.log('set email visible and add href');
+            if (!audioPlayedCounter) {
+                let audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/overview.wav');
+                audio.play();
+                console.log("Overview audio played.")
+            }
+            audioPlayedCounter = true;
 
-                    document.getElementById('linkedin').setAttribute('visible', 'true');
-                    document.getElementById('linkedin').setAttribute('href', 'https://uk.linkedin.com/in/jonmcnamara');
-                    console.log('set linkedin visible and add href');
-                });
-            </script>
-        </a-marker>
+            document.getElementById('email').setAttribute('visible', 'true');
+            document.getElementById('email').setAttribute('href', 'mailto:j0nnymac@uk.ibm.com');
+            // console.log('set email visible and add href');
+
+            document.getElementById('linkedin').setAttribute('visible', 'true');
+            document.getElementById('linkedin').setAttribute('href', 'https://uk.linkedin.com/in/jonmcnamara');
+            // console.log('set linkedin visible and add href');
+        });
+    </script>
+
+    <div class="popup-form" id="popup">
+        <form id="popupForm">
+            <input type="text" id="textInput" placeholder="Enter text...">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
 </body>
-</html>
