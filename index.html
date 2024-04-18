@@ -210,12 +210,12 @@
 
         // Function to show the question popup
         function showPopup() {
-            document.getElementById("popup").style.display = "block";
+            document.getElementById("popup-form").addAttribute('hidden');
         }
 
         // Function to hide the question popup
         function hidePopup() {
-            document.getElementById("popup").style.display = "none";
+            document.getElementById("popup-form").removeAttribute('hidden')
         }
 
         // Function to handle question form submission
@@ -230,7 +230,7 @@
         document.getElementById("popupForm").addEventListener("submit", handleSubmit);
     </script>
 
-    <div class="popup-form" id="popup">
+    <div hidden class="popup-form" id="popup">
         <form id="popupForm">
             <input type="text" id="textInput"
                    placeholder="Ask your own question...">
