@@ -172,6 +172,9 @@
             contentElement4.setAttribute('visible', 'true');
             contentElement5.setAttribute('visible', 'true');
             contentElement6.setAttribute('visible', 'true');
+
+            // show question form popup
+            showPopup();
         }
 
 
@@ -204,11 +207,33 @@
             document.getElementById('linkedin').setAttribute('href', 'https://uk.linkedin.com/in/jonmcnamara');
             // console.log('set linkedin visible and add href');
         });
+
+        // Function to show the question popup
+        function showPopup() {
+            document.getElementById("popup").style.display = "block";
+        }
+
+        // Function to hide the question popup
+        function hidePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        // Function to handle question form submission
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+            var userInput = document.getElementById("textInput").value;
+            alert("Question asked: " + userInput);
+            hidePopup(); // Hide question form after submission
+        }
+
+        // Event listener for form submission
+        document.getElementById("popupForm").addEventListener("submit", handleSubmit);
     </script>
 
     <div class="popup-form" id="popup">
         <form id="popupForm">
-            <input type="text" id="textInput" placeholder="Enter text...">
+            <input type="text" id="textInput"
+                   placeholder="Ask your own question...">
             <input type="submit" value="Submit">
         </form>
     </div>
