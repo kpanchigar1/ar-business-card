@@ -92,11 +92,11 @@
             </a-box></a-link>
 
 
-            <a-plane id="box1" position="-2 4 0" color="#0000FF" height="1"
+            <a-plane id="box1" class="clickable link" position="-2 4 0" color="#0000FF" height="1"
                      width="2" visible="false" clickable></a-plane>
-            <a-plane id="box2" position="0 6 0" color="#FF0000" height="1"
+            <a-plane id="box2" class="clickable link" position="0 6 0" color="#FF0000" height="1"
                      width="2" visible="false" clickable></a-plane>
-            <a-plane id="box3" position="2 4 0" color="#00FF00" height="1"
+            <a-plane id="box3" class="clickable link" position="2 4 0" color="#00FF00" height="1"
                      width="2" visible="false" clickable></a-plane>
             <a-entity id="speechBubbleA" position="0 4 0.1" scale="5 5 5"
                       text="value: Work?" look-at="#john"
@@ -116,6 +116,7 @@
     </a-scene>
 
     <script>
+        let playingAudio = false;
         window.onload = function(){
             var popupContainer = document.getElementById('popup-container');
             var popupBox = document.createElement('div');
@@ -143,13 +144,6 @@
             popupContainer.appendChild(popupBox);
         };
 
-
-        AFRAME.registerComponent('cursor-listener', {
-            init: function(){
-                console.log("cursor-listener init");
-            }
-        })
-
         // Function to show the hidden content after a delay
         function showContent() {
             console.log("Show content triggered.")
@@ -173,14 +167,69 @@
             contentElement5.setAttribute('visible', 'true');
             contentElement6.setAttribute('visible', 'true');
 
+            // Create a dictionary that maps speech bubble text to audio files
+            var speechBubbleToAudioMap = {
+                'Work?': '/audio/workHistory.wav',
+                'Education?': '/audio/education.wav',
+                'Hobbies?': '/audio/hobbies.wav'
+                // Add more mappings as needed
+            };
+
+            // Register click event listener for each speech bubble
+            console.log('Adding click event listener for speech bubble 1');
+            document.getElementById('box1').addEventListener('click', function() {
+                console.log('box1 clicked');
+                var speechBubble = document.getElementById('speechBubbleA');
+                var speechBubbleText = speechBubble.getAttribute('text').value;
+                var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app'+ speechBubbleToAudioMap[speechBubbleText]);
+                if(!playingAudio){
+                    audio.play();
+                    playingAudio = true;
+                }
+                audio.addEventListener('ended', function(){
+                    playingAudio = false;
+                });
+            });
+
+            console.log('Adding click event listener for speech bubble 2');
+            document.getElementById('box2').addEventListener('click', function() {
+                console.log('box2 clicked');
+                var speechBubble = document.getElementById('speechBubbleB');
+                var speechBubbleText = speechBubble.getAttribute('text').value;
+                var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app'+ speechBubbleToAudioMap[speechBubbleText]);
+                if(!playingAudio){
+                    audio.play();
+                    playingAudio = true;
+                }
+                audio.addEventListener('ended', function(){
+                    playingAudio = false;
+                });
+            });
+
+
+            console.log('Adding click event listener for speech bubble 3');
+            document.getElementById('box3').addEventListener('click', function() {
+                console.log('box3 clicked');
+                var speechBubble = document.getElementById('speechBubbleC');
+                var speechBubbleText = speechBubble.getAttribute('text').value;
+                var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app'+ speechBubbleToAudioMap[speechBubbleText]);
+                if(!playingAudio){
+                    audio.play();
+                    playingAudio = true;
+                }
+                audio.addEventListener('ended', function(){
+                    playingAudio = false;
+                });
+            });
+
             // show question form popup
-            showPopup();
+            // showPopup();
         }
 
 
         // TODO: add a message to the user that the camera is not supported
 
-        let audioPlayedCounter = false;
+        let overviewPlayed = false;
 
         // Disable the raycaster component when the page loads
         document.querySelector('a-cursor').setAttribute('raycaster', 'enabled', false);
@@ -192,12 +241,19 @@
             // Call the showContent function after 10000 milliseconds (10 seconds)
             setTimeout(showContent, 10000);
 
-            if (!audioPlayedCounter) {
+            if (!overviewPlayed) {
                 let audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/overview.wav');
                 audio.play();
+                overviewPlayed = true;
                 console.log("Overview audio played.")
+                playingAudio = true;
+                audio.addEventListener('ended', function(){
+                    playingAudio = false;
+                });
             }
-            audioPlayedCounter = true;
+
+
+
 
             document.getElementById('email').setAttribute('visible', 'true');
             document.getElementById('email').setAttribute('href', 'mailto:j0nnymac@uk.ibm.com');
@@ -228,13 +284,15 @@
 
         // Event listener for form submission
         document.getElementById("popupForm").addEventListener("submit", handleSubmit);
+
+
     </script>
 
-    <div hidden class="popup-form" id="popup">
-        <form id="popupForm">
-            <input type="text" id="textInput"
-                   placeholder="Ask your own question...">
-            <input type="submit" value="Submit">
-        </form>
-    </div>
+<!--    <div hidden class="popup-form" id="popup">-->
+<!--        <form id="popupForm">-->
+<!--            <input type="text" id="textInput"-->
+<!--                   placeholder="Ask your own question...">-->
+<!--            <input type="submit" value="Submit">-->
+<!--        </form>-->
+<!--    </div>-->
 </body>
