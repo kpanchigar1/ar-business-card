@@ -77,7 +77,7 @@
 
         <!-- defining the marker to scan using a .patt file -->
         <a-marker camera="active:false" preset='custom' type='pattern'
-                  url='https://startling-hummingbird-a198e7.netlify.app/marker/pattern-12.patt'>
+                  url='/marker/pattern-12.patt'>
 
             <a-entity position="-2 .5 -1.4" rotation="-45.98 -4.56 5.28" scale="0.1 .25 .2" text-geometry="bevelEnabled:true;bevelSize:0.1;bevelThickness:0.1;curveSegments:1;font:https://cdn.glitch.com/c719c986-c0c5-48b8-967c-3cd8b8aa17f3%2Fexo2Black.typeface.json?1490305922150;height:0.5;size:2;value:J O H N   M C N A M A R A" material="color:pink;metalness:0.9;roughness:0.05;sphericalEnvMap:https://cdn.glitch.com/6f8b5a13-fd4d-445d-b9eb-57c735d720ea%2FTextureMap.png?1528781398531"></a-entity>
 
@@ -119,28 +119,54 @@
         window.onload = function(){
             var popupContainer = document.getElementById('popup-container');
             var popupBox = document.createElement('div');
-            var closeButton = document.createElement('span');
-            var startButton = document.createElement('button');
+            var germanButton = document.createElement('button');
+            var englishButton = document.createElement('button');
 
             popupBox.className = 'popup-box';
-            closeButton.className = 'close-btn';
-            startButton.id = 'startButton';
-            startButton.innerText = 'Start';
+            germanButton.innerText = 'Deutsch';
+            englishButton.innerText = 'English';
 
             popupBox.innerHTML = "<div class=popup-content><h2>Hi there!</h2><p>My name is John McNamara and I am a software engineer at IBM. I am passionate about technology and I am always looking for new challenges. If you want to know more about me, feel free to ask me anything!</p></div>";
-            closeButton.innerHTML = "&times;";
 
-            closeButton.addEventListener('click', function() {
+            germanButton.addEventListener('click', function() {
+                language = "german";
+                updateTextContent();
                 popupContainer.removeChild(popupBox);
             });
 
-            startButton.addEventListener('click', function() {
+            englishButton.addEventListener('click', function() {
+                language = "english";
+                updateTextContent();
                 popupContainer.removeChild(popupBox);
             });
 
-            popupBox.appendChild(closeButton);
-            popupBox.appendChild(startButton);
+            popupBox.appendChild(germanButton);
+            popupBox.appendChild(englishButton);
             popupContainer.appendChild(popupBox);
+
+            function updateTextContent() {
+                var workText, educationText, hobbiesText;
+
+                if (language === "german") {
+                    workText = "Arbeiten?";
+                    educationText = "Ausbildung?";
+                    hobbiesText = "Interessen?";
+                } else {
+                    workText = "Work?";
+                    educationText = "Education?";
+                    hobbiesText = "Hobbies?";
+                }
+
+                // Update speech bubble text
+                document.getElementById("speechBubbleA").setAttribute("text", "value", workText);
+                document.getElementById("speechBubbleB").setAttribute("text", "value", educationText);
+                document.getElementById("speechBubbleC").setAttribute("text", "value", hobbiesText);
+            }
+
+            // Update speech bubble text values
+            document.getElementById("speechBubbleA").setAttribute("text", "value", workText);
+            document.getElementById("speechBubbleB").setAttribute("text", "value", educationText);
+            document.getElementById("speechBubbleC").setAttribute("text", "value", hobbiesText);
         };
 
 
