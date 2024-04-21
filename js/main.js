@@ -1,5 +1,15 @@
+// TODO: add documentation
+
 let playingAudio = false;
 window.onload = function(){
+    // check if the browser supports navigator.mediaDevices.getUserMedia
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        // Request the camera
+        navigator.mediaDevices.getUserMedia({ video: true }).catch(function(err) {
+            alert('Camera is not supported or permission not granted.');
+        });
+    }
+
     var popupContainer = document.getElementById('popup-container');
     var popupBox = document.createElement('div');
     var closeButton = document.createElement('span');
@@ -58,9 +68,7 @@ function showContent() {
     };
 
     // Register click event listener for each speech bubble
-    console.log('Adding click event listener for speech bubble 1');
     document.getElementById('box1').addEventListener('click', function() {
-        console.log('box1 clicked');
         var speechBubble = document.getElementById('speechBubbleA');
         var speechBubbleText = speechBubble.getAttribute('text').value;
         var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app'+ speechBubbleToAudioMap[speechBubbleText]);
@@ -73,9 +81,7 @@ function showContent() {
         });
     });
 
-    console.log('Adding click event listener for speech bubble 2');
     document.getElementById('box2').addEventListener('click', function() {
-        console.log('box2 clicked');
         var speechBubble = document.getElementById('speechBubbleB');
         var speechBubbleText = speechBubble.getAttribute('text').value;
         var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app'+ speechBubbleToAudioMap[speechBubbleText]);
@@ -88,10 +94,7 @@ function showContent() {
         });
     });
 
-
-    console.log('Adding click event listener for speech bubble 3');
     document.getElementById('box3').addEventListener('click', function() {
-        console.log('box3 clicked');
         var speechBubble = document.getElementById('speechBubbleC');
         var speechBubbleText = speechBubble.getAttribute('text').value;
         var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app'+ speechBubbleToAudioMap[speechBubbleText]);
@@ -108,12 +111,12 @@ function showContent() {
     // showPopup();
 }
 
-
 // TODO: add a message to the user that the camera is not supported
+
 
 let overviewPlayed = false;
 
-// Disable the raycaster component when the page loads
+// Disabling the raycaster component when the page loads to avoid accidental clicks
 document.querySelector('a-cursor').setAttribute('raycaster', 'enabled', false);
 
 document.querySelector('a-marker').addEventListener('markerFound', function() {
@@ -123,7 +126,7 @@ document.querySelector('a-marker').addEventListener('markerFound', function() {
     // Call the showContent function after 10000 milliseconds (10 seconds)
     setTimeout(showContent, 10000);
 
-    if (!overviewPlayed) {
+    if (!overviewPlayed && !playingAudio) {
         let audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/overview.wav');
         audio.play();
         overviewPlayed = true;
@@ -133,9 +136,6 @@ document.querySelector('a-marker').addEventListener('markerFound', function() {
             playingAudio = false;
         });
     }
-
-
-
 
     document.getElementById('email').setAttribute('visible', 'true');
     document.getElementById('email').setAttribute('href', 'mailto:j0nnymac@uk.ibm.com');
