@@ -70,7 +70,7 @@
     <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
         <!-- defining the content to appear (avatar of john) -->
         <a-assets>
-            <a-asset-item id="john" src="/models/john_animation.glb"></a-asset-item>
+            <a-asset-item id="john-animation" src="/models/animation.glb"></a-asset-item>
             <img crossorigin="anonymous" id="emailTexture" src="https://cdn.glitch.com/6f8b5a13-fd4d-445d-b9eb-57c735d720ea%2FPostEmail.png?1528821333360">
             <img crossorigin="anonymous" id="linkedinTexture" src="https://cdn.glitch.com/6f8b5a13-fd4d-445d-b9eb-57c735d720ea%2FPostLinkedin.png?1528821333139">
         </a-assets>
@@ -82,7 +82,7 @@
             <a-entity position="-2 .5 -1.4" rotation="-45.98 -4.56 5.28" scale="0.1 .25 .2" text-geometry="bevelEnabled:true;bevelSize:0.1;bevelThickness:0.1;curveSegments:1;font:https://cdn.glitch.com/c719c986-c0c5-48b8-967c-3cd8b8aa17f3%2Fexo2Black.typeface.json?1490305922150;height:0.5;size:2;value:J O H N   M C N A M A R A" material="color:pink;metalness:0.9;roughness:0.05;sphericalEnvMap:https://cdn.glitch.com/6f8b5a13-fd4d-445d-b9eb-57c735d720ea%2FTextureMap.png?1528781398531"></a-entity>
 
             <!-- linking the marker to the model we want to show -->
-            <a-entity gltf-model="#john" scale="2 2 2" position="0 0 0"></a-entity>
+            <a-entity gltf-model="#john-animation" scale="2 2 2" position="0 0 0" animation-mixer></a-entity>
 
             <!-- Adding some test links -- can be replaced with speech bubbles -->
             <a-link id="email" target="_blank" class="clickable link" title="" image="" position="-2 -2 1" rotation="-67.42 0 0" scale="0.6 0.6 0.6" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" link="title:." visible="false"><a-box scale="0.8 0.8 1.05" material="src:#emailTexture" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
