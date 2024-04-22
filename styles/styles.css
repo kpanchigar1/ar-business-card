@@ -1,3 +1,21 @@
+#caption{
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    background: rgba(0,0,0, 0.75);
+    padding: 10px;
+}
+
+@media (max-width: 768px) {
+    #caption {
+        font-size: 15px;
+        left: 5px;
+    }
+}
+
+
 .popup-box{
     position: fixed;
     top: 0;
