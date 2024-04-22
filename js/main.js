@@ -59,11 +59,11 @@ function showContent() {
     contentElement5.setAttribute('visible', 'true');
     contentElement6.setAttribute('visible', 'true');
 
-    // Create a dictionary that maps speech bubble text to audio files
+    // Create a dictionary that maps speech bubble text to audio files and captions
     var speechBubbleToAudioMap = {
-        'Work?': '/audio/workHistory.wav',
-        'Education?': '/audio/education.wav',
-        'Hobbies?': '/audio/hobbies.wav'
+        'Work?': ['/audio/workHistory.wav', "I have worked at IBM for 24 years, starting as a Technical Integration Consultant in 1999, and I currently work as a UK University Programs Lead. I have a background that includes consultancy, performance, service & product delivery, all of which is underpinned by a passion for innovation. I am also the Chair of the Board for the South Coast Institute of Technology."],
+        'Education?': ['/audio/education.wav', "I attended the University of Hull from 1991-1994 and achieved a 2 1 in Information Systems. During my degree, I worked in a management position for UCI cinemas."],
+        'Hobbies?': ['/audio/hobbies.wav', "I enjoy gaming, inventing, hacking, writing, making presentations, Brazilian Jiu-Jitsu, medical service robots and space exploration."]
         // Add more mappings as needed
     };
 
@@ -71,39 +71,48 @@ function showContent() {
     document.getElementById('box1').addEventListener('click', function() {
         var speechBubble = document.getElementById('speechBubbleA');
         var speechBubbleText = speechBubble.getAttribute('text').value;
-        var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app'+ speechBubbleToAudioMap[speechBubbleText]);
+        var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app'+ speechBubbleToAudioMap[speechBubbleText][0]);
+        var caption = speechBubbleToAudioMap[speechBubbleText][1];
         if(!playingAudio){
             audio.play();
             playingAudio = true;
+            displayCaption(caption);
         }
         audio.addEventListener('ended', function(){
             playingAudio = false;
+            hideCaption();
         });
     });
 
     document.getElementById('box2').addEventListener('click', function() {
         var speechBubble = document.getElementById('speechBubbleB');
         var speechBubbleText = speechBubble.getAttribute('text').value;
-        var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app'+ speechBubbleToAudioMap[speechBubbleText]);
+        var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app'+ speechBubbleToAudioMap[speechBubbleText][0]);
+        var caption = speechBubbleToAudioMap[speechBubbleText][1];
         if(!playingAudio){
             audio.play();
             playingAudio = true;
+            displayCaption(caption);
         }
         audio.addEventListener('ended', function(){
             playingAudio = false;
+            hideCaption();
         });
     });
 
     document.getElementById('box3').addEventListener('click', function() {
         var speechBubble = document.getElementById('speechBubbleC');
         var speechBubbleText = speechBubble.getAttribute('text').value;
-        var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app'+ speechBubbleToAudioMap[speechBubbleText]);
+        var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app'+ speechBubbleToAudioMap[speechBubbleText][0]);
+        var caption = speechBubbleToAudioMap[speechBubbleText][1];
         if(!playingAudio){
             audio.play();
             playingAudio = true;
+            displayCaption(caption);
         }
         audio.addEventListener('ended', function(){
             playingAudio = false;
+            hideCaption();
         });
     });
 
@@ -130,14 +139,13 @@ document.querySelector('a-marker').addEventListener('markerFound', function() {
         let audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/overview.wav');
         audio.play();
         let caption = "I’m John McNamara, an IBM Master Inventor, Honorary Professor, Research Fellow, Impact Fellow and I currently lead IBM UK University Programs.";
-        document.getElementById('caption').textContent = caption;
+        displayCaption(caption);
         overviewPlayed = true;
         console.log("Overview audio played.")
         playingAudio = true;
         audio.addEventListener('ended', function(){
             playingAudio = false;
-            document.getElementById('caption').textContent = "";
-            document.getElementById('caption').setAttribute('visible', 'false');
+            hideCaption();
         });
     }
 
@@ -170,4 +178,15 @@ function handleSubmit(event) {
 
 // Event listener for form submission
 document.getElementById("popupForm").addEventListener("submit", handleSubmit);
+
+// function to display captions
+function displayCaption(captionText) {
+    document.getElementById('caption').setAttribute('style', 'display: block');
+    document.getElementById('caption').textContent = captionText;
+}
+
+function hideCaption() {
+    document.getElementById('caption').textContent = "";
+    document.getElementById('caption').setAttribute('style', 'display: none');
+}
 
