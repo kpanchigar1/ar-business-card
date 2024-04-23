@@ -59,6 +59,8 @@
                     });
             });
         }
+        var language = "english";
+        console.log(language)
     </script>
 </head>
 
@@ -121,6 +123,8 @@
             var popupBox = document.createElement('div');
             var germanButton = document.createElement('button');
             var englishButton = document.createElement('button');
+            console.log("language");
+            console.log(language);
 
             popupBox.className = 'popup-box';
             germanButton.innerText = 'Deutsch';
@@ -219,7 +223,12 @@
             setTimeout(showContent, 10000);
 
             if (!audioPlayedCounter) {
-                let audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/overview.wav');
+                if (language === "german"){
+                    var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/de-overview.wav');
+                }
+                else{
+                    var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/overview.wav');
+                }
                 audio.play();
                 console.log("Overview audio played.")
             }
