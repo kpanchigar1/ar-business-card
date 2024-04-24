@@ -1,3 +1,24 @@
+/* TODO: fix mobile position for caption */
+
+#caption{
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    background: rgba(0,0,0, 0.75);
+}
+
+@media (max-width: 768px) {
+    #caption {
+        justify-items: center;
+        font-size: 17px;
+        left: 2px;
+        padding-right: 5px;
+    }
+}
+
+
 .popup-box{
     position: fixed;
     top: 0;
