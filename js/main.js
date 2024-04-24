@@ -1,4 +1,5 @@
 // TODO: add documentation
+var userInput = "";
 
 let playingAudio = false;
 window.onload = function(){
@@ -215,7 +216,7 @@ function showPopup() {
 
 // Function to handle question form submission
 function handleSubmit() {
-    var userInput = document.getElementById("textInput").value;
+    userInput = document.getElementById("textInput").value;
     console.log("User input: " + userInput);
     hidePopup(); // Hide question form after submission
 }
