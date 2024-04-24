@@ -160,12 +160,12 @@ document.querySelector('a-marker').addEventListener('markerFound', function() {
 
 // Function to show the question popup
 function hidePopup() {
-    document.getElementById("popup").addAttribute('hidden');
+    document.getElementById("popup").setAttribute('hidden', 'true');
 }
 
 // Function to hide the question popup
 function showPopup() {
-    document.getElementById("popup").removeAttribute('hidden')
+    document.getElementById("popup").setAttribute('hidden', 'false');
 }
 
 // Function to handle question form submission
