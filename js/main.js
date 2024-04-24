@@ -212,11 +212,11 @@ document.querySelector('a-marker').addEventListener('markerFound', function() {
     if (!overviewPlayed && !playingAudio) {
         if (language === "german"){
             var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/de-overview.wav');
-            var caption = "I’m John McNamara, an IBM Master Inventor, Honorary Professor, Research Fellow, Impact Fellow and I currently lead IBM UK University Programs.";
+            var caption = "Ich bin John McNamara, IBM Master Inventor, Honorarprofessor, wissenschaftlicher Mitarbeiter, Schlagmann und Leiter derzeit IBM UK University Programs.";
         }
         else{
             var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/overview.wav');
-            var caption = "Ich bin John McNamara, IBM Master Inventor, Honorarprofessor, wissenschaftlicher Mitarbeiter, Schlagmann und Leiter derzeit IBM UK University Programs.";
+            var caption = "I’m John McNamara, an IBM Master Inventor, Honorary Professor, Research Fellow, Impact Fellow and I currently lead IBM UK University Programs.";
         }
         audio.play();
         console.log("Overview audio played.")
