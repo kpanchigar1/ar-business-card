@@ -5,6 +5,7 @@
     </title>
     <meta charset="UTF-8">
     <meta name="description" content="John McNamara's AR Business Card">
+    <script src="/js/main.js"></script>
 
     <!-- initialising the viewport -->
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, initial-scale=1.0, maximum-scale=1.0">
@@ -44,6 +45,7 @@
             resizeEvent.initUIEvent('resize', true, false, window, 0);
             window.dispatchEvent(resizeEvent);
         }, 3000);
+        console.log("version 1 !!!!!");
     };
     </script>
 
@@ -73,7 +75,7 @@
     <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
         <!-- defining the content to appear (avatar of john) -->
         <a-assets>
-            <a-asset-item id="john-animation" src="/models/animation.glb"></a-asset-item>
+            <a-asset-item id="john-animation" src="/models/john_animation.glb"></a-asset-item>
             <img crossorigin="anonymous" id="emailTexture" src="https://cdn.glitch.com/6f8b5a13-fd4d-445d-b9eb-57c735d720ea%2FPostEmail.png?1528821333360">
             <img crossorigin="anonymous" id="linkedinTexture" src="https://cdn.glitch.com/6f8b5a13-fd4d-445d-b9eb-57c735d720ea%2FPostLinkedin.png?1528821333139">
         </a-assets>
@@ -117,14 +119,12 @@
         </a-camera>
     </a-scene>
 
-    <script src="/js/main.js"></script>
 
-
-<!--    <div hidden class="popup-form" id="popup">-->
-<!--        <form id="popupForm">-->
-<!--            <input type="text" id="textInput"-->
-<!--                   placeholder="Ask your own question...">-->
-<!--            <input type="submit" value="Submit">-->
-<!--        </form>-->
-<!--    </div>-->
+    <div class="popup-form" id="popup">
+        <form id="popupForm">
+            <input type="text" id="textInput"
+                   placeholder="Ask your own question...">
+            <button type="submit" onclick="handleSubmit()"></button>
+        </form>
+    </div>
 </body>

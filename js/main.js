@@ -204,25 +204,21 @@ document.querySelector('a-marker').addEventListener('markerFound', function() {
 });
 
 // Function to show the question popup
-function showPopup() {
-    document.getElementById("popup-form").addAttribute('hidden');
+function hidePopup() {
+    document.getElementById("popup").setAttribute('hidden', 'true');
 }
 
 // Function to hide the question popup
-function hidePopup() {
-    document.getElementById("popup-form").removeAttribute('hidden')
+function showPopup() {
+    document.getElementById("popup").setAttribute('hidden', 'false');
 }
 
 // Function to handle question form submission
-function handleSubmit(event) {
-    event.preventDefault(); // Prevent the form from submitting normally
+function handleSubmit() {
     var userInput = document.getElementById("textInput").value;
-    alert("Question asked: " + userInput);
-    hidePopup(); // Hide question form after submission
+    console.log("User input: " + userInput);
+    //hidePopup(); // Hide question form after submission
 }
-
-// Event listener for form submission
-document.getElementById("popupForm").addEventListener("submit", handleSubmit);
 
 // function to display captions
 function displayCaption(captionText) {
