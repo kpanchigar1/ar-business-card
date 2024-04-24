@@ -126,11 +126,11 @@ function showContent() {
 let overviewPlayed = false;
 
 // Disabling the raycaster component when the page loads to avoid accidental clicks
-document.querySelector('a-cursor').setAttribute('raycaster', 'enabled', false);
+document.querySelector('a-cursor').setAttribute('raycaster', 'enabled: false');
 
 document.querySelector('a-marker').addEventListener('markerFound', function() {
     // Enable the raycaster component when the marker is found
-    document.querySelector('a-cursor').setAttribute('raycaster', 'enabled', true);
+    document.querySelector('a-cursor').setAttribute('raycaster', 'enabled: true');
 
     // Call the showContent function after 10000 milliseconds (10 seconds)
     setTimeout(showContent, 10000);
