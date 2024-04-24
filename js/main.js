@@ -172,7 +172,7 @@ function showPopup() {
 function handleSubmit() {
     var userInput = document.getElementById("textInput").value;
     console.log("User input: " + userInput);
-    //hidePopup(); // Hide question form after submission
+    hidePopup(); // Hide question form after submission
 }
 
 // function to display captions
