@@ -12,28 +12,56 @@ window.onload = function(){
 
     var popupContainer = document.getElementById('popup-container');
     var popupBox = document.createElement('div');
-    var closeButton = document.createElement('span');
-    var startButton = document.createElement('button');
+    var germanButton = document.createElement('button');
+    var englishButton = document.createElement('button');
+    console.log("language");
+    console.log(language);
 
     popupBox.className = 'popup-box';
-    closeButton.className = 'close-btn';
-    startButton.id = 'startButton';
-    startButton.innerText = 'Start';
+    germanButton.innerText = 'Deutsch';
+    englishButton.innerText = 'English';
 
-    popupBox.innerHTML = "<div class=popup-content><h2>Hi there!</h2><p>My name is John McNamara and I am a software engineer at IBM. I am passionate about technology and I am always looking for new challenges. If you want to know more about me, feel free to ask me anything!</p></div>";
-    closeButton.innerHTML = "&times;";
+    popupBox.innerHTML = "<div class=popup-content><h2>Hi there!</h2><p>My name is John McNamara and I am a software engineer at IBM. I am passionate about technology and I am always looking for new challenges. If you want to know more about me, feel free to ask me anything! Please choose a language: </p></div>";
 
-    closeButton.addEventListener('click', function() {
+    germanButton.addEventListener('click', function() {
+        language = "german";
+        updateTextContent();
         popupContainer.removeChild(popupBox);
     });
 
-    startButton.addEventListener('click', function() {
+    englishButton.addEventListener('click', function() {
+        language = "english";
+        updateTextContent();
         popupContainer.removeChild(popupBox);
     });
 
-    popupBox.appendChild(closeButton);
-    popupBox.appendChild(startButton);
+    popupBox.appendChild(germanButton);
+    popupBox.appendChild(englishButton);
     popupContainer.appendChild(popupBox);
+
+    function updateTextContent() {
+        var workText, educationText, hobbiesText;
+
+        if (language === "german") {
+            workText = "Arbeiten?";
+            educationText = "Ausbildung?";
+            hobbiesText = "Interessen?";
+        } else {
+            workText = "Work?";
+            educationText = "Education?";
+            hobbiesText = "Hobbies?";
+        }
+
+        // Update speech bubble text
+        document.getElementById("speechBubbleA").setAttribute("text", "value", workText);
+        document.getElementById("speechBubbleB").setAttribute("text", "value", educationText);
+        document.getElementById("speechBubbleC").setAttribute("text", "value", hobbiesText);
+    }
+
+    // Update speech bubble text values
+    document.getElementById("speechBubbleA").setAttribute("text", "value", workText);
+    document.getElementById("speechBubbleB").setAttribute("text", "value", educationText);
+    document.getElementById("speechBubbleC").setAttribute("text", "value", hobbiesText);
 };
 
 // Function to show the hidden content after a delay
@@ -181,13 +209,19 @@ document.querySelector('a-marker').addEventListener('markerFound', function() {
     setTimeout(showContent, 10000);
 
     if (!overviewPlayed && !playingAudio) {
-        let audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/overview.wav');
+        if (language === "german"){
+            var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/de-overview.wav');
+            var caption = "I’m John McNamara, an IBM Master Inventor, Honorary Professor, Research Fellow, Impact Fellow and I currently lead IBM UK University Programs.";
+        }
+        else{
+            var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/overview.wav');
+            var caption = "Ich bin John McNamara, IBM Master Inventor, Honorarprofessor, wissenschaftlicher Mitarbeiter, Schlagmann und Leiter derzeit IBM UK University Programs.";
+        }
         audio.play();
-        let caption = "I’m John McNamara, an IBM Master Inventor, Honorary Professor, Research Fellow, Impact Fellow and I currently lead IBM UK University Programs.";
-        displayCaption(caption);
-        overviewPlayed = true;
         console.log("Overview audio played.")
+        overviewPlayed = true;
         playingAudio = true;
+        displayCaption(caption);
         audio.addEventListener('ended', function(){
             playingAudio = false;
             hideCaption();
