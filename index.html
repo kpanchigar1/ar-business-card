@@ -1,15 +1,15 @@
 <!DOCTYPE html>
+<title>
+    Team05's AR Business Card
+</title>
 <head>
-    <title>
-        Team05's AR Business Card
-    </title>
     <meta charset="UTF-8">
     <meta name="description" content="John McNamara's AR Business Card">
 
     <!-- initialising the viewport -->
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, initial-scale=1.0, maximum-scale=1.0">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" type="text/css" href="/styles/styles.css">
+    <link rel="stylesheet" type="text/css" href="styles/styles.css">
 
 
     <!-- load a-frame and ar.js-->
@@ -50,7 +50,7 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/js/sw.js')
+                navigator.serviceWorker.register('/sw.js')
                     .then(registration => {
                         console.log('Service Worker registered:', registration);
                     })
@@ -65,15 +65,14 @@
 </head>
 
 <body style='margin : 0px; overflow: hidden;'>
-    <div id="popup-container"></div>
+    <div id="popup-container">
 
-    <!-- Div tag for captions -->
-    <div id="caption" style="display: none"></div>
+    </div>
     <!-- define the scene  -->
     <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
         <!-- defining the content to appear (avatar of john) -->
         <a-assets>
-            <a-asset-item id="john-animation" src="/models/animation.glb"></a-asset-item>
+            <a-asset-item id="john" src="/models/john_animation.glb"></a-asset-item>
             <img crossorigin="anonymous" id="emailTexture" src="https://cdn.glitch.com/6f8b5a13-fd4d-445d-b9eb-57c735d720ea%2FPostEmail.png?1528821333360">
             <img crossorigin="anonymous" id="linkedinTexture" src="https://cdn.glitch.com/6f8b5a13-fd4d-445d-b9eb-57c735d720ea%2FPostLinkedin.png?1528821333139">
         </a-assets>
@@ -85,7 +84,7 @@
             <a-entity position="-2 .5 -1.4" rotation="-45.98 -4.56 5.28" scale="0.1 .25 .2" text-geometry="bevelEnabled:true;bevelSize:0.1;bevelThickness:0.1;curveSegments:1;font:https://cdn.glitch.com/c719c986-c0c5-48b8-967c-3cd8b8aa17f3%2Fexo2Black.typeface.json?1490305922150;height:0.5;size:2;value:J O H N   M C N A M A R A" material="color:pink;metalness:0.9;roughness:0.05;sphericalEnvMap:https://cdn.glitch.com/6f8b5a13-fd4d-445d-b9eb-57c735d720ea%2FTextureMap.png?1528781398531"></a-entity>
 
             <!-- linking the marker to the model we want to show -->
-            <a-entity gltf-model="#john-animation" scale="2 2 2" position="0 0 0" animation-mixer></a-entity>
+            <a-entity gltf-model="#john" scale="2 2 2" position="0 0 0"></a-entity>
 
             <!-- Adding some test links -- can be replaced with speech bubbles -->
             <a-link id="email" target="_blank" class="clickable link" title="" image="" position="-2 -2 1" rotation="-67.42 0 0" scale="0.6 0.6 0.6" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" link="title:." visible="false"><a-box scale="0.8 0.8 1.05" material="src:#emailTexture" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
@@ -95,11 +94,11 @@
             </a-box></a-link>
 
 
-            <a-plane id="box1" class="clickable link" position="-2 4 0" color="#0000FF" height="1"
+            <a-plane id="box1" position="-2 4 0" color="#0000FF" height="1"
                      width="2" visible="false" clickable></a-plane>
-            <a-plane id="box2" class="clickable link" position="0 6 0" color="#FF0000" height="1"
+            <a-plane id="box2" position="0 6 0" color="#FF0000" height="1"
                      width="2" visible="false" clickable></a-plane>
-            <a-plane id="box3" class="clickable link" position="2 4 0" color="#00FF00" height="1"
+            <a-plane id="box3" position="2 4 0" color="#00FF00" height="1"
                      width="2" visible="false" clickable></a-plane>
             <a-entity id="speechBubbleA" position="0 4 0.1" scale="5 5 5"
                       text="value: Work?" look-at="#john"
@@ -115,16 +114,162 @@
         <a-camera>
             <a-cursor color="#ffba70" position="0 0 -1" fuse="true" fuse-timeout="2000" raycaster="objects: .link"></a-cursor>
         </a-camera>
+
     </a-scene>
 
-    <script src="/js/main.js"></script>
+    <script>
+        window.onload = function(){
+            var popupContainer = document.getElementById('popup-container');
+            var popupBox = document.createElement('div');
+            var germanButton = document.createElement('button');
+            var englishButton = document.createElement('button');
+            console.log("language");
+            console.log(language);
+
+            popupBox.className = 'popup-box';
+            germanButton.innerText = 'Deutsch';
+            englishButton.innerText = 'English';
+
+            popupBox.innerHTML = "<div class=popup-content><h2>Hi there!</h2><p>My name is John McNamara and I am a software engineer at IBM. I am passionate about technology and I am always looking for new challenges. If you want to know more about me, feel free to ask me anything! Please choose a language: </p></div>";
+
+            germanButton.addEventListener('click', function() {
+                language = "german";
+                updateTextContent();
+                popupContainer.removeChild(popupBox);
+            });
+
+            englishButton.addEventListener('click', function() {
+                language = "english";
+                updateTextContent();
+                popupContainer.removeChild(popupBox);
+            });
+
+            popupBox.appendChild(germanButton);
+            popupBox.appendChild(englishButton);
+            popupContainer.appendChild(popupBox);
+
+            function updateTextContent() {
+                var workText, educationText, hobbiesText;
+
+                if (language === "german") {
+                    workText = "Arbeiten?";
+                    educationText = "Ausbildung?";
+                    hobbiesText = "Interessen?";
+                } else {
+                    workText = "Work?";
+                    educationText = "Education?";
+                    hobbiesText = "Hobbies?";
+                }
+
+                // Update speech bubble text
+                document.getElementById("speechBubbleA").setAttribute("text", "value", workText);
+                document.getElementById("speechBubbleB").setAttribute("text", "value", educationText);
+                document.getElementById("speechBubbleC").setAttribute("text", "value", hobbiesText);
+            }
+
+            // Update speech bubble text values
+            document.getElementById("speechBubbleA").setAttribute("text", "value", workText);
+            document.getElementById("speechBubbleB").setAttribute("text", "value", educationText);
+            document.getElementById("speechBubbleC").setAttribute("text", "value", hobbiesText);
+        };
 
 
-<!--    <div hidden class="popup-form" id="popup">-->
-<!--        <form id="popupForm">-->
-<!--            <input type="text" id="textInput"-->
-<!--                   placeholder="Ask your own question...">-->
-<!--            <input type="submit" value="Submit">-->
-<!--        </form>-->
-<!--    </div>-->
+        AFRAME.registerComponent('cursor-listener', {
+            init: function(){
+                console.log("cursor-listener init");
+            }
+        })
+
+        // Function to show the hidden content after a delay
+        function showContent() {
+            console.log("Show content triggered.")
+
+            // Get the content element
+            var contentElement1 = document.getElementById('box1');
+            var contentElement2 = document.getElementById('box2');
+            var contentElement3 = document.getElementById('box3');
+            var contentElement4 =
+                document.getElementById('speechBubbleA');
+            var contentElement5 =
+                document.getElementById('speechBubbleB');
+            var contentElement6 =
+                document.getElementById('speechBubbleC');
+
+            // Show the content
+            contentElement1.setAttribute('visible', 'true');
+            contentElement2.setAttribute('visible', 'true');
+            contentElement3.setAttribute('visible', 'true');
+            contentElement4.setAttribute('visible', 'true');
+            contentElement5.setAttribute('visible', 'true');
+            contentElement6.setAttribute('visible', 'true');
+
+            // show question form popup
+            showPopup();
+        }
+
+
+        // TODO: add a message to the user that the camera is not supported
+
+        let audioPlayedCounter = false;
+
+        // Disable the raycaster component when the page loads
+        document.querySelector('a-cursor').setAttribute('raycaster', 'enabled', false);
+
+        document.querySelector('a-marker').addEventListener('markerFound', function() {
+            // Enable the raycaster component when the marker is found
+            document.querySelector('a-cursor').setAttribute('raycaster', 'enabled', true);
+
+            // Call the showContent function after 10000 milliseconds (10 seconds)
+            setTimeout(showContent, 10000);
+
+            if (!audioPlayedCounter) {
+                if (language === "german"){
+                    var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/de-overview.wav');
+                }
+                else{
+                    var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/overview.wav');
+                }
+                audio.play();
+                console.log("Overview audio played.")
+            }
+            audioPlayedCounter = true;
+
+            document.getElementById('email').setAttribute('visible', 'true');
+            document.getElementById('email').setAttribute('href', 'mailto:j0nnymac@uk.ibm.com');
+            // console.log('set email visible and add href');
+
+            document.getElementById('linkedin').setAttribute('visible', 'true');
+            document.getElementById('linkedin').setAttribute('href', 'https://uk.linkedin.com/in/jonmcnamara');
+            // console.log('set linkedin visible and add href');
+        });
+
+        // Function to show the question popup
+        function showPopup() {
+            document.getElementById("popup-form").addAttribute('hidden');
+        }
+
+        // Function to hide the question popup
+        function hidePopup() {
+            document.getElementById("popup-form").removeAttribute('hidden')
+        }
+
+        // Function to handle question form submission
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+            var userInput = document.getElementById("textInput").value;
+            alert("Question asked: " + userInput);
+            hidePopup(); // Hide question form after submission
+        }
+
+        // Event listener for form submission
+        document.getElementById("popupForm").addEventListener("submit", handleSubmit);
+    </script>
+
+    <div hidden class="popup-form" id="popup">
+        <form id="popupForm">
+            <input type="text" id="textInput"
+                   placeholder="Ask your own question...">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
 </body>
