@@ -82,6 +82,8 @@ function showContent() {
             playingAudio = false;
             hideCaption();
         });
+        changeText("Try asking about \n my work between \n 1999-2004...", "Try asking about \n my work between \n 2012-2016...",
+        "Try asking about \n my work between \n 2019-Present...", "#0000FF");
     });
 
     document.getElementById('box2').addEventListener('click', function() {
@@ -98,6 +100,8 @@ function showContent() {
             playingAudio = false;
             hideCaption();
         });
+        changeText("Try asking about \n my work \n experience...", "Try asking about \n my university...",
+        "Try asking about \n my degree...", "#FF0000")
     });
 
     document.getElementById('box3').addEventListener('click', function() {
@@ -114,10 +118,51 @@ function showContent() {
             playingAudio = false;
             hideCaption();
         });
+        changeText("Try asking about \n brazilian jiu-jitsu...", "Try asking about \n gaming...", "Try asking about \n writing...",
+         "#00FF00")
     });
 
     // show question form popup
     // showPopup();
+}
+
+function changeText(text1, text2, text3, colour) {
+    console.log("Speech bubble content changes")
+    console.log(text1)
+
+    // Get the content element
+    var contentElement1 = document.getElementById('box1');
+    var contentElement2 = document.getElementById('box2');
+    var contentElement3 = document.getElementById('box3');
+    var contentElement4 =
+        document.getElementById('speechBubbleA');
+    var contentElement5 =
+        document.getElementById('speechBubbleB');
+    var contentElement6 =
+        document.getElementById('speechBubbleC');
+
+    // Change the content in the speech bubbles
+    contentElement4.setAttribute('text', "value: " + text1);
+    contentElement5.setAttribute('text', "value: " + text2);
+    contentElement6.setAttribute('text', "value: " + text3);
+
+    // Changing the colour of the boxes
+    contentElement1.setAttribute('color', colour);
+    contentElement2.setAttribute('color', colour);
+    contentElement3.setAttribute('color', colour);
+
+    // Changing the position of the text
+    contentElement4.setAttribute('position', "-0.4 4 0.1");
+    contentElement5.setAttribute('position', "1.6 6 0.1");
+    contentElement6.setAttribute('position', "3.6 4 0.1");
+
+    // Set all content to visible
+    contentElement1.setAttribute('visible', 'true');
+    contentElement2.setAttribute('visible', 'true');
+    contentElement3.setAttribute('visible', 'true');
+    contentElement4.setAttribute('visible', 'true');
+    contentElement5.setAttribute('visible', 'true');
+    contentElement6.setAttribute('visible', 'true');
 }
 
 // TODO: add a message to the user that the camera is not supported
