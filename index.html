@@ -45,7 +45,7 @@
             resizeEvent.initUIEvent('resize', true, false, window, 0);
             window.dispatchEvent(resizeEvent);
         }, 3000);
-        print("version 1 !!!!!");
+        console.log("version 1 !!!!!");
     };
     </script>
 
@@ -124,7 +124,7 @@
         <form id="popupForm">
             <input type="text" id="textInput"
                    placeholder="Ask your own question...">
-            <button type="submit" value="Submit"></button>
+            <button type="submit" onclick="handleSubmit()"></button>
         </form>
     </div>
 </body>

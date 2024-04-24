@@ -169,16 +169,12 @@ function showPopup() {
 }
 
 // Function to handle question form submission
-function handleSubmit(event) {
-    event.preventDefault(); // Prevent the form from submitting normally
+function handleSubmit() {
     var userInput = document.getElementById("textInput").value;
     alert("Question asked: " + userInput);
     console.log("User input: " + userInput);
     hidePopup(); // Hide question form after submission
 }
-
-// Event listener for form submission
-document.getElementById("popupForm").addEventListener("submit", handleSubmit);
 
 // function to display captions
 function displayCaption(captionText) {
