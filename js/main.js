@@ -159,12 +159,12 @@ document.querySelector('a-marker').addEventListener('markerFound', function() {
 });
 
 // Function to show the question popup
-function showPopup() {
+function hidePopup() {
     document.getElementById("popup-form").addAttribute('hidden');
 }
 
 // Function to hide the question popup
-function hidePopup() {
+function showPopup() {
     document.getElementById("popup-form").removeAttribute('hidden')
 }
 
@@ -173,6 +173,7 @@ function handleSubmit(event) {
     event.preventDefault(); // Prevent the form from submitting normally
     var userInput = document.getElementById("textInput").value;
     alert("Question asked: " + userInput);
+    console.log("User input: " + userInput);
     hidePopup(); // Hide question form after submission
 }
 
