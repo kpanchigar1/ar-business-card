@@ -1,5 +1,5 @@
 // TODO: add documentation
-
+console.log("main.js here")
 let playingAudio = false;
 window.onload = function(){
     // check if the browser supports navigator.mediaDevices.getUserMedia
@@ -34,6 +34,7 @@ window.onload = function(){
     popupBox.appendChild(closeButton);
     popupBox.appendChild(startButton);
     popupContainer.appendChild(popupBox);
+    console.log("load things working")
 };
 
 // Function to show the hidden content after a delay
