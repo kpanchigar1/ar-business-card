@@ -40,8 +40,8 @@ window.onload = function(){
     popupContainer.appendChild(popupBox);
     console.log("load things working")
 
+    var workText, educationText, hobbiesText;
     function updateTextContent() {
-        var workText, educationText, hobbiesText;
         if (language === "german") {
             workText = "Arbeiten?";
             educationText = "Ausbildung?";
