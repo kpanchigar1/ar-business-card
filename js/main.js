@@ -40,9 +40,8 @@ window.onload = function(){
     popupContainer.appendChild(popupBox);
     console.log("load things working")
 
+    var workText, educationText, hobbiesText;
     function updateTextContent() {
-        var workText, educationText, hobbiesText;
-
         if (language === "german") {
             workText = "Arbeiten?";
             educationText = "Ausbildung?";
@@ -113,6 +112,7 @@ function showContent() {
         });
         changeText("Try asking about \n my work between \n 1999-2004...", "Try asking about \n my work between \n 2012-2016...",
         "Try asking about \n my work between \n 2019-Present...", "#0000FF");
+        displayBackButton();
     });
 
     document.getElementById('box2').addEventListener('click', function() {
@@ -130,7 +130,8 @@ function showContent() {
             hideCaption();
         });
         changeText("Try asking about \n my work \n experience...", "Try asking about \n my university...",
-        "Try asking about \n my degree...", "#FF0000")
+        "Try asking about \n my degree...", "#FF0000");
+        displayBackButton();
     });
 
     document.getElementById('box3').addEventListener('click', function() {
@@ -148,7 +149,8 @@ function showContent() {
             hideCaption();
         });
         changeText("Try asking about \n brazilian jiu-jitsu...", "Try asking about \n gaming...", "Try asking about \n writing...",
-         "#00FF00")
+         "#00FF00");
+        displayBackButton();
     });
 
     // show question form popup
@@ -176,9 +178,16 @@ function changeText(text1, text2, text3, colour) {
     contentElement6.setAttribute('text', "value: " + text3);
 
     // Changing the colour of the boxes
-    contentElement1.setAttribute('color', colour);
-    contentElement2.setAttribute('color', colour);
-    contentElement3.setAttribute('color', colour);
+    if(colour === "default") {
+        contentElement1.setAttribute('color', "#0000FF");
+        contentElement2.setAttribute('color', "#FF0000");
+        contentElement3.setAttribute('color', "#00FF00");
+    }
+    else {
+        contentElement1.setAttribute('color', colour);
+        contentElement2.setAttribute('color', colour);
+        contentElement3.setAttribute('color', colour);
+    }
 
     // Changing the position of the text
     contentElement4.setAttribute('position', "-0.4 4 0.1");
@@ -212,11 +221,11 @@ document.querySelector('a-marker').addEventListener('markerFound', function() {
     if (!overviewPlayed && !playingAudio) {
         if (language === "german"){
             var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/de-overview.wav');
-            var caption = "I’m John McNamara, an IBM Master Inventor, Honorary Professor, Research Fellow, Impact Fellow and I currently lead IBM UK University Programs.";
+            var caption = "Ich bin John McNamara, IBM Master Inventor, Honorarprofessor, wissenschaftlicher Mitarbeiter, Schlagmann und Leiter derzeit IBM UK University Programs.";
         }
         else{
             var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/overview.wav');
-            var caption = "Ich bin John McNamara, IBM Master Inventor, Honorarprofessor, wissenschaftlicher Mitarbeiter, Schlagmann und Leiter derzeit IBM UK University Programs.";
+            var caption = "I’m John McNamara, an IBM Master Inventor, Honorary Professor, Research Fellow, Impact Fellow and I currently lead IBM UK University Programs.";
         }
         audio.play();
         console.log("Overview audio played.")
@@ -264,5 +273,15 @@ function displayCaption(captionText) {
 function hideCaption() {
     document.getElementById('caption').textContent = "";
     document.getElementById('caption').setAttribute('style', 'display: none');
+}
+
+function displayBackButton() {
+    let backButton = document.getElementById('back');
+    backButton.setAttribute('visible', 'true');
+    backButton.addEventListener('click', function(){
+        changeText("Work?", "Education?", "Hobbies?", "default");
+        document.getElementById('back').setAttribute('visible', 'false');
+    });
+
 }
 
