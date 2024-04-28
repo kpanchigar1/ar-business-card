@@ -35,3 +35,5 @@ chatbot("hobbies") // calls the chatbot function with a "Work History" question,
     .catch(err => {
         console.error("Error:", err);
     });
+
+    module.exports = chatbot;
