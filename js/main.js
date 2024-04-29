@@ -248,10 +248,12 @@ function showPopup() {
     document.getElementById("popup").setAttribute('hidden', 'false');
 }
 
+import {chatbot} from './js/assistant.js';  // imports the chatbot function from assistant.js
 // Function to handle question form submission
 function handleSubmit() {
     userInput = document.getElementById("textInput").value;
     console.log("User input: " + userInput);
+    watsonResponse = chatbot(userQuestion);
     hidePopup(); // Hide question form after submission
 }
 
@@ -265,4 +267,3 @@ function hideCaption() {
     document.getElementById('caption').textContent = "";
     document.getElementById('caption').setAttribute('style', 'display: none');
 }
-
