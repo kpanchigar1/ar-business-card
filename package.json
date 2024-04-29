@@ -1,18 +1,5 @@
 {
   "dependencies": {
-    "ibm-watson": "^8.0.0"
-  },
-  "devDependencies": {
-    "jest": "^29.7.0"
-  },
-  "name": "ar-business-card",
-  "description": "",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "jest"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
-}
+    "ibm-watson": "^8.0.0",
+    "package.json": "^2.0.1"
+  }}
