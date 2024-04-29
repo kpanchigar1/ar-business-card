@@ -27,7 +27,7 @@ export function chatbot(question){
   });
 };
 
-chatbot("hobbies") // calls the chatbot function with a "Work History" question, this needs to be removed and
+chatbot("university") // calls the chatbot function with a "Work History" question, this needs to be removed and
                         //implemented elsewhere when needed
     .then(response => {
         console.log(response);
@@ -35,3 +35,5 @@ chatbot("hobbies") // calls the chatbot function with a "Work History" question,
     .catch(err => {
         console.error("Error:", err);
     });
+
+    module.exports = chatbot;
