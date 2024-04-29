@@ -3,6 +3,14 @@
 var userInput = "";
 let playingAudio = false;
 window.onload = function(){
+    // check if the browser supports navigator.mediaDevices.getUserMedia
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        // Request the camera
+        navigator.mediaDevices.getUserMedia({ video: true }).catch(function(err) {
+            alert('Camera is not supported or permission not granted.');
+        });
+    }
+
     var popupContainer = document.getElementById('popup-container');
     var popupBox = document.createElement('div');
     var germanButton = document.createElement('button');
