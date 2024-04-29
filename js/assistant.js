@@ -1,5 +1,5 @@
-const AssistantV2 = require('ibm-watson/assistant/v2');
-const { IamAuthenticator } = require('ibm-watson/auth');
+import AssistantV2 from 'ibm-watson/assistant/v2';
+import { IamAuthenticator } from 'ibm-watson/auth';
 
 const assistant = new AssistantV2({
   version: '2021-06-14',
