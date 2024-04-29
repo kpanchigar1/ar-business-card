@@ -1,5 +1,4 @@
 // TODO: add documentation
-// TODO: add functionality slowly
 var userInput = "";
 let playingAudio = false;
 window.onload = function(){
@@ -41,8 +40,8 @@ window.onload = function(){
     popupContainer.appendChild(popupBox);
     console.log("load things working")
 
-    var workText, educationText, hobbiesText;
     function updateTextContent() {
+        var workText, educationText, hobbiesText;
         if (language === "german") {
             workText = "Arbeiten?";
             educationText = "Ausbildung?";
@@ -112,7 +111,7 @@ function showContent() {
             hideCaption();
         });
         changeText("Try asking about \n my work between \n 1999-2004...", "Try asking about \n my work between \n 2012-2016...",
-        "Try asking about \n my work between \n 2019-Present...", "#0000FF");
+            "Try asking about \n my work between \n 2019-Present...", "#0000FF");
         displayBackButton();
     });
 
@@ -131,7 +130,7 @@ function showContent() {
             hideCaption();
         });
         changeText("Try asking about \n my work \n experience...", "Try asking about \n my university...",
-        "Try asking about \n my degree...", "#FF0000");
+            "Try asking about \n my degree...", "#FF0000");
         displayBackButton();
     });
 
@@ -150,7 +149,7 @@ function showContent() {
             hideCaption();
         });
         changeText("Try asking about \n brazilian jiu-jitsu...", "Try asking about \n gaming...", "Try asking about \n writing...",
-         "#00FF00");
+            "#00FF00");
         displayBackButton();
     });
 
@@ -258,60 +257,10 @@ function showPopup() {
     document.getElementById("popup").setAttribute('hidden', 'false');
 }
 
-//import chatbot from './assistant.js'  // imports the chatbot function from assistant.js
 // Function to handle question form submission
 function handleSubmit() {
-    // const captions = ["Brazilian jiu-jitsu is a self-defence martial art and combat sport based on grappling, ground fighting, and submission holds. BJJ focuses on taking ones opponent down to the ground, gaining a dominant position, and using a number of techniques to force them into submission via joint locks or chokeholds.", "I have played project Gotham,  Counter-strike, Battlefield, Dirt, Gran Turismo, Halo, and countless others.", "I have a wordpress site where I share my thoughts and current work. You can find it at j0nnymac.wordpress.com", "In my role I was responsible for site operations, people management and customer relations. This was a rich and fulfilling role, which gave me my first real taste of management, dealing with customers and working alongside the staff members to create a rewarding customer experience.", "The University of Hull was formed in 1927, making them the 14th oldest university in England. It has a proud history of academic excellence and creating and inspiring life-changing research.", "My information systems degree gave me a range of specialist skills in areas such as: hardware, software development and programming, systems analysis, database systems and design.", "I was a technical Integration Consultant for IBM. This was a role which involved me engaging with clients, ranging from banks to pharmaceutical companies, in the optimal method of approaching and executing the integration of their business systems.", "I was a BPM consultant for IBM. This was a role which involved me consulting with clients worldwide, to engage in leading the application of gold standard business process methodologies to new and existing ventures as well as enhancing the effectiveness of these processes with the use of BPM software.", "I was an Information Strategist and Architect for IBM. This was a role which involved the design of information and information delivery to support IBM products such as WebSphere MQ and WebSphere Message Broker.", "I was a Senior Inventor and IBM Hursley Innovation Labs Technologist Lead. I was responsible for a team of technologists in the IBM Hursley Innovation Labs; a vital part of the IBM Hursley Development Labs in Winchester.", "I was a UK universities lead and senior inventor from June 2019 to January 2020. I currently work as an IBM master inventor and IBM UK university programs lead.", "Sorry I don't know how to answer that question, try asking another question."]
-    // userInput = document.getElementById("textInput").value;
-    // console.log("User input: " + userInput);
-    // let watsonResponse = chatbot(userQuestion);
-    // if (watsonResponse = "BJJ.wav") {
-    //     var captionNum = 0
-    // }
-    // else if (watsonResponse = "gaming.wav") {
-    //     var captionNum = 1
-    // }
-    // else if (watsonResponse = "writing.wav") {
-    //     var captionNum = 2
-    // }
-    // else if (watsonResponse = "workExperience.wav") {
-    //     var captionNum = 3
-    // }
-    // else if (watsonResponse = "university.wav") {
-    //     var captionNum = 4
-    // }
-    // else if (watsonResponse = "degree.wav") {
-    //     var captionNum = 5
-    // }
-    // else if (watsonResponse = "1999-2004.wav") {
-    //     var captionNum = 6
-    // }
-    // else if (watsonResponse = "2004-2012.wav") {
-    //     var captionNum = 7
-    // }
-    // else if (watsonResponse = "2012-2016.wav") {
-    //     var captionNum = 8
-    // }
-    // else if (watsonResponse = "2015-2019.wav") {
-    //     var captionNum = 9
-    // }
-    // else if (watsonResponse = "2019-present.wav") {
-    //     var captionNum = 10
-    // }
-    // else {
-    //     var captionNum = 11
-    //     // TODO we need to add a .wav file for when the avatar doesn't know how to respond, can we make the chatbot return this .wav file when it is unsure?
-    // }
-    // var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/' + watsonResponse);
-    // var caption = captions[captionNum]
-    // audio.play();
-    console.log("Response audio played.")
-    playingAudio = true;
-    displayCaption(caption);
-    audio.addEventListener('ended', function(){
-        playingAudio = false;
-        hideCaption();
-    });
+    userInput = document.getElementById("textInput").value;
+    console.log("User input: " + userInput);
     hidePopup(); // Hide question form after submission
 }
 
@@ -324,7 +273,6 @@ function displayCaption(captionText) {
 function hideCaption() {
     document.getElementById('caption').textContent = "";
     document.getElementById('caption').setAttribute('style', 'display: none');
-
 }
 
 function displayBackButton() {
@@ -336,4 +284,3 @@ function displayBackButton() {
     });
 
 }
-
