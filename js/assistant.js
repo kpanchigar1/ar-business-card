@@ -36,4 +36,4 @@ chatbot("university") // calls the chatbot function with a "Work History" questi
         console.error("Error:", err);
     });
 
-    module.exports = chatbot;
+export default chatbot; // exports the chatbot function to be used in other files
