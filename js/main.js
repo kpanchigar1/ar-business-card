@@ -1,4 +1,5 @@
 // TODO: add documentation
+// TODO: add functionality slowly
 var userInput = "";
 let playingAudio = false;
 window.onload = function(){
