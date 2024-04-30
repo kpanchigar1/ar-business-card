@@ -270,11 +270,13 @@ function displayCaption(captionText) {
     document.getElementById('caption').textContent = captionText;
 }
 
+// function to hide captions
 function hideCaption() {
     document.getElementById('caption').textContent = "";
     document.getElementById('caption').setAttribute('style', 'display: none');
 }
 
+// function to display the back button
 function displayBackButton() {
     let backButton = document.getElementById('back');
     backButton.setAttribute('visible', 'true');
