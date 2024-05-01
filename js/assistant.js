@@ -10,7 +10,7 @@ const assistant = new AssistantV2({
 });
 
 
-export function chatbot(question){
+function chatbot(question){
     return assistant.messageStateless({  // calls the chatbot assistant with whatever question is passed in
         assistantId: 'dd0e8243-5e9b-474f-9e67-b07a0eec17df',
         input: {
