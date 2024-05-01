@@ -4,15 +4,18 @@ const { IamAuthenticator } = require('ibm-watson/auth');
 const assistant = new AssistantV2({
   version: '2021-06-14',
   authenticator: new IamAuthenticator({
-    apikey: 'UVyG7eL6sBcZmZgtCFi2-p__r1EMv1c2c-2I1R716hJz',
+    apikey: 'UVyG7eL6sBcZmZgtCFi2-p__r1EMv1c2c-2I1R716hJz', // insert watson resource api key
   }),
+  // insert watson resource url
   serviceUrl: 'https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/cd153831-2882-424a-921f-cd367fc10c99',
 });
 
 
 function chatbot(question){
+// question is text to be passed to Assistant
     return assistant.messageStateless({  // calls the chatbot assistant with whatever question is passed in
-        assistantId: 'dd0e8243-5e9b-474f-9e67-b07a0eec17df',
+        assistantId: 'dd0e8243-5e9b-474f-9e67-b07a0eec17df', // environment id
+        // set parameters
         input: {
             'message_type': 'text',
             'text': question
@@ -36,4 +39,4 @@ chatbot("university") // calls the chatbot function with a "Work History" questi
         console.error("Error:", err);
     });
 
-    module.exports = chatbot;
+export default chatbot; // exports the chatbot function to be used in other files

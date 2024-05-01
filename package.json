@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "ibm-watson": "^8.0.0"
+    "ibm-watson": "^8.0.0",
+    "package.json": "^2.0.1"
   },
   "devDependencies": {
     "jest": "^29.7.0"

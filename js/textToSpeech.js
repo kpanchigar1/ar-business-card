@@ -4,24 +4,24 @@ const { IamAuthenticator } = require('ibm-watson/auth');
 
 const textToSpeech = new TextToSpeechV1({
   authenticator: new IamAuthenticator({
-    apikey: 'i8VO7YIS1IIhqI1z8NrRVqTasM3szv8JktkAFLPf2wBu',
+    apikey: 'i8VO7YIS1IIhqI1z8NrRVqTasM3szv8JktkAFLPf2wBu', // insert watson resource api key
   }),
+  // insert watson resource url
   serviceUrl: 'https://api.eu-gb.text-to-speech.watson.cloud.ibm.com/instances/9e02922a-0f48-4aeb-b925-f9f3fb8ce716',
 });
 
 function textToSpeechGenerator(text, fileName){
+    // set parameter
     const synthesizeParams = {
       text: text,
       accept: 'audio/wav',
       voice: 'en-GB_JamesV3Voice',
     };
 
+    // generates wav file
     textToSpeech.synthesize(synthesizeParams)
       .then(response => {
-        // The following line is necessary only for
-        // wav formats; otherwise, `response.result`2
-        // can be directly piped to a file.
-        return textToSpeech.repairWavHeaderStream(response.result);
+        return textToSpeech.repairWavHeaderStream(response.result); // wav format
       })
       .then(buffer => {
         fs.writeFileSync(fileName, buffer);
@@ -31,4 +31,5 @@ function textToSpeechGenerator(text, fileName){
       });
 };
 
+// which other files can refer to this file
 module.exports = textToSpeechGenerator;
