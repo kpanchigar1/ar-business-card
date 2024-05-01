@@ -11,7 +11,7 @@ const assistant = new AssistantV2({
 });
 
 // question is text to be passed to Assistant
-export function chatbot(question){
+function chatbot(question){
     return assistant.messageStateless({  // calls the chatbot assistant with whatever question is passed in
         assistantId: 'dd0e8243-5e9b-474f-9e67-b07a0eec17df', // environment id
         // set parameters
@@ -38,4 +38,4 @@ chatbot("university") // calls the chatbot function with a "Work History" questi
         console.error("Error:", err);
     });
 
-export default chatbot; // exports the chatbot function to be used in other files
+module.exports = chatbot; // exports the chatbot function to be used in other files
