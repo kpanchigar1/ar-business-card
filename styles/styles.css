@@ -31,7 +31,7 @@
     z-index: 9999;
 }
 
-.popup-content{
+.popup-content {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
@@ -40,7 +40,7 @@
 
 .popup-form {
     position: fixed;
-    bottom: 20px;
+    top: 100px;
     left: 50%;
     transform: translateX(-50%);
     background-color: white;

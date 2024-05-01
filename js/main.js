@@ -217,6 +217,7 @@ document.querySelector('a-marker').addEventListener('markerFound', function() {
 
     // Call the showContent function after 10000 milliseconds (10 seconds)
     setTimeout(showContent, 10000);
+    setTimeout(showPopup, 10000);
 
     if (!overviewPlayed && !playingAudio) {
         if (language === "german"){
@@ -254,7 +255,7 @@ function hidePopup() {
 
 // Function to hide the question popup
 function showPopup() {
-    document.getElementById("popup").setAttribute('hidden', 'false');
+    document.getElementById("popup").removeAttribute('hidden');
 }
 
 // Function to handle question form submission
