@@ -255,7 +255,7 @@ function hidePopup() {
 
 // Function to hide the question popup
 function showPopup() {
-    document.getElementById("popup").setAttribute('hidden', 'false');
+    document.getElementById("popup").removeAttribute('hidden');
 }
 
 // Function to handle question form submission
