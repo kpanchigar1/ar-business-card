@@ -217,6 +217,7 @@ document.querySelector('a-marker').addEventListener('markerFound', function() {
 
     // Call the showContent function after 10000 milliseconds (10 seconds)
     setTimeout(showContent, 10000);
+    setTimeout(showPopup, 10000);
 
     if (!overviewPlayed && !playingAudio) {
         if (language === "german"){
