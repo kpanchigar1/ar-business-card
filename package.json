@@ -1,9 +1,14 @@
 {
   "dependencies": {
-    "ibm-watson": "^8.0.0",
+    "express": "^4.19.2",
+    "express-browserify": "^1.0.3",
+    "ibm-watson": "latest",
     "package.json": "^2.0.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.24.5",
+    "@babel/preset-env": "^7.24.5",
+    "babelify": "^10.0.0",
     "jest": "^29.7.0"
   },
   "name": "ar-business-card",
