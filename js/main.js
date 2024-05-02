@@ -318,62 +318,73 @@ function handleSubmit() {
     console.log("User input: " + userInput);
     const englishCaptions = ["Brazilian jiu-jitsu is a self-defence martial art and combat sport based on grappling, ground fighting, and submission holds. BJJ focuses on taking ones opponent down to the ground, gaining a dominant position, and using a number of techniques to force them into submission via joint locks or chokeholds.", "I have played project Gotham,  Counter-strike, Battlefield, Dirt, Gran Turismo, Halo, and countless others.", "I have a wordpress site where I share my thoughts and current work. You can find it at j0nnymac.wordpress.com", "In my role I was responsible for site operations, people management and customer relations. This was a rich and fulfilling role, which gave me my first real taste of management, dealing with customers and working alongside the staff members to create a rewarding customer experience.", "The University of Hull was formed in 1927, making them the 14th oldest university in England. It has a proud history of academic excellence and creating and inspiring life-changing research.", "My information systems degree gave me a range of specialist skills in areas such as: hardware, software development and programming, systems analysis, database systems and design.", "I was a technical Integration Consultant for IBM. This was a role which involved me engaging with clients, ranging from banks to pharmaceutical companies, in the optimal method of approaching and executing the integration of their business systems.", "I was a BPM consultant for IBM. This was a role which involved me consulting with clients worldwide, to engage in leading the application of gold standard business process methodologies to new and existing ventures as well as enhancing the effectiveness of these processes with the use of BPM software.", "I was an Information Strategist and Architect for IBM. This was a role which involved the design of information and information delivery to support IBM products such as WebSphere MQ and WebSphere Message Broker.", "I was a Senior Inventor and IBM Hursley Innovation Labs Technologist Lead. I was responsible for a team of technologists in the IBM Hursley Innovation Labs; a vital part of the IBM Hursley Development Labs in Winchester.", "I was a UK universities lead and senior inventor from June 2019 to January 2020. I currently work as an IBM master inventor and IBM UK university programs lead.", "Sorry I don't know how to answer that question, try asking another question."];
     const germanCaptions = ["Brasilianisches Jiu-Jitsu ist eine Kampfkunst und Kampfsportart zur Selbstverteidigung, die auf Grappling, Bodenkämpfen und Unterwerfungsgriffen basiert. Beim BJJ geht es darum, den Gegner zu Boden zu bringen, eine dominante Position einzunehmen und eine Reihe von Techniken anzuwenden, um ihn durch Gelenkverriegelungen oder Würgegriffe zur Unterwerfung zu zwingen.", "Ich habe Projekt Gotham, Counter-Strike, Battlefield, Dirt, Gran Turismo, Halo und unzählige andere gespielt.", "Ich habe eine WordPress-Site, auf der ich meine Gedanken und aktuellen Arbeiten teile. Sie finden es unter j0nnymac.wordpress.com", "In meiner Rolle war ich für den Standortbetrieb, das Personalmanagement und die Kundenbeziehungen verantwortlich. Dies war eine reichhaltige und erfüllende Rolle, die mir einen ersten echten Eindruck vom Management, dem Umgang mit Kunden und der Zusammenarbeit mit den Mitarbeitern vermittelte, um ein lohnendes Kundenerlebnis zu schaffen.", "Die University of Hull wurde 1927 gegründet und ist damit die 14. älteste Universität Englands. Es kann auf eine stolze Geschichte akademischer Exzellenz und der Schaffung und Inspiration lebensverändernder Forschung zurückblicken.", "Mein Informatikstudium vermittelte mir eine Reihe von Fachkenntnissen in Bereichen wie Hardware, Softwareentwicklung und -programmierung, Systemanalyse, Datenbanksysteme und Design.", "Ich war technischer Integrationsberater für IBM. In dieser Rolle musste ich mich mit Kunden, von Banken bis hin zu Pharmaunternehmen, an der optimalen Herangehensweise und Umsetzung der Integration ihrer Geschäftssysteme beteiligen.", "Ich war BPM-Berater für IBM. In dieser Rolle beriet ich Kunden auf der ganzen Welt, um die Anwendung von Goldstandard-Geschäftsprozessmethoden auf neue und bestehende Unternehmen zu leiten und die Effektivität dieser Prozesse durch den Einsatz von BPM-Software zu steigern.", "Ich war Informationsstratege und Architekt für IBM. Dabei handelte es sich um eine Rolle, die das Design von Informationen und die Informationsbereitstellung zur Unterstützung von IBM-Produkten wie WebSphere MQ und WebSphere Message Broker umfasste.", "Ich war leitender Erfinder und technischer Leiter der IBM Hursley Innovation Labs. Ich war für ein Team von Technologen in den IBM Hursley Innovation Labs verantwortlich; ein wichtiger Teil der IBM Hursley Development Labs in Winchester.", "Von Juni 2019 bis Januar 2020 war ich Leiter einer britischen Universität und leitender Erfinder. Derzeit arbeite ich als IBM-Master-Erfinder und Leiter der IBM UK-Universitätsprogramme."]
-    chatbot(userInput)
-        .then(watsonResponse => {
-            console.log(watsonResponse);
-            if (watsonResponse == "BJJ.wav") {
-                var captionNum = 0;
-            }
-            else if (watsonResponse == "gaming.wav") {
-                var captionNum = 1;
-            }
-            else if (watsonResponse == "writing.wav") {
-                var captionNum = 2;
-            }
-            else if (watsonResponse == "workExperience.wav") {
-                var captionNum = 3;
-            }
-            else if (watsonResponse == "university.wav") {
-                var captionNum = 4;
-            }
-            else if (watsonResponse == "degree.wav") {
-                var captionNum = 5;
-            }
-            else if (watsonResponse == "1999-2004.wav") {
-                var captionNum = 6;
-            }
-            else if (watsonResponse == "2004-2012.wav") {
-                var captionNum = 7;
-            }
-            else if (watsonResponse == "2012-2016.wav") {
-                var captionNum = 8;
-            }
-            else if (watsonResponse == "2015-2019.wav") {
-                var captionNum = 9;
-            }
-            else if (watsonResponse == "2019-present.wav") {
-                var captionNum = 10;
-            }
-            else {
-                var captionNum = 11;
-                // TODO we need to add a .wav file for when the avatar doesn't know how to respond, can we make the chatbot return this .wav file when it is unsure?
-            }
-            var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/' + watsonResponse);
-            var caption = "waiting to be assigned a caption"
-            if (language === "english") {caption = englishCaptions[captionNum];}
-            else {caption = germanCaptions[captionNum];}
+    fetch('/api/chatbot', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ userInput })
+      })
+      .then(response => response.json())
+      .then(data => {
+        const watsonResponse = data.result.output.generic[0].text;
+        console.log(watsonResponse);
+                    if (watsonResponse == "BJJ.wav") {
+                        var captionNum = 0;
+                    }
+                    else if (watsonResponse == "gaming.wav") {
+                        var captionNum = 1;
+                    }
+                    else if (watsonResponse == "writing.wav") {
+                        var captionNum = 2;
+                    }
+                    else if (watsonResponse == "workExperience.wav") {
+                        var captionNum = 3;
+                    }
+                    else if (watsonResponse == "university.wav") {
+                        var captionNum = 4;
+                    }
+                    else if (watsonResponse == "degree.wav") {
+                        var captionNum = 5;
+                    }
+                    else if (watsonResponse == "1999-2004.wav") {
+                        var captionNum = 6;
+                    }
+                    else if (watsonResponse == "2004-2012.wav") {
+                        var captionNum = 7;
+                    }
+                    else if (watsonResponse == "2012-2016.wav") {
+                        var captionNum = 8;
+                    }
+                    else if (watsonResponse == "2015-2019.wav") {
+                        var captionNum = 9;
+                    }
+                    else if (watsonResponse == "2019-present.wav") {
+                        var captionNum = 10;
+                    }
+                    else {
+                        var captionNum = 11;
+                        // TODO we need to add a .wav file for when the avatar doesn't know how to respond, can we make the chatbot return this .wav file when it is unsure?
+                    }
+                    var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/' + watsonResponse);
+                    var caption = "waiting to be assigned a caption"
+                    if (language === "english") {caption = englishCaptions[captionNum];}
+                    else {caption = germanCaptions[captionNum];}
 
-            audio.play();
-            console.log("Response audio played.")
-            playingAudio = true;
-            displayCaption(caption);
-            audio.addEventListener('ended', function(){
-                playingAudio = false;
-                hideCaption();
-            });
-            hidePopup(); // Hide question form after submission
-        })
+                    audio.play();
+                    console.log("Response audio played.")
+                    playingAudio = true;
+                    displayCaption(caption);
+                    audio.addEventListener('ended', function(){
+                        playingAudio = false;
+                        hideCaption();
+                    });
+                    hidePopup(); // Hide question form after submission
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    }
 
-};
 
 document.getElementById("submit_button").addEventListener("click", handleSubmit);
