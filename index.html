@@ -64,6 +64,7 @@
         var language = "english";
         console.log(language)
     </script>
+
 </head>
 
 <body style='margin : 0px; overflow: hidden;'>
@@ -138,16 +139,17 @@
     </a-camera>
 </a-scene>
 
-<script src="/js/main.js"></script>
+
 
 
 <div hidden class="popup-form" id="popup">
     <form id="popupForm">
         <input type="text" id="textInput"
                placeholder="Ask your own question...">
-        <button type="button" onclick="handleSubmit()">Submit</button>
+        <button type="button" id="submit_button">Submit</button>
     </form>
 </div>
+<script src="/js/main_browserify.js"></script>
 
 
 <!--    <div hidden class="popup-form" id="popup">-->
