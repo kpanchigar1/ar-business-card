@@ -107,11 +107,14 @@ function showContent() {
         var caption = speechBubbleToAudioMap[speechBubbleText][1];
         if(!playingAudio){
             audio.play();
+            document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Talk; loop: repeat');
             playingAudio = true;
             displayCaption(caption);
         }
         audio.addEventListener('ended', function(){
+            document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Idle; loop: repeat');
             playingAudio = false;
+
             hideCaption();
         });
         if (language === "german"){
@@ -240,9 +243,8 @@ document.querySelector('a-marker').addEventListener('markerFound', function() {
     // Call the showContent function after 10000 milliseconds (10 seconds)
     setTimeout(showContent, 10000);
     setTimeout(showPopup, 10000);
-
+    
     if (!overviewPlayed && !playingAudio) {
-        document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Stand; loop: repeat');
         if (language === "german"){
             var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/de-overview.wav');
             var caption = "Ich bin John McNamara, IBM Master Inventor, Honorarprofessor, wissenschaftlicher Mitarbeiter, Schlagmann und Leiter derzeit IBM UK University Programs.";
@@ -252,6 +254,7 @@ document.querySelector('a-marker').addEventListener('markerFound', function() {
             var caption = "I’m John McNamara, an IBM Master Inventor, Honorary Professor, Research Fellow, Impact Fellow and I currently lead IBM UK University Programs.";
         }
         audio.play();
+        document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Stand; loop: once');
         console.log("Overview audio played.")
         overviewPlayed = true;
         playingAudio = true;
