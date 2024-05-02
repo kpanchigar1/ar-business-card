@@ -64,9 +64,14 @@
         var language = "english";
         console.log(language)
     </script>
+
 </head>
 
 <body style='margin : 0px; overflow: hidden;'>
+<script src="./js/chatbot.js">
+    var result = chatbot("gaming");
+    console.log(result);
+</script>
 <!-- Div tag for popups -->
 <div id="popup-container"></div>
 
@@ -138,16 +143,17 @@
     </a-camera>
 </a-scene>
 
-<script src="/js/main.js"></script>
+
 
 
 <div hidden class="popup-form" id="popup">
     <form id="popupForm">
         <input type="text" id="textInput"
                placeholder="Ask your own question...">
-        <button type="button" onclick="handleSubmit()">Submit</button>
+        <button type="button" id="submit_button">Submit</button>
     </form>
 </div>
+<script src="/js/main_browserify.js"></script>
 
 
 <!--    <div hidden class="popup-form" id="popup">-->
