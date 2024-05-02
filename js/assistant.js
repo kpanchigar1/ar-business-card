@@ -30,6 +30,4 @@ const assistant = new AssistantV2({
         });
     }
 
-    module.exports = {
-        chatbot: chatbot
-    };
+    module.exports = chatbot;

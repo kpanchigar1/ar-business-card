@@ -258,11 +258,11 @@ function displayBackButton() {
 }
 
 // Function to handle question form submission
-const chatbot = require('./assistant');
 function handleSubmit() {
   // Importing the chatbot function from assistant.js using require.js
   console.log("handle submit was called");
   console.log("about to load chatbot");
+  const chatbot = require('./chatbot2');
   console.log("handleSubmit is active");
   userInput = document.getElementById("textInput").value;
   console.log("User input: " + userInput);
