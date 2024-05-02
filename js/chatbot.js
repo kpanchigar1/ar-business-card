@@ -36,13 +36,6 @@ function chatbot(question) {
   });
 }
 ;
-chatbot("university") // calls the chatbot function with a "Work History" question, this needs to be removed and
-//implemented elsewhere when needed
-.then(function (response) {
-  console.log(response);
-})["catch"](function (err) {
-  console.error("Error:", err);
-});
 module.exports = chatbot; // Export the chatbot function so it can be used by other modules
 
 },{"ibm-watson/assistant/v2":121,"ibm-watson/auth":122}],2:[function(require,module,exports){
