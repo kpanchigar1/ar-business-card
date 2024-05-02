@@ -39,13 +39,13 @@ window.onload = function () {
   function updateTextContent() {
     var workText, educationText, hobbiesText;
     if (language === "german") {
-      workText = "Arbeiten?";
-      educationText = "Ausbildung?";
-      hobbiesText = "Interessen?";
+      workText = "Klicken Sie hier, \n um mehr über meine \n Arbeit zu erfahren";
+      educationText = "Klicken Sie hier, \n  um mehr über meine \n Ausbildung zu erfahren";
+      hobbiesText = "Klicken Sie hier, \n um mehr über meine \n Hobbys zu erfahren";
     } else {
-      workText = "Work?";
-      educationText = "Education?";
-      hobbiesText = "Hobbies?";
+      workText = "Click here to learn \n about my work";
+      educationText = "Click here to learn \n about my education";
+      hobbiesText = "Click here to learn \n about my hobbies";
     }
 
     // Update speech bubble text
@@ -82,10 +82,12 @@ function showContent() {
 
   // Create a dictionary that maps speech bubble text to audio files and captions
   var speechBubbleToAudioMap = {
-    'Work?': ['/audio/workHistory.wav', "I have worked at IBM for 24 years, starting as a Technical Integration Consultant in 1999, and I currently work as a UK University Programs Lead. I have a background that includes consultancy, performance, service & product delivery, all of which is underpinned by a passion for innovation. I am also the Chair of the Board for the South Coast Institute of Technology."],
-    'Education?': ['/audio/education.wav', "I attended the University of Hull from 1991-1994 and achieved a 2 1 in Information Systems. During my degree, I worked in a management position for UCI cinemas."],
-    'Hobbies?': ['/audio/hobbies.wav', "I enjoy gaming, inventing, hacking, writing, making presentations, Brazilian Jiu-Jitsu, medical service robots and space exploration."]
-    // Add more mappings as needed
+    'Click here to learn \n about my work': ['/audio/workHistory.wav', "I have worked at IBM for 24 years, starting as a Technical Integration Consultant in 1999, and I currently work as a UK University Programs Lead. I have a background that includes consultancy, performance, service & product delivery, all of which is underpinned by a passion for innovation. I am also the Chair of the Board for the South Coast Institute of Technology."],
+    'Click here to learn \n about my education': ['/audio/education.wav', "I attended the University of Hull from 1991-1994 and achieved a 2 1 in Information Systems. During my degree, I worked in a management position for UCI cinemas."],
+    'Click here to learn \n about my hobbies': ['/audio/hobbies.wav', "I enjoy gaming, inventing, hacking, writing, making presentations, Brazilian Jiu-Jitsu, medical service robots and space exploration."],
+    'Klicken Sie hier, \n um mehr über meine \n Arbeit zu erfahren': ['/audio/de-workHistory.wav', "Ich arbeite seit 24 Jahren bei IBM, begann 1999 als Berater für technische Integration und arbeite derzeit als Programmleiter für Universitäten in Großbritannien. Ich verfüge über einen Hintergrund, der Beratung, Leistung, Service und Produktlieferung umfasst, und all dies wird durch eine Leidenschaft für Innovation untermauert. Ich bin außerdem Vorstandsvorsitzender des South Coast Institute of Technology."],
+    'Klicken Sie hier, \n um mehr über meine \n Ausbildung zu erfahren': ['/audio/de-education.wav', "Ich besuchte die University of Hull von 1991 bis 1994 und erlangte einen 2 1 in Informationssystemen. Während meines Studiums war ich in einer Führungsposition für UCI-Kinos tätig."],
+    'Klicken Sie hier, \n um mehr über meine \n Hobbys zu erfahren': ['/audio/de-hobbies.wav', "Ich genieße das Spielen, Erfinden, Hacken, Schreiben, Präsentieren, brasilianisches Jiu-Jitsu, medizinische Serviceroboter und Weltraumforschung."]
   };
 
   // Register click event listener for each speech bubble
@@ -103,7 +105,11 @@ function showContent() {
       playingAudio = false;
       hideCaption();
     });
-    changeText("Try asking about \n my work between \n 1999-2004...", "Try asking about \n my work between \n 2012-2016...", "Try asking about \n my work between \n 2019-Present...", "#0000FF");
+    if (language === "german") {
+      changeText("Versuchen Sie, nachzufragen \n meine Arbeit zwischen \n 1999-2004...", "Versuchen Sie \n meine Arbeit zwischen \n 2012-2016...", "Versuchen Sie \n meine Arbeit zwischen \n 2019-Gegenwärtig...", "#0000FF");
+    } else {
+      changeText("Try asking about \n my work between \n 1999-2004...", "Try asking about \n my work between \n 2012-2016...", "Try asking about \n my work between \n 2019-Present...", "#0000FF");
+    }
     displayBackButton();
   });
   document.getElementById('box2').addEventListener('click', function () {
@@ -120,7 +126,11 @@ function showContent() {
       playingAudio = false;
       hideCaption();
     });
-    changeText("Try asking about \n my work \n experience...", "Try asking about \n my university...", "Try asking about \n my degree...", "#FF0000");
+    if (language === "german") {
+      changeText("Versuchen Sie \n meine Arbeit \n Erfahrung...", "Versuchen Sie \n meine univer...", "Versuchen Sie \n mein Abschluss...", "#FF0000");
+    } else {
+      changeText("Try asking about \n my work \n experience...", "Try asking about \n my university...", "Try asking about \n my degree...", "#FF0000");
+    }
     displayBackButton();
   });
   document.getElementById('box3').addEventListener('click', function () {
@@ -137,7 +147,11 @@ function showContent() {
       playingAudio = false;
       hideCaption();
     });
-    changeText("Try asking about \n brazilian jiu-jitsu...", "Try asking about \n gaming...", "Try asking about \n writing...", "#00FF00");
+    if (language === "german") {
+      changeText("Versuchen Sie \n brasilianisches Jiu-Jitsu...", "Versuchen Sie \n gaming...", "Versuchen Sie \n Schreiben...", "#00FF00");
+    } else {
+      changeText("Try asking about \n brazilian jiu-jitsu...", "Try asking about \n gaming...", "Try asking about \n writing...", "#00FF00");
+    }
     displayBackButton();
   });
 
@@ -198,6 +212,7 @@ document.querySelector('a-marker').addEventListener('markerFound', function () {
 
   // Call the showContent function after 10000 milliseconds (10 seconds)
   setTimeout(showContent, 10000);
+  setTimeout(showPopup, 10000);
   if (!overviewPlayed && !playingAudio) {
     if (language === "german") {
       var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/de-overview.wav');
@@ -232,7 +247,7 @@ function hidePopup() {
 
 // Function to hide the question popup
 function showPopup() {
-  document.getElementById("popup").setAttribute('hidden', 'false');
+  document.getElementById("popup").removeAttribute('hidden');
 }
 
 // function to display captions
@@ -266,7 +281,7 @@ function handleSubmit() {
   console.log("handleSubmit is active");
   userInput = document.getElementById("textInput").value;
   console.log("User input: " + userInput);
-  let watsonResponse = chatbot("BJJ");
+  let watsonResponse = chatbot(userInput);
   if (watsonResponse = "BJJ.wav") {
     var captionNum = 0;
   } else if (watsonResponse = "gaming.wav") {
