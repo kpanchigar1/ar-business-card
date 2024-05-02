@@ -5,14 +5,14 @@ const {
 const assistant = new AssistantV2({
   version: '2021-06-14',
   authenticator: new IamAuthenticator({
-    apikey: 'UVyG7eL6sBcZmZgtCFi2-p__r1EMv1c2c-2I1R716hJz' // insert watson resource api key
+    apikey: process.env.API_KEY // use environment variable
   }),
-  // insert watson resource url
-  serviceUrl: 'https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/cd153831-2882-424a-921f-cd367fc10c99'
+  serviceUrl: process.env.SERVICE_URL // use environment variable
 });
 function chatbot(question) {
   return assistant.messageStateless({
-    assistantId: 'dd0e8243-5e9b-474f-9e67-b07a0eec17df',
+    assistantId: process.env.ASSISTANT_ID,
+    // use environment variable
     input: {
       'message_type': 'text',
       'text': question
@@ -24,4 +24,5 @@ function chatbot(question) {
     console.log(err);
   });
 }
+;
 module.exports = chatbot;
