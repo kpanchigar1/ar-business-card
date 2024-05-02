@@ -2,32 +2,39 @@
 (function (process){(function (){
 const AssistantV2 = require('ibm-watson/assistant/v2');
 const {
-  IamAuthenticator
+  BearerTokenAuthenticator
 } = require('ibm-watson/auth');
-const assistant = new AssistantV2({
-  version: '2021-06-14',
-  authenticator: new IamAuthenticator({
-    apikey: process.env.API_KEY // use environment variable
-  }),
-  serviceUrl: process.env.SERVICE_URL // use environment variable
-});
-function chatbot(question) {
-  return assistant.messageStateless({
-    assistantId: process.env.ASSISTANT_ID,
-    // use environment variable
-    input: {
-      'message_type': 'text',
-      'text': question
-    }
-  }).then(res => {
-    let responseText = res.result.output.generic[0].text;
-    return responseText;
-  }).catch(err => {
-    console.log(err);
+
+// Fetch the access_token from the server-side function
+fetch('/.netlify/functions/get-token').then(response => response.json()).then(data => {
+  const accessToken = data.access_token;
+
+  // Use the access_token to authenticate requests
+  const assistant = new AssistantV2({
+    version: '2021-06-14',
+    authenticator: new BearerTokenAuthenticator({
+      bearerToken: accessToken
+    }),
+    serviceUrl: process.env.SERVICE_URL // use environment variable
   });
-}
-;
-module.exports = chatbot;
+  function chatbot(question) {
+    return assistant.messageStateless({
+      assistantId: process.env.ASSISTANT_ID,
+      // use environment variable
+      input: {
+        'message_type': 'text',
+        'text': question
+      }
+    }).then(res => {
+      let responseText = res.result.output.generic[0].text;
+      return responseText;
+    }).catch(err => {
+      console.log(err);
+    });
+  }
+  ;
+  module.exports = chatbot;
+}).catch(error => console.error('Error:', error));
 
 }).call(this)}).call(this,require('_process'))
 },{"_process":409,"ibm-watson/assistant/v2":119,"ibm-watson/auth":120}],2:[function(require,module,exports){
@@ -325,9 +332,14 @@ function handleSubmit() {
     body: JSON.stringify({
       userInput
     })
-  }).then(response => response.json()).then(data => {
+  }).then(response => {
+    console.log('Response status:', response.status);
+    return response.json();
+  }).then(data => {
+    console.log('Response data:', data);
     const watsonResponse = data.result.output.generic[0].text;
-    console.log(watsonResponse);
+    console.log('Watson Response:', watsonResponse);
+    var captionNum;
     if (watsonResponse == "BJJ.wav") {
       var captionNum = 0;
     } else if (watsonResponse == "gaming.wav") {

@@ -321,70 +321,69 @@ function handleSubmit() {
     fetch('https://startling-hummingbird-a198e7.netlify.app/api/chatbot', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ userInput })
-      })
-      .then(response => response.json())
-      .then(data => {
-        const watsonResponse = data.result.output.generic[0].text;
-        console.log(watsonResponse);
-                    if (watsonResponse == "BJJ.wav") {
-                        var captionNum = 0;
-                    }
-                    else if (watsonResponse == "gaming.wav") {
-                        var captionNum = 1;
-                    }
-                    else if (watsonResponse == "writing.wav") {
-                        var captionNum = 2;
-                    }
-                    else if (watsonResponse == "workExperience.wav") {
-                        var captionNum = 3;
-                    }
-                    else if (watsonResponse == "university.wav") {
-                        var captionNum = 4;
-                    }
-                    else if (watsonResponse == "degree.wav") {
-                        var captionNum = 5;
-                    }
-                    else if (watsonResponse == "1999-2004.wav") {
-                        var captionNum = 6;
-                    }
-                    else if (watsonResponse == "2004-2012.wav") {
-                        var captionNum = 7;
-                    }
-                    else if (watsonResponse == "2012-2016.wav") {
-                        var captionNum = 8;
-                    }
-                    else if (watsonResponse == "2015-2019.wav") {
-                        var captionNum = 9;
-                    }
-                    else if (watsonResponse == "2019-present.wav") {
-                        var captionNum = 10;
-                    }
-                    else {
-                        var captionNum = 11;
-                        // TODO we need to add a .wav file for when the avatar doesn't know how to respond, can we make the chatbot return this .wav file when it is unsure?
-                    }
-                    var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/' + watsonResponse);
-                    var caption = "waiting to be assigned a caption"
-                    if (language === "english") {caption = englishCaptions[captionNum];}
-                    else {caption = germanCaptions[captionNum];}
+        body: JSON.stringify({userInput})
+    })
+        .then(response => {
+            console.log('Response status:', response.status);
+            return response.json();
+        })
+        .then(data => {
+            console.log('Response data:', data);
+            const watsonResponse = data.result.output.generic[0].text;
+            console.log('Watson Response:', watsonResponse);
 
-                    audio.play();
-                    console.log("Response audio played.")
-                    playingAudio = true;
-                    displayCaption(caption);
-                    audio.addEventListener('ended', function(){
-                        playingAudio = false;
-                        hideCaption();
-                    });
-                    hidePopup(); // Hide question form after submission
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-    }
+            var captionNum;
+            if (watsonResponse == "BJJ.wav") {
+                var captionNum = 0;
+            } else if (watsonResponse == "gaming.wav") {
+                var captionNum = 1;
+            } else if (watsonResponse == "writing.wav") {
+                var captionNum = 2;
+            } else if (watsonResponse == "workExperience.wav") {
+                var captionNum = 3;
+            } else if (watsonResponse == "university.wav") {
+                var captionNum = 4;
+            } else if (watsonResponse == "degree.wav") {
+                var captionNum = 5;
+            } else if (watsonResponse == "1999-2004.wav") {
+                var captionNum = 6;
+            } else if (watsonResponse == "2004-2012.wav") {
+                var captionNum = 7;
+            } else if (watsonResponse == "2012-2016.wav") {
+                var captionNum = 8;
+            } else if (watsonResponse == "2015-2019.wav") {
+                var captionNum = 9;
+            } else if (watsonResponse == "2019-present.wav") {
+                var captionNum = 10;
+            } else {
+                var captionNum = 11;
+                // TODO we need to add a .wav file for when the avatar doesn't know how to respond, can we make the chatbot return this .wav file when it is unsure?
+            }
+
+            var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/' + watsonResponse);
+            var caption = "waiting to be assigned a caption"
+            if (language === "english") {
+                caption = englishCaptions[captionNum];
+            } else {
+                caption = germanCaptions[captionNum];
+            }
+
+            audio.play();
+            console.log("Response audio played.")
+            playingAudio = true;
+            displayCaption(caption);
+            audio.addEventListener('ended', function () {
+                playingAudio = false;
+                hideCaption();
+            });
+            hidePopup(); // Hide question form after submission
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
 
 
 document.getElementById("submit_button").addEventListener("click", handleSubmit);

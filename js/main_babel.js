@@ -292,9 +292,14 @@ function handleSubmit() {
     body: JSON.stringify({
       userInput
     })
-  }).then(response => response.json()).then(data => {
+  }).then(response => {
+    console.log('Response status:', response.status);
+    return response.json();
+  }).then(data => {
+    console.log('Response data:', data);
     const watsonResponse = data.result.output.generic[0].text;
-    console.log(watsonResponse);
+    console.log('Watson Response:', watsonResponse);
+    var captionNum;
     if (watsonResponse == "BJJ.wav") {
       var captionNum = 0;
     } else if (watsonResponse == "gaming.wav") {
