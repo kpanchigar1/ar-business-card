@@ -17,6 +17,7 @@ const assistant = new AssistantV2({
 app.use(bodyParser.json());
 
 app.post('/api/chatbot', async (req, res) => {
+console.log(reached /api/chatbot);
   try {
     const userInput = req.body.userInput;
     const response = await assistant.messageStateless({
