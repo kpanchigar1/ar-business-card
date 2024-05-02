@@ -242,6 +242,7 @@ document.querySelector('a-marker').addEventListener('markerFound', function() {
     setTimeout(showPopup, 10000);
 
     if (!overviewPlayed && !playingAudio) {
+        document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Stand; loop: repeat');
         if (language === "german"){
             var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/de-overview.wav');
             var caption = "Ich bin John McNamara, IBM Master Inventor, Honorarprofessor, wissenschaftlicher Mitarbeiter, Schlagmann und Leiter derzeit IBM UK University Programs.";
