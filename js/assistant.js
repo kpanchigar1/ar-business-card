@@ -13,21 +13,31 @@ const assistant = new AssistantV2({
 
 
 
-   function chatbot(question) {
-        return assistant.messageStateless({
-            assistantId: 'dd0e8243-5e9b-474f-9e67-b07a0eec17df',
-            input: {
-                'message_type': 'text',
-                'text': question
+function chatbot(question){
+    return assistant.messageStateless({  // calls the chatbot assistant with whatever question is passed in
+        assistantId: 'dd0e8243-5e9b-474f-9e67-b07a0eec17df',
+        input: {
+            'message_type': 'text',
+            'text': question
             }
-        })
-        .then(res => {
-            let responseText = res.result.output.generic[0].text;
-            return responseText;
-        })
-        .catch(err => {
-            console.log(err);
-        });
-    }
+    })
+    .then(res => {
+        let responseText = res.result.output.generic[0].text; // saves the chatbot's response in responseText
+        return responseText;
+    })
+  .catch(err => {
+    console.log(err);
+  });
+};
 
-    module.exports = chatbot;
+chatbot("Work History") // calls the chatbot function with a "Work History" question, this needs to be removed and
+                        //implemented elsewhere when needed
+    .then(response => {
+        console.log(response);
+    })
+    .catch(err => {
+        console.error("Error:", err);
+    });
+
+module.exports = chatbot;
+
