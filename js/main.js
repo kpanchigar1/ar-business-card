@@ -388,3 +388,11 @@ function handleSubmit() {
 
 
 document.getElementById("submit_button").addEventListener("click", handleSubmit);
+
+fetch('/.netlify/functions/get-token')
+    .then(response => response.json())
+    .then(data => {
+        const accessToken = data.access_token;
+        // Use the access token to make requests to the IBM Watson Assistant service
+    })
+    .catch(error => console.error('Error:', error));
