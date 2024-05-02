@@ -10,9 +10,13 @@ const assistant = new AssistantV2({
 });
 
 exports.handler = async (event, context) => {
+    console.log('API_KEY:', process.env.API_KEY);
+    console.log('SERVICE_URL:', process.env.SERVICE_URL);
+    console.log('ASSISTANT_ID:', process.env.ASSISTANT_ID);
+
     try {
         const session = await assistant.createSession({
-            assistantId: process.env.ASSISTANT_ID, // Use environment variable
+            assistantId: process.env.ASSISTANT_ID,
         });
 
         return {
