@@ -27,7 +27,7 @@ var assistantPromise = fetch('/.netlify/functions/get-token').then(function (res
 function chatbot(question) {
   return assistantPromise.then(function (assistant) {
     return assistant.messageStateless({
-      assistantId: process.env.ASSISTANT_ID,
+      assistantId: 'dd0e8243-5e9b-474f-9e67-b07a0eec17df',
       // use environment variable
       input: {
         'message_type': 'text',
