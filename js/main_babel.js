@@ -1,14 +1,17 @@
+"use strict";
+
 // TODO: add documentation
 console.log("loaded main.js");
 var userInput = "";
-let playingAudio = false;
+var playingAudio = false;
+var chatbot = require('./assistant.js');
 window.onload = function () {
   // check if the browser supports navigator.mediaDevices.getUserMedia
   if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     // Request the camera
     navigator.mediaDevices.getUserMedia({
       video: true
-    }).catch(function (err) {
+    })["catch"](function (err) {
       alert('Camera is not supported or permission not granted.');
     });
   }
@@ -53,13 +56,12 @@ window.onload = function () {
     document.getElementById("speechBubbleB").setAttribute("text", "value", educationText);
     document.getElementById("speechBubbleC").setAttribute("text", "value", hobbiesText);
   }
-  const chatbot = require('./chatbot2.js');
-
   // Update speech bubble text values
   //document.getElementById("speechBubbleA").setAttribute("text", "value", workText);
   //    document.getElementById("speechBubbleB").setAttribute("text", "value", educationText);
   //    document.getElementById("speechBubbleC").setAttribute("text", "value", hobbiesText);
 };
+z;
 
 // Function to show the hidden content after a delay
 function showContent() {
@@ -205,7 +207,7 @@ function changeText(text1, text2, text3, colour) {
 
 // TODO: add a message to the user that the camera is not supported
 
-let overviewPlayed = false;
+var overviewPlayed = false;
 
 // Disabling the raycaster component when the page loads to avoid accidental clicks
 document.querySelector('a-cursor').setAttribute('raycaster', 'enabled: false');
@@ -268,7 +270,7 @@ function hideCaption() {
 
 // function to display the back button
 function displayBackButton() {
-  let backButton = document.getElementById('back');
+  var backButton = document.getElementById('back');
   backButton.setAttribute('visible', 'true');
   backButton.addEventListener('click', function () {
     changeText("Work?", "Education?", "Hobbies?", "default");
@@ -282,9 +284,12 @@ function handleSubmit() {
   console.log("handle submit called");
   userInput = document.getElementById("textInput").value;
   console.log("User input: " + userInput);
-  const englishCaptions = ["Brazilian jiu-jitsu is a self-defence martial art and combat sport based on grappling, ground fighting, and submission holds. BJJ focuses on taking ones opponent down to the ground, gaining a dominant position, and using a number of techniques to force them into submission via joint locks or chokeholds.", "I have played project Gotham,  Counter-strike, Battlefield, Dirt, Gran Turismo, Halo, and countless others.", "I have a wordpress site where I share my thoughts and current work. You can find it at j0nnymac.wordpress.com", "In my role I was responsible for site operations, people management and customer relations. This was a rich and fulfilling role, which gave me my first real taste of management, dealing with customers and working alongside the staff members to create a rewarding customer experience.", "The University of Hull was formed in 1927, making them the 14th oldest university in England. It has a proud history of academic excellence and creating and inspiring life-changing research.", "My information systems degree gave me a range of specialist skills in areas such as: hardware, software development and programming, systems analysis, database systems and design.", "I was a technical Integration Consultant for IBM. This was a role which involved me engaging with clients, ranging from banks to pharmaceutical companies, in the optimal method of approaching and executing the integration of their business systems.", "I was a BPM consultant for IBM. This was a role which involved me consulting with clients worldwide, to engage in leading the application of gold standard business process methodologies to new and existing ventures as well as enhancing the effectiveness of these processes with the use of BPM software.", "I was an Information Strategist and Architect for IBM. This was a role which involved the design of information and information delivery to support IBM products such as WebSphere MQ and WebSphere Message Broker.", "I was a Senior Inventor and IBM Hursley Innovation Labs Technologist Lead. I was responsible for a team of technologists in the IBM Hursley Innovation Labs; a vital part of the IBM Hursley Development Labs in Winchester.", "I was a UK universities lead and senior inventor from June 2019 to January 2020. I currently work as an IBM master inventor and IBM UK university programs lead.", "Sorry I don't know how to answer that question, try asking another question."];
-  const germanCaptions = ["Brasilianisches Jiu-Jitsu ist eine Kampfkunst und Kampfsportart zur Selbstverteidigung, die auf Grappling, Bodenkämpfen und Unterwerfungsgriffen basiert. Beim BJJ geht es darum, den Gegner zu Boden zu bringen, eine dominante Position einzunehmen und eine Reihe von Techniken anzuwenden, um ihn durch Gelenkverriegelungen oder Würgegriffe zur Unterwerfung zu zwingen.", "Ich habe Projekt Gotham, Counter-Strike, Battlefield, Dirt, Gran Turismo, Halo und unzählige andere gespielt.", "Ich habe eine WordPress-Site, auf der ich meine Gedanken und aktuellen Arbeiten teile. Sie finden es unter j0nnymac.wordpress.com", "In meiner Rolle war ich für den Standortbetrieb, das Personalmanagement und die Kundenbeziehungen verantwortlich. Dies war eine reichhaltige und erfüllende Rolle, die mir einen ersten echten Eindruck vom Management, dem Umgang mit Kunden und der Zusammenarbeit mit den Mitarbeitern vermittelte, um ein lohnendes Kundenerlebnis zu schaffen.", "Die University of Hull wurde 1927 gegründet und ist damit die 14. älteste Universität Englands. Es kann auf eine stolze Geschichte akademischer Exzellenz und der Schaffung und Inspiration lebensverändernder Forschung zurückblicken.", "Mein Informatikstudium vermittelte mir eine Reihe von Fachkenntnissen in Bereichen wie Hardware, Softwareentwicklung und -programmierung, Systemanalyse, Datenbanksysteme und Design.", "Ich war technischer Integrationsberater für IBM. In dieser Rolle musste ich mich mit Kunden, von Banken bis hin zu Pharmaunternehmen, an der optimalen Herangehensweise und Umsetzung der Integration ihrer Geschäftssysteme beteiligen.", "Ich war BPM-Berater für IBM. In dieser Rolle beriet ich Kunden auf der ganzen Welt, um die Anwendung von Goldstandard-Geschäftsprozessmethoden auf neue und bestehende Unternehmen zu leiten und die Effektivität dieser Prozesse durch den Einsatz von BPM-Software zu steigern.", "Ich war Informationsstratege und Architekt für IBM. Dabei handelte es sich um eine Rolle, die das Design von Informationen und die Informationsbereitstellung zur Unterstützung von IBM-Produkten wie WebSphere MQ und WebSphere Message Broker umfasste.", "Ich war leitender Erfinder und technischer Leiter der IBM Hursley Innovation Labs. Ich war für ein Team von Technologen in den IBM Hursley Innovation Labs verantwortlich; ein wichtiger Teil der IBM Hursley Development Labs in Winchester.", "Von Juni 2019 bis Januar 2020 war ich Leiter einer britischen Universität und leitender Erfinder. Derzeit arbeite ich als IBM-Master-Erfinder und Leiter der IBM UK-Universitätsprogramme."];
-  let watsonResponse = chatbot(userInput);
+  var englishCaptions = ["Brazilian jiu-jitsu is a self-defence martial art and combat sport based on grappling, ground fighting, and submission holds. BJJ focuses on taking ones opponent down to the ground, gaining a dominant position, and using a number of techniques to force them into submission via joint locks or chokeholds.", "I have played project Gotham,  Counter-strike, Battlefield, Dirt, Gran Turismo, Halo, and countless others.", "I have a wordpress site where I share my thoughts and current work. You can find it at j0nnymac.wordpress.com", "In my role I was responsible for site operations, people management and customer relations. This was a rich and fulfilling role, which gave me my first real taste of management, dealing with customers and working alongside the staff members to create a rewarding customer experience.", "The University of Hull was formed in 1927, making them the 14th oldest university in England. It has a proud history of academic excellence and creating and inspiring life-changing research.", "My information systems degree gave me a range of specialist skills in areas such as: hardware, software development and programming, systems analysis, database systems and design.", "I was a technical Integration Consultant for IBM. This was a role which involved me engaging with clients, ranging from banks to pharmaceutical companies, in the optimal method of approaching and executing the integration of their business systems.", "I was a BPM consultant for IBM. This was a role which involved me consulting with clients worldwide, to engage in leading the application of gold standard business process methodologies to new and existing ventures as well as enhancing the effectiveness of these processes with the use of BPM software.", "I was an Information Strategist and Architect for IBM. This was a role which involved the design of information and information delivery to support IBM products such as WebSphere MQ and WebSphere Message Broker.", "I was a Senior Inventor and IBM Hursley Innovation Labs Technologist Lead. I was responsible for a team of technologists in the IBM Hursley Innovation Labs; a vital part of the IBM Hursley Development Labs in Winchester.", "I was a UK universities lead and senior inventor from June 2019 to January 2020. I currently work as an IBM master inventor and IBM UK university programs lead.", "Sorry I don't know how to answer that question, try asking another question."];
+  var germanCaptions = ["Brasilianisches Jiu-Jitsu ist eine Kampfkunst und Kampfsportart zur Selbstverteidigung, die auf Grappling, Bodenkämpfen und Unterwerfungsgriffen basiert. Beim BJJ geht es darum, den Gegner zu Boden zu bringen, eine dominante Position einzunehmen und eine Reihe von Techniken anzuwenden, um ihn durch Gelenkverriegelungen oder Würgegriffe zur Unterwerfung zu zwingen.", "Ich habe Projekt Gotham, Counter-Strike, Battlefield, Dirt, Gran Turismo, Halo und unzählige andere gespielt.", "Ich habe eine WordPress-Site, auf der ich meine Gedanken und aktuellen Arbeiten teile. Sie finden es unter j0nnymac.wordpress.com", "In meiner Rolle war ich für den Standortbetrieb, das Personalmanagement und die Kundenbeziehungen verantwortlich. Dies war eine reichhaltige und erfüllende Rolle, die mir einen ersten echten Eindruck vom Management, dem Umgang mit Kunden und der Zusammenarbeit mit den Mitarbeitern vermittelte, um ein lohnendes Kundenerlebnis zu schaffen.", "Die University of Hull wurde 1927 gegründet und ist damit die 14. älteste Universität Englands. Es kann auf eine stolze Geschichte akademischer Exzellenz und der Schaffung und Inspiration lebensverändernder Forschung zurückblicken.", "Mein Informatikstudium vermittelte mir eine Reihe von Fachkenntnissen in Bereichen wie Hardware, Softwareentwicklung und -programmierung, Systemanalyse, Datenbanksysteme und Design.", "Ich war technischer Integrationsberater für IBM. In dieser Rolle musste ich mich mit Kunden, von Banken bis hin zu Pharmaunternehmen, an der optimalen Herangehensweise und Umsetzung der Integration ihrer Geschäftssysteme beteiligen.", "Ich war BPM-Berater für IBM. In dieser Rolle beriet ich Kunden auf der ganzen Welt, um die Anwendung von Goldstandard-Geschäftsprozessmethoden auf neue und bestehende Unternehmen zu leiten und die Effektivität dieser Prozesse durch den Einsatz von BPM-Software zu steigern.", "Ich war Informationsstratege und Architekt für IBM. Dabei handelte es sich um eine Rolle, die das Design von Informationen und die Informationsbereitstellung zur Unterstützung von IBM-Produkten wie WebSphere MQ und WebSphere Message Broker umfasste.", "Ich war leitender Erfinder und technischer Leiter der IBM Hursley Innovation Labs. Ich war für ein Team von Technologen in den IBM Hursley Innovation Labs verantwortlich; ein wichtiger Teil der IBM Hursley Development Labs in Winchester.", "Von Juni 2019 bis Januar 2020 war ich Leiter einer britischen Universität und leitender Erfinder. Derzeit arbeite ich als IBM-Master-Erfinder und Leiter der IBM UK-Universitätsprogramme."];
+  var watsonResponse;
+  chatbot(userInput).then(function (response) {
+    watsonResponse = response;
+  });
   console.log("Watson response: " + watsonResponse);
   var captionNum;
   if (watsonResponse == "BJJ.wav") {
@@ -331,9 +336,13 @@ function handleSubmit() {
   hidePopup(); // Hide question form after submission
 }
 document.getElementById("submit_button").addEventListener("click", handleSubmit);
-fetch('/.netlify/functions/get-token').then(response => response.json()).then(data => {
+fetch('/.netlify/functions/get-token').then(function (response) {
+  return response.json();
+}).then(function (data) {
   console.log(data);
-  const accessToken = data.access_token;
+  var accessToken = data.access_token;
   console.log(accessToken);
   // Use the access token to make requests to the IBM Watson Assistant service
-}).catch(error => console.error('Error:', error));
+})["catch"](function (error) {
+  return console.error('Error:', error);
+});
