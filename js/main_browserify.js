@@ -106,9 +106,10 @@ window.onload = function () {
   }
   // Update speech bubble text values
   //document.getElementById("speechBubbleA").setAttribute("text", "value", workText);
-  //    document.getElmentById("speechBubbleB").setAttribute("text", "value", educationText);
+  //    document.getElementById("speechBubbleB").setAttribute("text", "value", educationText);
   //    document.getElementById("speechBubbleC").setAttribute("text", "value", hobbiesText);
 };
+z;
 
 // Function to show the hidden content after a delay
 function showContent() {
@@ -320,7 +321,7 @@ function displayBackButton() {
   var backButton = document.getElementById('back');
   backButton.setAttribute('visible', 'true');
   backButton.addEventListener('click', function () {
-    changeText("Try asking about \n my work \n experience...", "Try asking about \n my university...", "Try asking about \n my degree...", "default");
+    changeText("\"Click here to learn \\n about my work\"", "Click here to learn \n about my education", "Click here to learn \n about my hobbies", "default");
     document.getElementById('back').setAttribute('visible', 'false');
   });
 }

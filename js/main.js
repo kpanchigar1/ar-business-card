@@ -302,8 +302,8 @@ function displayBackButton() {
     let backButton = document.getElementById('back');
     backButton.setAttribute('visible', 'true');
     backButton.addEventListener('click', function(){
-    changeText("Try asking about \n my work \n experience...", "Try asking about \n my university...",
-            "Try asking about \n my degree...", "default");
+    changeText("\"Click here to learn \\n about my work\"", "Click here to learn \n about my education",
+            "Click here to learn \n about my hobbies", "default");
         document.getElementById('back').setAttribute('visible', 'false');
     });
 
