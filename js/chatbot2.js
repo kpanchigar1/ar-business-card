@@ -18,23 +18,23 @@ fetch('/.netlify/functions/get-token').then(function (response) {
     }),
     serviceUrl: process.env.SERVICE_URL // use environment variable
   });
-  function chatbot(question) {
-    return assistant.messageStateless({
-      assistantId: process.env.ASSISTANT_ID,
-      // use environment variable
-      input: {
-        'message_type': 'text',
-        'text': question
-      }
-    }).then(function (res) {
-      var responseText = res.result.output.generic[0].text;
-      return responseText;
-    })["catch"](function (err) {
-      console.log(err);
-    });
-  }
-  ;
-  module.exports = chatbot;
 })["catch"](function (error) {
   return console.error('Error:', error);
 });
+function chatbot(question) {
+  return assistant.messageStateless({
+    assistantId: process.env.ASSISTANT_ID,
+    // use environment variable
+    input: {
+      'message_type': 'text',
+      'text': question
+    }
+  }).then(function (res) {
+    var responseText = res.result.output.generic[0].text;
+    return responseText;
+  })["catch"](function (err) {
+    console.log(err);
+  });
+}
+;
+module.exports = chatbot;

@@ -15,24 +15,24 @@ fetch('/.netlify/functions/get-token')
             }),
             serviceUrl: process.env.SERVICE_URL, // use environment variable
         });
-
-        function chatbot (question){
-            return assistant.messageStateless({
-                assistantId: process.env.ASSISTANT_ID, // use environment variable
-                input: {
-                    'message_type': 'text',
-                    'text': question
-                }
-            })
-                .then(res => {
-                    let responseText = res.result.output.generic[0].text;
-                    return responseText;
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-        };
-
-        module.exports = chatbot;
     })
     .catch(error => console.error('Error:', error));
+
+    function chatbot (question){
+        return assistant.messageStateless({
+            assistantId: process.env.ASSISTANT_ID, // use environment variable
+            input: {
+                'message_type': 'text',
+                'text': question
+            }
+        })
+            .then(res => {
+                let responseText = res.result.output.generic[0].text;
+                return responseText;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    };
+
+    module.exports = chatbot;

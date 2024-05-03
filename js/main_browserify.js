@@ -20,26 +20,26 @@ fetch('/.netlify/functions/get-token').then(function (response) {
     }),
     serviceUrl: process.env.SERVICE_URL // use environment variable
   });
-  function chatbot(question) {
-    return assistant.messageStateless({
-      assistantId: process.env.ASSISTANT_ID,
-      // use environment variable
-      input: {
-        'message_type': 'text',
-        'text': question
-      }
-    }).then(function (res) {
-      var responseText = res.result.output.generic[0].text;
-      return responseText;
-    })["catch"](function (err) {
-      console.log(err);
-    });
-  }
-  ;
-  module.exports = chatbot;
 })["catch"](function (error) {
   return console.error('Error:', error);
 });
+function chatbot(question) {
+  return assistant.messageStateless({
+    assistantId: process.env.ASSISTANT_ID,
+    // use environment variable
+    input: {
+      'message_type': 'text',
+      'text': question
+    }
+  }).then(function (res) {
+    var responseText = res.result.output.generic[0].text;
+    return responseText;
+  })["catch"](function (err) {
+    console.log(err);
+  });
+}
+;
+module.exports = chatbot;
 
 }).call(this)}).call(this,require('_process'))
 },{"_process":411,"ibm-watson/assistant/v2":122,"ibm-watson/auth":123}],2:[function(require,module,exports){
@@ -105,6 +105,7 @@ window.onload = function () {
   //    document.getElementById("speechBubbleB").setAttribute("text", "value", educationText);
   //    document.getElementById("speechBubbleC").setAttribute("text", "value", hobbiesText);
 };
+z;
 
 // Function to show the hidden content after a delay
 function showContent() {
