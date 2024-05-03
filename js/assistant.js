@@ -16,7 +16,7 @@ fetch('/.netlify/functions/get-token')
             serviceUrl: process.env.SERVICE_URL, // use environment variable
         });
 
-        function chatbot(question){
+        export function chatbot(question){
             return assistant.messageStateless({
                 assistantId: process.env.ASSISTANT_ID, // use environment variable
                 input: {
