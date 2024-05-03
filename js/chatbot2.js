@@ -1,5 +1,8 @@
 "use strict";
 
+var AssistantV2 = require('ibm-watson/assistant/v2');
+var _require = require('ibm-watson/auth'),
+  BearerTokenAuthenticator = _require.BearerTokenAuthenticator;
 var assistantPromise = fetch('/.netlify/functions/get-token').then(function (response) {
   return response.json();
 }).then(function (data) {

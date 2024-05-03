@@ -1,3 +1,6 @@
+let AssistantV2 = require('ibm-watson/assistant/v2');
+let { BearerTokenAuthenticator } = require('ibm-watson/auth');
+
 let assistantPromise = fetch('/.netlify/functions/get-token')
     .then(response => response.json())
     .then(data => {
