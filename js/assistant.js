@@ -1,16 +1,11 @@
-const AssistantV2 = require('ibm-watson/assistant/v2');
-const { BearerTokenAuthenticator } = require('ibm-watson/auth');
-let assistant = null;
-
-
-// Fetch the access_token from the server-side function
-fetch('/.netlify/functions/get-token')
+let assistantPromise = fetch('/.netlify/functions/get-token')
     .then(response => response.json())
     .then(data => {
         const accessToken = data.access_token;
+        console.log("Access Token fetched");
 
         // Use the access_token to authenticate requests
-        assistant = new AssistantV2({
+        let assistant = new AssistantV2({
             version: '2021-06-14',
             authenticator: new BearerTokenAuthenticator({
                 bearerToken: accessToken,
@@ -18,10 +13,12 @@ fetch('/.netlify/functions/get-token')
             serviceUrl: process.env.SERVICE_URL, // use environment variable
         });
         console.log("Assistant created");
+        return assistant;
     })
     .catch(error => console.error('Error:', error));
 
-    function chatbot (question){
+function chatbot (question){
+    return assistantPromise.then(assistant => {
         return assistant.messageStateless({
             assistantId: process.env.ASSISTANT_ID, // use environment variable
             input: {
@@ -36,6 +33,7 @@ fetch('/.netlify/functions/get-token')
             .catch(err => {
                 console.log(err);
             });
-    };
+    });
+};
 
-    module.exports = chatbot;
+module.exports = chatbot;
