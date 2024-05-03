@@ -331,6 +331,7 @@ function handleSubmit() {
         console.log(watsonResponse);
                     if (watsonResponse == "BJJ.wav") {
                         var captionNum = 0;
+                        document.getElementById("john-model").setAttribute("animation-mixer","clip: Capoeira; loop: once")
                     }
                     else if (watsonResponse == "gaming.wav") {
                         var captionNum = 1;
