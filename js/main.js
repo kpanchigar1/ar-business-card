@@ -3,7 +3,7 @@ console.log("loaded main.js")
 
 var userInput = "";
 let playingAudio = false;
-const chatbot = require('./assistant.js');
+const chatbot = require('./chatbot2');
 window.onload = function(){
     // check if the browser supports navigator.mediaDevices.getUserMedia
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
