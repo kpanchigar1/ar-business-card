@@ -285,8 +285,6 @@ function showPopup() {
     document.getElementById("popup").removeAttribute('hidden');
 }
 
-
-
 // function to display captions
 function displayCaption(captionText) {
     document.getElementById('caption').setAttribute('style', 'display: block');
@@ -304,7 +302,8 @@ function displayBackButton() {
     let backButton = document.getElementById('back');
     backButton.setAttribute('visible', 'true');
     backButton.addEventListener('click', function(){
-        changeText("Work?", "Education?", "Hobbies?", "default");
+    changeText("Try asking about \n my work \n experience...", "Try asking about \n my university...",
+            "Try asking about \n my degree...", "default");
         document.getElementById('back').setAttribute('visible', 'false');
     });
 

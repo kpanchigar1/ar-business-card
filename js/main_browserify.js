@@ -106,7 +106,7 @@ window.onload = function () {
   }
   // Update speech bubble text values
   //document.getElementById("speechBubbleA").setAttribute("text", "value", workText);
-  //    document.getElementById("speechBubbleB").setAttribute("text", "value", educationText);
+  //    document.getElmentById("speechBubbleB").setAttribute("text", "value", educationText);
   //    document.getElementById("speechBubbleC").setAttribute("text", "value", hobbiesText);
 };
 
@@ -320,7 +320,7 @@ function displayBackButton() {
   var backButton = document.getElementById('back');
   backButton.setAttribute('visible', 'true');
   backButton.addEventListener('click', function () {
-    changeText("Work?", "Education?", "Hobbies?", "default");
+    changeText("Try asking about \n my work \n experience...", "Try asking about \n my university...", "Try asking about \n my degree...", "default");
     document.getElementById('back').setAttribute('visible', 'false');
   });
 }
