@@ -3,6 +3,7 @@
 var AssistantV2 = require('ibm-watson/assistant/v2');
 var _require = require('ibm-watson/auth'),
   BearerTokenAuthenticator = _require.BearerTokenAuthenticator;
+var assistant = null;
 
 // Fetch the access_token from the server-side function
 fetch('/.netlify/functions/get-token').then(function (response) {
@@ -11,13 +12,14 @@ fetch('/.netlify/functions/get-token').then(function (response) {
   var accessToken = data.access_token;
 
   // Use the access_token to authenticate requests
-  var assistant = new AssistantV2({
+  assistant = new AssistantV2({
     version: '2021-06-14',
     authenticator: new BearerTokenAuthenticator({
       bearerToken: accessToken
     }),
     serviceUrl: process.env.SERVICE_URL // use environment variable
   });
+  console.log("Assistant created");
 })["catch"](function (error) {
   return console.error('Error:', error);
 });
