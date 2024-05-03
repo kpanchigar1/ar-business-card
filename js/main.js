@@ -60,7 +60,7 @@ window.onload = function(){
         document.getElementById("speechBubbleC").setAttribute("text", "value", hobbiesText);
     }
 
-    const chatbot = require('./chatbot_browserify.js');
+    const chatbot = require('./assistant.js');
 
     // Update speech bubble text values
     //document.getElementById("speechBubbleA").setAttribute("text", "value", workText);
