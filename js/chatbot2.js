@@ -18,7 +18,7 @@ fetch('/.netlify/functions/get-token').then(function (response) {
     }),
     serviceUrl: process.env.SERVICE_URL // use environment variable
   });
-  global.chatbot = function (question) {
+  function chatbot(question) {
     return assistant.messageStateless({
       assistantId: process.env.ASSISTANT_ID,
       // use environment variable
@@ -32,7 +32,8 @@ fetch('/.netlify/functions/get-token').then(function (response) {
     })["catch"](function (err) {
       console.log(err);
     });
-  };
+  }
+  ;
   module.exports = chatbot;
 })["catch"](function (error) {
   return console.error('Error:', error);
