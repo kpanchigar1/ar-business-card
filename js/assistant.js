@@ -20,7 +20,7 @@ let assistantPromise = fetch('/.netlify/functions/get-token')
     })
     .catch(error => console.error('Error:', error));
 
-console.log("no problems with the then catch block")
+console.log("no problems with the then catch block");
 function chatbot (question){
     console.log("chatbot function called")
     return assistantPromise.then(assistant => {
