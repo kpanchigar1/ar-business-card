@@ -1,7 +1,7 @@
 let AssistantV2 = require('ibm-watson/assistant/v2');
 let { BearerTokenAuthenticator } = require('ibm-watson/auth');
 
-function chatbot (question){
+function chatbot(question){
     console.log("chatbot function called")
     return assistantPromise.then(assistant => {
         return assistant.messageStateless({

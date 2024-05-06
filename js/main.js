@@ -1,11 +1,12 @@
 // TODO: add documentation
 console.log("loaded main.js")
+let chatbot = require('./chatbot2');
+console.log("chatbot2 required globally")
 
 var userInput = "";
 let playingAudio = false;
 
 window.onload = function(){
-    const chatbot = require('./chatbot2');
     // check if the browser supports navigator.mediaDevices.getUserMedia
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         // Request the camera
