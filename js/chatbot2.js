@@ -2,22 +2,6 @@ let AssistantV2 = require('ibm-watson/assistant/v2');
 let {
   BearerTokenAuthenticator
 } = require('ibm-watson/auth');
-let assistantPromise = fetch('/.netlify/functions/get-token').then(response => response.json()).then(data => {
-  const accessToken = data.access_token;
-  console.log("Access Token fetched");
-
-  // Use the access_token to authenticate requests
-  let assistant = new AssistantV2({
-    version: '2021-06-14',
-    authenticator: new BearerTokenAuthenticator({
-      bearerToken: accessToken
-    }),
-    serviceUrl: process.env.SERVICE_URL // use environment variable
-  });
-  console.log("Assistant created");
-  return assistant;
-}).catch(error => console.error('Error:', error));
-console.log("no problems with the then catch block");
 function chatbot(question) {
   console.log("chatbot function called");
   return assistantPromise.then(assistant => {
@@ -38,3 +22,19 @@ function chatbot(question) {
 }
 ;
 module.exports = chatbot;
+console.log("chatbot function established");
+let assistantPromise = fetch('/.netlify/functions/get-token').then(response => response.json()).then(data => {
+  const accessToken = data.access_token;
+  console.log("Access Token fetched");
+
+  // Use the access_token to authenticate requests
+  let assistant = new AssistantV2({
+    version: '2021-06-14',
+    authenticator: new BearerTokenAuthenticator({
+      bearerToken: accessToken
+    }),
+    serviceUrl: process.env.SERVICE_URL // use environment variable
+  });
+  console.log("Assistant created");
+  return assistant;
+}).catch(error => console.error('Error:', error));
