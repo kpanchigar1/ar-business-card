@@ -109,6 +109,7 @@ window.onload = function () {
   //    document.getElementById("speechBubbleB").setAttribute("text", "value", educationText);
   //    document.getElementById("speechBubbleC").setAttribute("text", "value", hobbiesText);
 };
+z;
 
 // Function to show the hidden content after a delay
 function showContent() {

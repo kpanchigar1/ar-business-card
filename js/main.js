@@ -5,7 +5,6 @@ var userInput = "";
 let playingAudio = false;
 
 window.onload = function(){
-    const chatbot = require('./assistant');
     // check if the browser supports navigator.mediaDevices.getUserMedia
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         // Request the camera
@@ -312,6 +311,8 @@ function displayBackButton() {
 // Function to handle question form submission
 function handleSubmit() {
 // Importing the chatbot function from assistant.js using require.js
+    const chatbot = require('./assistant');
+    console.log("chatbot imported")
     console.log("handle submit called");
     userInput = document.getElementById("textInput").value;
     console.log("User input: " + userInput);
