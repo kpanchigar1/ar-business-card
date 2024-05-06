@@ -5,7 +5,7 @@ var userInput = "";
 let playingAudio = false;
 
 window.onload = function(){
-    const chatbot = require('./chatbot2');
+    const chatbot = require('./assistant');
     // check if the browser supports navigator.mediaDevices.getUserMedia
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         // Request the camera
