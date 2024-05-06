@@ -26,6 +26,7 @@ function chatbot(question){
     return assistantPromise.then(assistant => {
         return assistant.messageStateless({
             assistantId: 'dd0e8243-5e9b-474f-9e67-b07a0eec17df', // use environment variable
+            serviceUrl: process.env.SERVICE_URL, // use environment variable
             input: {
                 'message_type': 'text',
                 'text': question
