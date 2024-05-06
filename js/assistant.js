@@ -16,17 +16,18 @@ let assistantPromise = fetch('/.netlify/functions/get-token')
             }),
             serviceUrl: process.env.SERVICE_URL, // use environment variable
         });
+        assistant.setServiceUrl(process.env.SERVICE_URL);
         console.log("Assistant created");
         return assistant;
     })
     .catch(error => console.error('Error:', error));
+
 
 function chatbot(question){
     console.log("chatbot function called")
     return assistantPromise.then(assistant => {
         return assistant.messageStateless({
             assistantId: 'dd0e8243-5e9b-474f-9e67-b07a0eec17df', // use environment variable
-            serviceUrl: process.env.SERVICE_URL, // use environment variable
             input: {
                 'message_type': 'text',
                 'text': question
