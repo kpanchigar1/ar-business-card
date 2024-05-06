@@ -12,11 +12,10 @@ let assistantPromise = fetch('/.netlify/functions/get-token').then(response => r
     authenticator: new BearerTokenAuthenticator({
       bearerToken: accessToken
     }),
-    serviceUrl: process.env.SERVICE_URL // use environment variable
+    serviceUrl: "https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/cd153831-2882-424a-921f-cd367fc10c99" // use environment variable
   });
-  assistant.setServiceUrl(process.env.SERVICE_URL);
+  //assistant.setServiceUrl(process.env.SERVICE_URL);
   console.log("Assistant created");
-  console.log(process.env.SERVICE_URL);
   console.log(assistant.serviceUrl);
   return assistant;
 }).catch(error => console.error('Error:', error));
