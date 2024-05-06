@@ -1,16 +1,13 @@
-"use strict";
-
-var AssistantV2 = require('ibm-watson/assistant/v2');
-var _require = require('ibm-watson/auth'),
-  BearerTokenAuthenticator = _require.BearerTokenAuthenticator;
-var assistantPromise = fetch('/.netlify/functions/get-token').then(function (response) {
-  return response.json();
-}).then(function (data) {
-  var accessToken = data.access_token;
+let AssistantV2 = require('ibm-watson/assistant/v2');
+let {
+  BearerTokenAuthenticator
+} = require('ibm-watson/auth');
+let assistantPromise = fetch('/.netlify/functions/get-token').then(response => response.json()).then(data => {
+  const accessToken = data.access_token;
   console.log("Access Token fetched");
 
   // Use the access_token to authenticate requests
-  var assistant = new AssistantV2({
+  let assistant = new AssistantV2({
     version: '2021-06-14',
     authenticator: new BearerTokenAuthenticator({
       bearerToken: accessToken
@@ -19,11 +16,10 @@ var assistantPromise = fetch('/.netlify/functions/get-token').then(function (res
   });
   console.log("Assistant created");
   return assistant;
-})["catch"](function (error) {
-  return console.error('Error:', error);
-});
+}).catch(error => console.error('Error:', error));
 function chatbot(question) {
-  return assistantPromise.then(function (assistant) {
+  console.log("chatbot function called");
+  return assistantPromise.then(assistant => {
     return assistant.messageStateless({
       assistantId: 'dd0e8243-5e9b-474f-9e67-b07a0eec17df',
       // use environment variable
@@ -31,10 +27,10 @@ function chatbot(question) {
         'message_type': 'text',
         'text': question
       }
-    }).then(function (res) {
-      var responseText = res.result.output.generic[0].text;
+    }).then(res => {
+      let responseText = res.result.output.generic[0].text;
       return responseText;
-    })["catch"](function (err) {
+    }).catch(err => {
       console.log(err);
     });
   });
