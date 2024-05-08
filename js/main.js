@@ -322,32 +322,46 @@ function handleSubmit() {
     chatbot(userInput).then(response => {watsonResponse = response;});
     console.log("Watson response: " + watsonResponse);
     var captionNum;
-    if (watsonResponse == "BJJ.wav") {
-        captionNum = 0;
-    } else if (watsonResponse == "gaming.wav") {
-        captionNum = 1;
-    } else if (watsonResponse == "writing.wav") {
-        captionNum = 2;
-    } else if (watsonResponse == "workExperience.wav") {
-        captionNum = 3;
-    } else if (watsonResponse == "university.wav") {
-        captionNum = 4;
-    } else if (watsonResponse == "degree.wav") {
-        captionNum = 5;
-    } else if (watsonResponse == "1999-2004.wav") {
-        captionNum = 6;
-    } else if (watsonResponse == "2004-2012.wav") {
-        captionNum = 7;
-    } else if (watsonResponse == "2012-2016.wav") {
-        captionNum = 8;
-    } else if (watsonResponse == "2015-2019.wav") {
-        captionNum = 9;
-    } else if (watsonResponse == "2019-present.wav") {
-        captionNum = 10;
-    } else {
-        captionNum = 11;
-        // TODO we need to add a .wav file for when the avatar doesn't know how to respond, can we make the chatbot return this .wav file when it is unsure?
+    switch (watsonResponse) {
+        case "BJJ.wav":
+            captionNum = 0;
+            break;
+        case "gaming.wav":
+            captionNum = 1;
+            break;
+        case "writing.wav":
+            captionNum = 2;
+            break;
+        case "workExperience.wav":
+            captionNum = 3;
+            break;
+        case "university.wav":
+            captionNum = 4;
+            break;
+        case "degree.wav":
+            captionNum = 5;
+            break;
+        case "1999-2004.wav":
+            captionNum = 6;
+            break;
+        case "2004-2012.wav":
+            captionNum = 7;
+            break;
+        case "2012-2016.wav":
+            captionNum = 8;
+            break;
+        case "2015-2019.wav":
+            captionNum = 9;
+            break;
+        case "2019-present.wav":
+            captionNum = 10;
+            break;
+        default:
+            captionNum = 11;
+            // TODO we need to add a .wav file for when the avatar doesn't know how to respond, can we make the chatbot return this .wav file when it is unsure?
+            break;
     }
+
 
     var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/' + watsonResponse);
     var caption = "waiting to be assigned a caption"
