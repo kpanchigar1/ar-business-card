@@ -112,17 +112,20 @@
         <a-plane id="box1" class="clickable link" position="-4 7 0"
            height="2.5" material="color: red; opacity: 0"
                  width="6" visible="false" clickable>
-            <a-image width="6" src="/imgs/speech-bubble.png"></a-image>
+            <a-image height="3" width="6"
+                     src="/imgs/speech-bubble.png"></a-image>
         </a-plane>
         <a-plane id="box2" class="clickable link" position="0 9 0"
            height="2.5" material="color: red; opacity: 0"
                  width="6" visible="false" clickable>
-            <a-image width="6" src="/imgs/speech-bubble.png"></a-image>
+            <a-image height="3" width="6"
+                     src="/imgs/speech-bubble.png"></a-image>
         </a-plane>
         <a-plane id="box3" class="clickable link" position="4 7 0"
            height="2.5" material="color: red; opacity: 0"
                  width="6" visible="false" clickable>
-            <a-image width="6" src="/imgs/speech-bubble.png"></a-image>
+            <a-image height="3" width="6"
+                     src="/imgs/speech-bubble.png"></a-image>
         </a-plane>
 
         <a-entity id="speechBubbleA" position="-1 7.4 0.4" scale="10 10 10"
@@ -158,21 +161,13 @@
   });
 </script>
 
-<div hidden class="popup-form" id="popup">
-    <form id="popupForm">
-        <input type="text" id="textInput"
-               placeholder="Ask your own question...">
-        <button type="button" id="submit_button">Submit</button>
-    </form>
-</div>
-<script src="/js/main_browserify.js"></script>
+<!--<div hidden class="popup-form" id="popup">-->
+<!--    <form id="popupForm">-->
+<!--        <input type="text" id="textInput"-->
+<!--               placeholder="Ask your own question...">-->
+<!--        <button type="button" id="submit_button">Submit</button>-->
+<!--    </form>-->
+<!--</div>-->
+<!--<script src="/js/main_browserify.js"></script>-->
 
-
-<!--    <div hidden class="popup-form" id="popup">-->
-<!--        <form id="popupForm">-->
-<!--            <input type="text" id="textInput"-->
-<!--                   placeholder="Ask your own question...">-->
-<!--            <input type="submit" value="Submit">-->
-<!--        </form>-->
-<!--    </div>-->
 </body>
