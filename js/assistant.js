@@ -14,7 +14,7 @@ let assistantPromise = fetch('/.netlify/functions/get-token')
             authenticator: new BearerTokenAuthenticator({
                 bearerToken: accessToken,
             }),
-            serviceUrl: "https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/cd153831-2882-424a-921f-cd367fc10c99", // use environment variable
+            //serviceUrl: "https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/cd153831-2882-424a-921f-cd367fc10c99", // use environment variable
         });
         //assistant.setServiceUrl(process.env.SERVICE_URL);
         console.log("Assistant created");
@@ -29,6 +29,7 @@ function chatbot(question){
     return assistantPromise.then(assistant => {
         console.log("assistant:" + assistant)
         return assistant.messageStateless({
+            assistant.setServiceUrl = "https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/cd153831-2882-424a-921f-cd367fc10c99"
             assistantId: 'dd0e8243-5e9b-474f-9e67-b07a0eec17df', // use environment variable
             input: {
                 'message_type': 'text',
