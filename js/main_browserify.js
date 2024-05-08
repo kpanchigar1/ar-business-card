@@ -13,6 +13,7 @@ var assistantPromise = fetch('/.netlify/functions/get-token').then(function (res
   // Use the access_token to authenticate requests
   var assistant = new AssistantV2({
     version: '2021-06-14',
+    url: "https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/cd153831-2882-424a-921f-cd367fc10c99",
     authenticator: new BearerTokenAuthenticator({
       bearerToken: accessToken
     })
@@ -20,8 +21,6 @@ var assistantPromise = fetch('/.netlify/functions/get-token').then(function (res
   });
   //assistant.setServiceUrl(process.env.SERVICE_URL);
   console.log("Assistant created");
-  assistant.setServiceUrl = "https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/cd153831-2882-424a-921f-cd367fc10c99";
-  console.log(assistant.serviceUrl);
   return assistant;
 })["catch"](function (error) {
   return console.error('Error:', error);
