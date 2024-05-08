@@ -13,15 +13,15 @@ var assistantPromise = fetch('/.netlify/functions/get-token').then(function (res
   // Use the access_token to authenticate requests
   var assistant = new AssistantV2({
     version: '2021-06-14',
-    serviceUrl: "https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/cd153831-2882-424a-921f-cd367fc10c99",
-    // use environment variable
     authenticator: new BearerTokenAuthenticator({
       bearerToken: accessToken
     })
+    //serviceUrl: "https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/cd153831-2882-424a-921f-cd367fc10c99", // use environment variable
   });
   //assistant.setServiceUrl(process.env.SERVICE_URL);
   console.log("Assistant created");
-  console.log("https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/cd153831-2882-424a-921f-cd367fc10c99");
+  assistant.setServiceUrl = "https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/cd153831-2882-424a-921f-cd367fc10c99";
+  console.log(assistant.serviceUrl);
   return assistant;
 })["catch"](function (error) {
   return console.error('Error:', error);
@@ -33,7 +33,6 @@ function chatbot(question) {
     return assistant.messageStateless({
       assistantId: 'dd0e8243-5e9b-474f-9e67-b07a0eec17df',
       // use environment variable
-      serviceUrl: "https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/cd153831-2882-424a-921f-cd367fc10c99",
       input: {
         'message_type': 'text',
         'text': question
@@ -83740,7 +83739,7 @@ var IncomingMessage = exports.IncomingMessage = function (xhr, response, mode, r
 		self.url = response.url
 		self.statusCode = response.status
 		self.statusMessage = response.statusText
-
+		
 		response.headers.forEach(function (header, key){
 			self.headers[key.toLowerCase()] = header
 			self.rawHeaders.push(key, header)
@@ -86003,13 +86002,13 @@ Script.prototype.runInContext = function (context) {
     if (!(context instanceof Context)) {
         throw new TypeError("needs a 'context' argument.");
     }
-
+    
     var iframe = document.createElement('iframe');
     if (!iframe.style) iframe.style = {};
     iframe.style.display = 'none';
-
+    
     document.body.appendChild(iframe);
-
+    
     var win = iframe.contentWindow;
     var wEval = win.eval, wExecScript = win.execScript;
 
@@ -86018,7 +86017,7 @@ Script.prototype.runInContext = function (context) {
         wExecScript.call(win, 'null');
         wEval = win.eval;
     }
-
+    
     forEach(Object_keys(context), function (key) {
         win[key] = context[key];
     });
@@ -86027,11 +86026,11 @@ Script.prototype.runInContext = function (context) {
             win[key] = context[key];
         }
     });
-
+    
     var winKeys = Object_keys(win);
 
     var res = wEval.call(win, this.code);
-
+    
     forEach(Object_keys(win), function (key) {
         // Avoid copying circular objects like `top` and `window` by only
         // updating existing context properties or new properties in the `win`
@@ -86046,9 +86045,9 @@ Script.prototype.runInContext = function (context) {
             defineProp(context, key, win[key]);
         }
     });
-
+    
     document.body.removeChild(iframe);
-
+    
     return res;
 };
 
