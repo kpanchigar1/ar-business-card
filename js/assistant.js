@@ -14,10 +14,11 @@ let assistantPromise = fetch('/.netlify/functions/get-token')
             authenticator: new BearerTokenAuthenticator({
                 bearerToken: accessToken,
             }),
-            serviceUrl: "https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/cd153831-2882-424a-921f-cd367fc10c99", // use environment variable
+            //serviceUrl: "https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/cd153831-2882-424a-921f-cd367fc10c99", // use environment variable
         });
         //assistant.setServiceUrl(process.env.SERVICE_URL);
         console.log("Assistant created");
+        assistant.setServiceUrl = "https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/cd153831-2882-424a-921f-cd367fc10c99";
         console.log(assistant.serviceUrl)
         return assistant;
     })

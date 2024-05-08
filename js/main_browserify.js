@@ -1,5 +1,4 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-(function (process){(function (){
 "use strict";
 
 var AssistantV2 = require('ibm-watson/assistant/v2');
@@ -16,16 +15,21 @@ var assistantPromise = fetch('/.netlify/functions/get-token').then(function (res
     version: '2021-06-14',
     authenticator: new BearerTokenAuthenticator({
       bearerToken: accessToken
-    }),
-    serviceUrl: process.env.SERVICE_URL // use environment variable
+    })
+    //serviceUrl: "https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/cd153831-2882-424a-921f-cd367fc10c99", // use environment variable
   });
+  //assistant.setServiceUrl(process.env.SERVICE_URL);
   console.log("Assistant created");
+  assistant.setServiceUrl = "https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/cd153831-2882-424a-921f-cd367fc10c99";
+  console.log(assistant.serviceUrl);
   return assistant;
 })["catch"](function (error) {
   return console.error('Error:', error);
 });
 function chatbot(question) {
+  console.log("chatbot function called");
   return assistantPromise.then(function (assistant) {
+    console.log("assistant:" + assistant);
     return assistant.messageStateless({
       assistantId: 'dd0e8243-5e9b-474f-9e67-b07a0eec17df',
       // use environment variable
@@ -44,8 +48,7 @@ function chatbot(question) {
 ;
 module.exports = chatbot;
 
-}).call(this)}).call(this,require('_process'))
-},{"_process":411,"ibm-watson/assistant/v2":122,"ibm-watson/auth":123}],2:[function(require,module,exports){
+},{"ibm-watson/assistant/v2":122,"ibm-watson/auth":123}],2:[function(require,module,exports){
 "use strict";
 
 // TODO: add documentation
