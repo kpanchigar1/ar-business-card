@@ -94,44 +94,44 @@
         <a-entity position="-2 .5 -1.4" rotation="-45.98 -4.56 5.28" scale="0.1 .25 .2" text-geometry="bevelEnabled:true;bevelSize:0.1;bevelThickness:0.1;curveSegments:1;font:https://cdn.glitch.com/c719c986-c0c5-48b8-967c-3cd8b8aa17f3%2Fexo2Black.typeface.json?1490305922150;height:0.5;size:2;value:J O H N   M C N A M A R A" material="color:pink;metalness:0.9;roughness:0.05;sphericalEnvMap:https://cdn.glitch.com/6f8b5a13-fd4d-445d-b9eb-57c735d720ea%2FTextureMap.png?1528781398531"></a-entity>
 
         <!-- linking the marker to the model we want to show -->
-        <a-entity id = "john-model" gltf-model="#john-animation" scale="2 2 2" position="0 0 0" animation-mixer="clip: Idle; loop: repeat" ></a-entity>
+        <a-entity id = "john-model" gltf-model="#john-animation" scale="4 4 4" position="0 0 0" animation-mixer="clip: Idle; loop: repeat" ></a-entity>
 
         <!-- The linkedin, email and back button -->
-        <a-link id="email" target="_blank" class="clickable link" title="" image="" position="-1 -1 1" rotation="-67.42 0 0" scale="0.6 0.6 0.6" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" link="title:." visible="false"><a-box scale="0.8 0.8 1.05" material="src:#emailTexture" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
+        <a-link id="email" target="_blank" class="clickable link" title="" image="" position="-2 2 2" rotation="-67.42 0 0" scale="1.2 1.2 1.2" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" link="title:." visible="false"><a-box scale="0.8 0.8 1.05" material="src:#emailTexture" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
         </a-box></a-link>
 
-        <a-link id="linkedin" target="_blank" class="clickable link" position="1 1 1" title="" image=""  rotation="-67.42 0 0" scale="0.6 0.6 0.6" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" link="title:." visible="false"><a-box scale="0.8 0.8 1.05" material="src:#linkedinTexture" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
+        <a-link id="linkedin" target="_blank" class="clickable link" position="2 2 2" title="" image=""  rotation="-67.42 0 0" scale="1.2 1.2 1.2" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" link="title:." visible="false"><a-box scale="0.8 0.8 1.05" material="src:#linkedinTexture" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
         </a-box></a-link>
 
-        <a-entity id="back" class="clickable link" position="1 -1 1" rotation="-67.42 0 0" scale="0.8 0.8 0.8" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" visible="false" clickable>
-            <a-box id="back" material="src: /imgs/back-button.png" scale="0.8 0.8 1.05" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
+        <a-entity id="back" class="clickable link" position="2 -2 2" rotation="-67.42 0 0" scale="0.8 0.8 0.8" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" visible="false" clickable>
+            <a-box id="back" material="src: /imgs/back-button.png" scale="1.6 1.6 2.1" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
             </a-box>
         </a-entity>
 
 
-        <a-plane id="box1" class="clickable link" position="-2 4 0"
-           height="1" material="color: red; opacity: 0"
-                 width="3" visible="false" clickable>
-            <a-image width="3" src="/imgs/speech-bubble.png"></a-image>
+        <a-plane id="box1" class="clickable link" position="-4 7 0"
+           height="2.5" material="color: red; opacity: 0"
+                 width="6" visible="false" clickable>
+            <a-image width="6" src="/imgs/speech-bubble.png"></a-image>
         </a-plane>
-        <a-plane id="box2" class="clickable link" position="0 6 0"
-           height="1" material="color: red; opacity: 0"
-                 width="3" visible="false" clickable>
-            <a-image width="3" src="/imgs/speech-bubble.png"></a-image>
+        <a-plane id="box2" class="clickable link" position="0 9 0"
+           height="2.5" material="color: red; opacity: 0"
+                 width="6" visible="false" clickable>
+            <a-image width="6" src="/imgs/speech-bubble.png"></a-image>
         </a-plane>
-        <a-plane id="box3" class="clickable link" position="2 4 0"
-           height="1" material="color: red; opacity: 0"
-                 width="3" visible="false" clickable>
-            <a-image width="3" src="/imgs/speech-bubble.png"></a-image>
+        <a-plane id="box3" class="clickable link" position="4 7 0"
+           height="2.5" material="color: red; opacity: 0"
+                 width="6" visible="false" clickable>
+            <a-image width="6" src="/imgs/speech-bubble.png"></a-image>
         </a-plane>
 
-        <a-entity id="speechBubbleA" position="-0.5 4.2 0.2" scale="5 5 5"
+        <a-entity id="speechBubbleA" position="-1 7.4 0.4" scale="10 10 10"
                   text="value: Work?; color: black" look-at="#john"
                   clickable visible="false"></a-entity>
-        <a-entity id="speechBubbleB" position="1.5 6.2 0.2" scale="5 5 5"
+        <a-entity id="speechBubbleB" position="3 9.4 0.4" scale="10 10 10"
                   text="value: Education?; color: black" look-at="#john"
                   clickable visible="false"></a-entity>
-        <a-entity id="speechBubbleC" position="3.5 4.2 0.2" scale="5 5 5"
+        <a-entity id="speechBubbleC" position="7 7.4 0.4" scale="10 10 10"
                   text="value: Hobbies?; color: black" look-at="#john"
                   clickable visible="false"></a-entity>
 

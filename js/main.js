@@ -217,9 +217,9 @@ function changeText(text1, text2, text3, colour) {
     }
 
     // Changing the position of the text
-    contentElement4.setAttribute('position', "-0.4 4 0.1");
-    contentElement5.setAttribute('position', "1.6 6 0.1");
-    contentElement6.setAttribute('position', "3.6 4 0.1");
+    contentElement4.setAttribute('position', "-0.8 8 0.2");
+    contentElement5.setAttribute('position', "3.2 12 0.2");
+    contentElement6.setAttribute('position', "7.2 8 0.2");
 
     // Set all content to visible
     contentElement1.setAttribute('visible', 'true');
