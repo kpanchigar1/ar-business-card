@@ -1,7 +1,6 @@
 {
   "dependencies": {
     "axios": "^1.6.8",
-    "body-parser": "^1.20.2",
     "express": "^4.19.2",
     "express-browserify": "^1.0.3",
     "ibm-watson": "latest",
@@ -18,9 +17,8 @@
   "name": "ar-business-card",
   "description": "",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js",
     "test": "jest"
   },
   "keywords": [],
