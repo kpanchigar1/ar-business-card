@@ -139,6 +139,9 @@ function showContent() {
 
             hideCaption();
         });
+
+        // Randomly selects the options to display since there are 5 options and only 3 can be displayed at a time
+        // Shuffles the options and selects the first 3
         let options;
         let englishOptions = [
             "Try asking about \n my work between \n 1999-2004...",
@@ -180,10 +183,12 @@ function showContent() {
         var caption = speechBubbleToAudioMap[speechBubbleText][1];
         if(!playingAudio){
             audio.play();
+            document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Talk; loop: repeat');
             playingAudio = true;
             displayCaption(caption);
         }
         audio.addEventListener('ended', function(){
+            document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Idle; loop: repeat');
             playingAudio = false;
             hideCaption();
         });
@@ -205,11 +210,13 @@ function showContent() {
         var caption = speechBubbleToAudioMap[speechBubbleText][1];
         if(!playingAudio){
             audio.play();
+            document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Talk; loop: repeat');
             playingAudio = true;
             displayCaption(caption);
         }
         audio.addEventListener('ended', function(){
             playingAudio = false;
+            document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Idle; loop: repeat');
             hideCaption();
         });
         if (language === "german"){
@@ -305,6 +312,7 @@ document.querySelector('a-marker').addEventListener('markerFound', function() {
         playingAudio = true;
         displayCaption(caption);
         audio.addEventListener('ended', function(){
+            document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Idle; loop: repeat');
             playingAudio = false;
             hideCaption();
         });
