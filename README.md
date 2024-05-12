@@ -8,3 +8,6 @@ Team 05's AR Business Card
 4. Once you’ve picked a language, you’ll be able to interact with the AR Business Card™.
 5. Use the **O** cursor in the middle of the viewport to select AR objects on your screen.
 6. You can ask a custom question using the “Ask your own question…” popup at the top (Currently a WIP)
+
+# Build Status
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b0d7224e-253c-423e-8f48-1e39746ac2e2/deploy-status)](https://app.netlify.com/sites/startling-hummingbird-a198e7/deploys)
