@@ -1,4 +1,5 @@
 // TODO: add documentation
+// TODO: fix T-Pose issue with model
 console.log("loaded main.js")
 
 let playingAudio = false;
@@ -138,15 +139,37 @@ function showContent() {
 
             hideCaption();
         });
-        // TODO: Randomise work history options
-        if (language === "german"){
-            changeText("Versuchen Sie, nachzufragen \n meine Arbeit zwischen \n 1999-2004...", "Versuchen Sie \n meine Arbeit zwischen \n 2012-2016...",
-                         "Versuchen Sie \n meine Arbeit zwischen \n 2019-Gegenwärtig...", "#0000FF");
+        let options;
+        let englishOptions = [
+            "Try asking about \n my work between \n 1999-2004...",
+            "Try asking about \n my work between \n 2004-2012...",
+            "Try asking about \n my work between \n 2012-2016...",
+            "Try asking about \n my work between \n 2016-2019...",
+            "Try asking about \n my work between \n 2019-Present..."];
+
+        let germanOptions = [
+            "Versuchen Sie, nachzufragen \\n meine Arbeit zwischen \\n 1999-2004...",
+            "Versuchen Sie, nachzufragen \\n meine Arbeit zwischen \\n 2004-2012...",
+            "Versuchen Sie, nachzufragen \\n meine Arbeit zwischen \\n 2012-2016...",
+            "Versuchen Sie, nachzufragen \\n meine Arbeit zwischen \\n 2016-2019...",
+            "Versuchen Sie \\n meine Arbeit zwischen \\n 2019-Gegenwärtig..."];
+
+        if (language === "german") {
+            options = germanOptions;
+        } else {
+            options = englishOptions;
         }
-        else{
-            changeText("Try asking about \n my work between \n 1999-2004...", "Try asking about \n my work between \n 2012-2016...",
-                        "Try asking about \n my work between \n 2019-Present...", "#0000FF");
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
         }
+        shuffle(options);
+        let selectedOptions = options.slice(0, 3);
+
+        changeText(selectedOptions[0], selectedOptions[1], selectedOptions[2], "default");
         displayBackButton();
     });
 
