@@ -229,9 +229,6 @@ function showContent() {
         }
         displayBackButton();
     });
-
-    // show question form popup
-    // showPopup();
 }
 
 function changeText(text1, text2, text3, colour) {
@@ -280,21 +277,18 @@ function changeText(text1, text2, text3, colour) {
     contentElement6.setAttribute('visible', 'true');
 }
 
-// TODO: add a message to the user that the camera is not supported
-
-
 let overviewPlayed = false;
 
 // Disabling the raycaster component when the page loads to avoid accidental clicks
 document.querySelector('a-cursor').setAttribute('raycaster', 'enabled: false');
 
 document.querySelector('a-marker').addEventListener('markerFound', function() {
+    document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Stand; loop: once');
     // Enable the raycaster component when the marker is found
     document.querySelector('a-cursor').setAttribute('raycaster', 'enabled: true');
 
     // Call the showContent function after 10000 milliseconds (10 seconds)
     setTimeout(showContent, 10000);
-    setTimeout(showPopup, 10000);
     
     if (!overviewPlayed && !playingAudio) {
         if (language === "german"){
@@ -306,7 +300,7 @@ document.querySelector('a-marker').addEventListener('markerFound', function() {
             var caption = "I’m John McNamara, an IBM Master Inventor, Honorary Professor, Research Fellow, Impact Fellow and I currently lead IBM UK University Programs.";
         }
         audio.play();
-        document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Stand; loop: once');
+        document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Talk; loop: repeat');
         console.log("Overview audio played.")
         overviewPlayed = true;
         playingAudio = true;
@@ -327,16 +321,6 @@ document.querySelector('a-marker').addEventListener('markerFound', function() {
     // console.log('set linkedin visible and add href');
 });
 
-// Function to show the question popup
-function hidePopup() {
-    document.getElementById("popup").setAttribute('hidden', 'true');
-}
-
-// Function to hide the question popup
-function showPopup() {
-    document.getElementById("popup").removeAttribute('hidden');
-}
-
 // function to display captions
 function displayCaption(captionText) {
     document.getElementById('caption').setAttribute('style', 'display: block');
@@ -354,8 +338,15 @@ function displayBackButton() {
     let backButton = document.getElementById('back');
     backButton.setAttribute('visible', 'true');
     backButton.addEventListener('click', function(){
-    changeText("Click here to learn \n about my work", "Click here to learn \n about my education",
-            "Click here to learn \n about my hobbies", "default");
+        // TODO: add german text
+        if(language === "german"){
+            changeText("Klicken Sie hier, \n um mehr über meine \n Arbeit zu erfahren", "Klicken Sie hier, \n  um mehr über meine \n Ausbildung zu erfahren",
+                "Klicken Sie hier, \n um mehr über meine \n Hobbys zu erfahren", "default");
+        }
+        else {
+            changeText("Click here to learn \n about my work", "Click here to learn \n about my education",
+                "Click here to learn \n about my hobbies", "default");
+        }
         document.getElementById('back').setAttribute('visible', 'false');
     });
 
