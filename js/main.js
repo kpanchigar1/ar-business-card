@@ -193,8 +193,10 @@ function showContent() {
             hideCaption();
         });
         if (language === "german"){
-            changeText("Versuchen Sie \n meine Arbeit \n Erfahrung...", "Versuchen Sie \n meine univer...",
-                                               "Versuchen Sie \n mein Abschluss...", "#FF0000");
+            changeText(
+                "Versuchen Sie \n meine Arbeit \n Erfahrung...",
+                "Versuchen Sie \n meine univer...",
+                "Versuchen Sie \n mein Abschluss...", "#FF0000");
         }
         else{
             changeText("Try asking about \n my work \n experience...", "Try asking about \n my university...",
@@ -220,11 +222,17 @@ function showContent() {
             hideCaption();
         });
         if (language === "german"){
-            changeText("Versuchen Sie \n brasilianisches Jiu-Jitsu...", "Versuchen Sie \n gaming...", "Versuchen Sie \n Schreiben...",
+            changeText(
+                "Versuchen Sie \n brasilianisches Jiu-Jitsu...",
+                "Versuchen Sie \n gaming...",
+                "Versuchen Sie \n Schreiben...",
                                     "#00FF00");
         }
         else{
-            changeText("Try asking about \n brazilian jiu-jitsu...", "Try asking about \n gaming...", "Try asking about \n writing...",
+            changeText(
+                "Try asking about \n brazilian jiu-jitsu...",
+                "Try asking about \n gaming...",
+                "Try asking about \n writing...",
                         "#00FF00");
         }
         displayBackButton();
@@ -340,11 +348,15 @@ function displayBackButton() {
     backButton.addEventListener('click', function(){
         // TODO: add german text
         if(language === "german"){
-            changeText("Klicken Sie hier, \n um mehr über meine \n Arbeit zu erfahren", "Klicken Sie hier, \n  um mehr über meine \n Ausbildung zu erfahren",
+            changeText(
+                "Klicken Sie hier, \n um mehr über meine \n Arbeit zu erfahren",
+                "Klicken Sie hier, \n  um mehr über meine \n Ausbildung zu erfahren",
                 "Klicken Sie hier, \n um mehr über meine \n Hobbys zu erfahren", "default");
         }
         else {
-            changeText("Click here to learn \n about my work", "Click here to learn \n about my education",
+            changeText(
+                "Click here to learn \n about my work",
+                "Click here to learn \n about my education",
                 "Click here to learn \n about my hobbies", "default");
         }
         document.getElementById('back').setAttribute('visible', 'false');
