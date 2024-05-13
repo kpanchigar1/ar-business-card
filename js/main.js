@@ -354,7 +354,7 @@ function displayBackButton() {
     let backButton = document.getElementById('back');
     backButton.setAttribute('visible', 'true');
     backButton.addEventListener('click', function(){
-    changeText("\"Click here to learn \\n about my work\"", "Click here to learn \n about my education",
+    changeText("Click here to learn \n about my work", "Click here to learn \n about my education",
             "Click here to learn \n about my hobbies", "default");
         document.getElementById('back').setAttribute('visible', 'false');
     });
