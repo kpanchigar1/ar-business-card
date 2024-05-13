@@ -106,7 +106,7 @@ function showContent() {
         'Try asking about \n gaming...': ['/audio/gaming.wav', "I have played project Gotham,  Counter-strike, Battlefield, Dirt, Gran Turismo, Halo, and countless others."],
         'Try asking about \n writing...': ['/audio/writing.wav', "I have a wordpress site where I share my thoughts and current work. You can find it at j0nnymac.wordpress.com."],
         'Klicken Sie hier, \n um mehr über meine \n Arbeit zu erfahren': ['/audio/de-workHistory.wav', "Ich arbeite seit 24 Jahren bei IBM, begann 1999 als Berater für technische Integration und arbeite derzeit als Programmleiter für Universitäten in Großbritannien. Ich verfüge über einen Hintergrund, der Beratung, Leistung, Service und Produktlieferung umfasst, und all dies wird durch eine Leidenschaft für Innovation untermauert. Ich bin außerdem Vorstandsvorsitzender des South Coast Institute of Technology."],
-        'Klicken Sie hier, \n um mehr über meine \n Ausbildung zu erfahren': ['/audio/de-education.wav', "Ich besuchte die University of Hull von 1991 bis 1994 und erlangte einen 2 1 in Informationssystemen. Während meines Studiums war ich in einer Führungsposition für UCI-Kinos tätig."],
+        "Klicken Sie hier, \n  um mehr über meine \n Ausbildung zu erfahren": ['/audio/de-education.wav', "Ich besuchte die University of Hull von 1991 bis 1994 und erlangte einen 2 1 in Informationssystemen. Während meines Studiums war ich in einer Führungsposition für UCI-Kinos tätig."],
         'Klicken Sie hier, \n um mehr über meine \n Hobbys zu erfahren': ['/audio/de-hobbies.wav', "Ich genieße das Spielen, Erfinden, Hacken, Schreiben, Präsentieren, brasilianisches Jiu-Jitsu, medizinische Serviceroboter und Weltraumforschung."],
         'Versuchen Sie, nachzufragen \n meine Arbeit zwischen \n 1999-2004...': ['/audio/de-1999-2004.wav', "Ich war technischer Integrationsberater für IBM. In dieser Rolle musste ich mich mit Kunden, von Banken bis hin zu Pharmaunternehmen, an der optimalen Herangehensweise und Umsetzung der Integration ihrer Geschäftssysteme beteiligen."],
         'Versuchen Sie, nachzufragen \n meine Arbeit zwischen \n 2004-2012...': ['/audio/de-2004-2012.wav', "Ich war BPM-Berater für IBM. In dieser Rolle beriet ich Kunden auf der ganzen Welt, um die Anwendung von Goldstandard-Geschäftsprozessmethoden auf neue und bestehende Unternehmen zu leiten und die Effektivität dieser Prozesse durch den Einsatz von BPM-Software zu steigern."],
@@ -229,9 +229,6 @@ function showContent() {
         }
         displayBackButton();
     });
-
-    // show question form popup
-    // showPopup();
 }
 
 function changeText(text1, text2, text3, colour) {
@@ -280,21 +277,18 @@ function changeText(text1, text2, text3, colour) {
     contentElement6.setAttribute('visible', 'true');
 }
 
-// TODO: add a message to the user that the camera is not supported
-
-
 let overviewPlayed = false;
 
 // Disabling the raycaster component when the page loads to avoid accidental clicks
 document.querySelector('a-cursor').setAttribute('raycaster', 'enabled: false');
 
 document.querySelector('a-marker').addEventListener('markerFound', function() {
+    document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Stand; loop: once');
     // Enable the raycaster component when the marker is found
     document.querySelector('a-cursor').setAttribute('raycaster', 'enabled: true');
 
     // Call the showContent function after 10000 milliseconds (10 seconds)
     setTimeout(showContent, 10000);
-    setTimeout(showPopup, 10000);
     
     if (!overviewPlayed && !playingAudio) {
         if (language === "german"){
@@ -306,7 +300,7 @@ document.querySelector('a-marker').addEventListener('markerFound', function() {
             var caption = "I’m John McNamara, an IBM Master Inventor, Honorary Professor, Research Fellow, Impact Fellow and I currently lead IBM UK University Programs.";
         }
         audio.play();
-        document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Stand; loop: once');
+        document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Talk; loop: repeat');
         console.log("Overview audio played.")
         overviewPlayed = true;
         playingAudio = true;
@@ -327,16 +321,6 @@ document.querySelector('a-marker').addEventListener('markerFound', function() {
     // console.log('set linkedin visible and add href');
 });
 
-// Function to show the question popup
-function hidePopup() {
-    document.getElementById("popup").setAttribute('hidden', 'true');
-}
-
-// Function to hide the question popup
-function showPopup() {
-    document.getElementById("popup").removeAttribute('hidden');
-}
-
 // function to display captions
 function displayCaption(captionText) {
     document.getElementById('caption').setAttribute('style', 'display: block');
@@ -354,8 +338,15 @@ function displayBackButton() {
     let backButton = document.getElementById('back');
     backButton.setAttribute('visible', 'true');
     backButton.addEventListener('click', function(){
-    changeText("Click here to learn \n about my work", "Click here to learn \n about my education",
-            "Click here to learn \n about my hobbies", "default");
+        // TODO: add german text
+        if(language === "german"){
+            changeText("Klicken Sie hier, \n um mehr über meine \n Arbeit zu erfahren", "Klicken Sie hier, \n  um mehr über meine \n Ausbildung zu erfahren",
+                "Klicken Sie hier, \n um mehr über meine \n Hobbys zu erfahren", "default");
+        }
+        else {
+            changeText("Click here to learn \n about my work", "Click here to learn \n about my education",
+                "Click here to learn \n about my hobbies", "default");
+        }
         document.getElementById('back').setAttribute('visible', 'false');
     });
 
