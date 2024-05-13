@@ -90,7 +90,7 @@ function showContent() {
     contentElement6.setAttribute('visible', 'true');
 
     // Create a dictionary that maps speech bubble text to audio files and captions
-    var speechBubbleToAudioMap = {
+    var speechBubbleToAudioMap= {
         'Click here to learn \n about my work': ['/audio/workHistory.wav', "I have worked at IBM for 24 years, starting as a Technical Integration Consultant in 1999, and I currently work as a UK University Programs Lead. I have a background that includes consultancy, performance, service & product delivery, all of which is underpinned by a passion for innovation. I am also the Chair of the Board for the South Coast Institute of Technology."],
         'Click here to learn \n about my education': ['/audio/education.wav', "I attended the University of Hull from 1991-1994 and achieved a 2 1 in Information Systems. During my degree, I worked in a management position for UCI cinemas."],
         'Click here to learn \n about my hobbies': ['/audio/hobbies.wav', "I enjoy gaming, inventing, hacking, writing, making presentations, Brazilian Jiu-Jitsu, medical service robots and space exploration."],
@@ -267,9 +267,9 @@ function changeText(text1, text2, text3, colour) {
     }
 
     // Changing the position of the text
-    contentElement4.setAttribute('position', "-0.8 8 0.2");
-    contentElement5.setAttribute('position', "3.2 12 0.2");
-    contentElement6.setAttribute('position', "7.2 8 0.2");
+    contentElement4.setAttribute('position', "-0.8 7.5 0.2");
+    contentElement5.setAttribute('position', "3.2 10 0.2");
+    contentElement6.setAttribute('position', "7.2 7.5 0.2");
 
     // Set all content to visible
     contentElement1.setAttribute('visible', 'true');
