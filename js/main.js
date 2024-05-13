@@ -267,7 +267,7 @@ function changeText(text1, text2, text3, colour) {
     }
 
     // Changing the position of the text
-    contentElement4.setAttribute('position', "-1 7.5 0.2");
+    contentElement4.setAttribute('position', "-1.2 7.5 0.2");
     contentElement5.setAttribute('position', "3.2 9.3 0.2");
     contentElement6.setAttribute('position', "7 7.5 0.2");
 
