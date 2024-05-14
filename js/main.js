@@ -129,7 +129,12 @@ function showContent() {
         var caption = speechBubbleToAudioMap[speechBubbleText][1];
         if(!playingAudio){
             audio.play();
-            document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Talk; loop: repeat');
+            if (speechBubbleText === "Try asking about \n brazilian jiu-jitsu..." || speechBubbleText === "Versuchen Sie \n brasilianisches Jiu-Jitsu...") {
+                document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Fight; loop: repeat');
+            }
+            else {
+                document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Talk; loop: repeat');
+            }
             playingAudio = true;
             displayCaption(caption);
         }
@@ -172,7 +177,11 @@ function showContent() {
         shuffle(options);
         let selectedOptions = options.slice(0, 3);
 
-        changeText(selectedOptions[0], selectedOptions[1], selectedOptions[2], "default");
+        // Only change text if speech bubble text is the default one
+        if (speechBubbleText === "Click here to learn \n about my work" || speechBubbleText === "Klicken Sie hier, \n um mehr über meine \n Arbeit zu erfahren") {
+            changeText(selectedOptions[0], selectedOptions[1], selectedOptions[2], "default");
+        }
+
         displayBackButton();
     });
 
@@ -183,7 +192,12 @@ function showContent() {
         var caption = speechBubbleToAudioMap[speechBubbleText][1];
         if(!playingAudio){
             audio.play();
-            document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Talk; loop: repeat');
+            if (speechBubbleText === "Try asking about \n brazilian jiu-jitsu..." || speechBubbleText === "Versuchen Sie \n brasilianisches Jiu-Jitsu...") {
+                document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Fight; loop: repeat');
+            }
+            else {
+                document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Talk; loop: repeat');
+            }
             playingAudio = true;
             displayCaption(caption);
         }
@@ -192,15 +206,17 @@ function showContent() {
             playingAudio = false;
             hideCaption();
         });
-        if (language === "german"){
-            changeText(
-                "Versuchen Sie \n meine Arbeit \n Erfahrung...",
-                "Versuchen Sie \n meine univer...",
-                "Versuchen Sie \n mein Abschluss...", "#FF0000");
-        }
-        else{
-            changeText("Try asking about \n my work \n experience...", "Try asking about \n my university...",
-                        "Try asking about \n my degree...", "#FF0000");
+
+        if (speechBubbleText === "Click here to learn \n about my education" || speechBubbleText === "Klicken Sie hier, \n  um mehr über meine \n Ausbildung zu erfahren") {
+            if (language === "german") {
+                changeText(
+                    "Versuchen Sie \n meine Arbeit \n Erfahrung...",
+                    "Versuchen Sie \n meine univer...",
+                    "Versuchen Sie \n mein Abschluss...", "#FF0000");
+            } else {
+                changeText("Try asking about \n my work \n experience...", "Try asking about \n my university...",
+                    "Try asking about \n my degree...", "#FF0000");
+            }
         }
         displayBackButton();
     });
@@ -212,7 +228,7 @@ function showContent() {
         var caption = speechBubbleToAudioMap[speechBubbleText][1];
         if(!playingAudio){
             audio.play();
-            if (audio === "https://startling-hummingbird-a198e7.netlify.app/audio/BJJ.wav" || audio === "https://startling-hummingbird-a198e7.netlify.app/audio/de-BJJ.wav"){
+            if (speechBubbleText === "Try asking about \n brazilian jiu-jitsu..." || speechBubbleText === "Versuchen Sie \n brasilianisches Jiu-Jitsu...") {
                 document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Fight; loop: repeat');
             }
             else {
@@ -226,19 +242,21 @@ function showContent() {
             document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Idle; loop: repeat');
             hideCaption();
         });
-        if (language === "german"){
-            changeText(
-                "Versuchen Sie \n brasilianisches Jiu-Jitsu...",
-                "Versuchen Sie \n gaming...",
-                "Versuchen Sie \n Schreiben...",
-                                    "#00FF00");
-        }
-        else{
-            changeText(
-                "Try asking about \n brazilian jiu-jitsu...",
-                "Try asking about \n gaming...",
-                "Try asking about \n writing...",
-                        "#00FF00");
+
+        if(speechBubbleText === "Click here to learn \n about my hobbies" || speechBubbleText === "Klicken Sie hier, \n um mehr über meine \n Hobbys zu erfahren") {
+            if (language === "german") {
+                changeText(
+                    "Versuchen Sie \n brasilianisches Jiu-Jitsu...",
+                    "Versuchen Sie \n gaming...",
+                    "Versuchen Sie \n Schreiben...",
+                    "#00FF00");
+            } else {
+                changeText(
+                    "Try asking about \n brazilian jiu-jitsu...",
+                    "Try asking about \n gaming...",
+                    "Try asking about \n writing...",
+                    "#00FF00");
+            }
         }
         displayBackButton();
     });
@@ -296,34 +314,36 @@ let overviewPlayed = false;
 document.querySelector('a-cursor').setAttribute('raycaster', 'enabled: false');
 
 document.querySelector('a-marker').addEventListener('markerFound', function() {
-    document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Stand; loop: once');
     // Enable the raycaster component when the marker is found
     document.querySelector('a-cursor').setAttribute('raycaster', 'enabled: true');
 
-    // Call the showContent function after 10000 milliseconds (10 seconds)
-    setTimeout(showContent, 10000);
-    
-    if (!overviewPlayed && !playingAudio) {
-        if (language === "german"){
-            var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/de-overview.wav');
-            var caption = "Ich bin John McNamara, IBM Master Inventor, Honorarprofessor, wissenschaftlicher Mitarbeiter, Schlagmann und Leiter derzeit IBM UK University Programs.";
-        }
-        else{
-            var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/overview.wav');
-            var caption = "I’m John McNamara, an IBM Master Inventor, Honorary Professor, Research Fellow, Impact Fellow and I currently lead IBM UK University Programs.";
-        }
-        audio.play();
-        document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Talk; loop: repeat');
-        console.log("Overview audio played.")
-        overviewPlayed = true;
-        playingAudio = true;
-        displayCaption(caption);
-        audio.addEventListener('ended', function(){
-            document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Idle; loop: repeat');
-            playingAudio = false;
-            hideCaption();
-        });
+    if (!overviewPlayed){
+        document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Stand; loop: once');
     }
+    document.querySelector('#john-model').addEventListener('animation-finished', function() {
+        if (!overviewPlayed && !playingAudio) {
+            if (language === "german"){
+                var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/de-overview.wav');
+                var caption = "Ich bin John McNamara, IBM Master Inventor, Honorarprofessor, wissenschaftlicher Mitarbeiter, Schlagmann und Leiter derzeit IBM UK University Programs.";
+            }
+            else{
+                var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/overview.wav');
+                var caption = "I’m John McNamara, an IBM Master Inventor, Honorary Professor, Research Fellow, Impact Fellow and I currently lead IBM UK University Programs.";
+            }
+            audio.play();
+            document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Talk; loop: repeat');
+            console.log("Overview audio played.")
+            overviewPlayed = true;
+            playingAudio = true;
+            displayCaption(caption);
+            audio.addEventListener('ended', function(){
+                document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Idle; loop: repeat');
+                playingAudio = false;
+                hideCaption();
+                showContent();
+            });
+        }
+    });
 
     document.getElementById('email').setAttribute('visible', 'true');
     document.getElementById('email').setAttribute('href', 'mailto:j0nnymac@uk.ibm.com');
@@ -331,7 +351,6 @@ document.querySelector('a-marker').addEventListener('markerFound', function() {
 
     document.getElementById('linkedin').setAttribute('visible', 'true');
     document.getElementById('linkedin').setAttribute('href', 'https://uk.linkedin.com/in/jonmcnamara');
-    // console.log('set linkedin visible and add href');
 });
 
 // function to display captions
