@@ -212,7 +212,12 @@ function showContent() {
         var caption = speechBubbleToAudioMap[speechBubbleText][1];
         if(!playingAudio){
             audio.play();
-            document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Talk; loop: repeat');
+            if (audio === "https://startling-hummingbird-a198e7.netlify.app/audio/BJJ.wav" || audio === "https://startling-hummingbird-a198e7.netlify.app/audio/de-BJJ.wav"){
+                document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Fight; loop: repeat');
+            }
+            else {
+                document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Talk; loop: repeat');
+            }
             playingAudio = true;
             displayCaption(caption);
         }
