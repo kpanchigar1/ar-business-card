@@ -5,15 +5,25 @@
     </title>
     <meta charset="UTF-8">
     <meta name="description" content="John McNamara's AR Business Card">
+
     <!-- initialising the viewport -->
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, initial-scale=1.0, maximum-scale=1.0">
+
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" type="text/css" href="/styles/styles.css">
+
     <!-- load a-frame and ar.js-->
     <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
     <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+
+    <!-- Manifest file for PWA functionality -->
     <link rel="manifest" href="manifest.json">
+
+    <!-- Splash screens for different screen sizes -->
+    <!-- These are displayed when the website is loading -->
+    <!-- Each link corresponds to a specific device size -->
+    <!-- Used for a more native app-like experience on mobile -->
     <link href="splashscreens/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
     <link href="splashscreens/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
     <link href="splashscreens/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
@@ -25,14 +35,8 @@
     <link href="splashscreens/ipadpro3_splash.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
     <link href="splashscreens/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <!-- enabling splashscreen for all apple devices -->
-    <!-- This is a hack because at the time of writing there are some distortions in the provided visuals until the  -->
-    <!-- system receives a resize event. The resize event must be triggered when everything has been loaded and the  -->
-    <!-- camera has been initialized. All the events I tried didn't work, so in the end I resorted using a 3 seconds -->
-    <!-- time-out after the load event. When this problem will be fixed in the AR.js library, this hack won't be necessary -->
-    <!-- anymore -->
-    <!-- do we need this?? -->
-    <!-- idk fam -->
+
+    <!-- JavaScript to trigger a resize event after 3 seconds -->
     <script>
         window.onload = function(){
             setTimeout(function(){
@@ -43,8 +47,9 @@
             console.log("version 4 !!!!!");
         };
     </script>
+
+    <!-- Service worker registration for offline use -->
     <script>
-        // registering the service worker for offline use
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/js/sw.js')
@@ -60,98 +65,125 @@
         console.log(language)
     </script>
 </head>
+
+
 <body style='margin : 0px; overflow: hidden;'>
-<!-- Div tag for popups -->
-<div id="popup-container"></div>
-<!-- Div tag for captions -->
-<div id="caption" style="display: none"></div>
-<!-- define the scene  -->
-<a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
-    <!-- defining the content to appear -->
-    <a-assets>
-        <a-asset-item id="john-animation" src="/models/john_animation_final.glb"></a-asset-item>
-        <a-asset-item id="john-summer" src="/models/summer_john.glb"></a-asset-item>
-        <img crossorigin="anonymous" id="emailTexture" src="https://cdn.glitch.com/6f8b5a13-fd4d-445d-b9eb-57c735d720ea%2FPostEmail.png?1528821333360">
-        <img crossorigin="anonymous" id="linkedinTexture" src="https://cdn.glitch.com/6f8b5a13-fd4d-445d-b9eb-57c735d720ea%2FPostLinkedin.png?1528821333139">
-    </a-assets>
-    <!-- defining the marker to scan using a .patt file -->
-    <a-marker camera="active:false" preset='custom' type='pattern'
-              url='/marker/pattern-12.patt'>
-        <a-entity position="-2 .5 -1.4" rotation="-45.98 -4.56 5.28" scale="0.1 .25 .2" text-geometry="bevelEnabled:true;bevelSize:0.1;bevelThickness:0.1;curveSegments:1;font:https://cdn.glitch.com/c719c986-c0c5-48b8-967c-3cd8b8aa17f3%2Fexo2Black.typeface.json?1490305922150;height:0.5;size:2;value:J O H N   M C N A M A R A" material="color:pink;metalness:0.9;roughness:0.05;sphericalEnvMap:https://cdn.glitch.com/6f8b5a13-fd4d-445d-b9eb-57c735d720ea%2FTextureMap.png?1528781398531"></a-entity>
+    <!-- Div tag for popups -->
+    <div id="popup-container"></div>
+    <!-- Div tag for captions -->
+    <div id="caption" style="display: none"></div>
+    <!-- Scene definition using A-Frame -->
+    <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
+        <!-- Assets section for preloading assets like 3D models and images -->
+        <a-assets>
+            <!-- Define 3D models -->
+            <a-asset-item id="john-animation" src="/models/john_animation_final.glb"></a-asset-item>
+            <a-asset-item id="john-summer" src="/models/summer_john.glb"></a-asset-item>
+            <!-- Define images for textures -->
+            <img crossorigin="anonymous" id="emailTexture" src="https://cdn.glitch.com/6f8b5a13-fd4d-445d-b9eb-57c735d720ea%2FPostEmail.png?1528821333360">
+            <img crossorigin="anonymous" id="linkedinTexture" src="https://cdn.glitch.com/6f8b5a13-fd4d-445d-b9eb-57c735d720ea%2FPostLinkedin.png?1528821333139">
+        </a-assets>
 
-        <!-- linking the marker to the model we want to show -->
-        <a-entity id="john-model" gltf-model="#john-summer" scale="4 4 4" position="0 0 0" animation-mixer="clip: Idle; loop: repeat" ></a-entity>
-        <a-entity id="john-model" gltf-model="#john-animation" scale="4 4 4" position="0 0 0" animation-mixer="clip: Idle; loop: repeat" ></a-entity>
+        <!-- Marker definition for AR -->
+        <a-marker camera="active:false" preset='custom' type='pattern'
+                  url='/marker/pattern-12.patt'>
 
-        <!-- The linkedin, email and back button -->
-        <a-link id="email" target="_blank" class="clickable link" title="" image="" position="-2 2 2" rotation="-67.42 0 0" scale="1.2 1.2 1.2" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" link="title:." visible="false"><a-box scale="0.8 0.8 1.05" material="src:#emailTexture" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
-        </a-box></a-link>
-        <a-link id="linkedin" target="_blank" class="clickable link" position="2 2 2" title="" image=""  rotation="-67.42 0 0" scale="1.2 1.2 1.2" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" link="title:." visible="false"><a-box scale="0.8 0.8 1.05" material="src:#linkedinTexture" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
-        </a-box></a-link>
-        <a-entity id="back" class="clickable link" position="2 -2 2" rotation="-67.42 0 0" scale="0.8 0.8 0.8" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" visible="false" clickable>
-            <a-box id="back" material="src: /imgs/back-button.png" scale="1.6 1.6 2.1" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
-            </a-box>
-        </a-entity>
-        <a-plane id="box1" class="clickable link" position="-4 7 0"
-                 height="2.5" material="color: red; opacity: 0"
-                 width="6" visible="false" clickable>
-            <a-image height="3" width="6"
-                     src="/imgs/speech-bubble.png"></a-image>
-        </a-plane>
-        <a-plane id="box2" class="clickable link" position="0 9 0"
-                 height="2.5" material="color: red; opacity: 0"
-                 width="6" visible="false" clickable>
-            <a-image height="3" width="6"
-                     src="/imgs/speech-bubble.png"></a-image>
-        </a-plane>
-        <a-plane id="box3" class="clickable link" position="4 7 0"
-                 height="2.5" material="color: red; opacity: 0"
-                 width="6" visible="false" clickable>
-            <a-image height="3" width="6"
-                     src="/imgs/speech-bubble.png"></a-image>
-        </a-plane>
-        <a-entity id="speechBubbleA" position="-1 7.4 0.4" scale="10 10 10"
-                  text="value: Work?; color: black" look-at="#john"
-                  clickable visible="false"></a-entity>
-        <a-entity id="speechBubbleB" position="3 9.4 0.4" scale="10 10 10"
-                  text="value: Education?; color: black" look-at="#john"
-                  clickable visible="false"></a-entity>
-        <a-entity id="speechBubbleC" position="7 7.4 0.4" scale="10 10 10"
-                  text="value: Hobbies?; color: black" look-at="#john"
-                  clickable visible="false"></a-entity>
-    </a-marker>
-    <!-- defining the cursor -->
-    <a-camera>
-        <a-cursor color="#ffba70" position="0 0 -1" fuse="true" fuse-timeout="2000" raycaster="objects: .link"></a-cursor>
-    </a-camera>
-</a-scene>
-<script>
-    window.watsonAssistantChatOptions = {
-        integrationID: "f771a2bd-1b36-4ce2-85ee-4543d613733a", // The ID of this integration.
-        region: "eu-gb", // The region your integration is hosted in.
-        serviceInstanceID: "cd153831-2882-424a-921f-cd367fc10c99", // The ID of your service instance.
-        onLoad: async (instance) => { await instance.render(); }
-    };
-    setTimeout(function(){
-        const t=document.createElement('script');
-        t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
-        document.head.appendChild(t);
-    });
-</script>
-<script>
-    document.querySelector('a-scene').addEventListener('loaded', function() {
-        let currentMonth = new Date().getMonth();
-        console.log(currentMonth);
-        // Define the model source based on the current month
-        let modelSource;
-        if (currentMonth >= 4 && currentMonth <= 7) {
-            modelSource = "#john-summer";
-        } else {
-            modelSource = "#john-animation";
-        }
-        // Set the model source
-        document.getElementById('john-model').setAttribute('gltf-model', modelSource);
-    });
-</script>
-<script src="./js/main.js"></script>
+            <!-- Elements to be displayed when marker is detected -->
+
+            <!-- Text displaying Jon's name -->
+            <a-entity position="-2 .5 -1.4" rotation="-45.98 -4.56 5.28" scale="0.1 .25 .2" text-geometry="bevelEnabled:true;bevelSize:0.1;bevelThickness:0.1;curveSegments:1;font:https://cdn.glitch.com/c719c986-c0c5-48b8-967c-3cd8b8aa17f3%2Fexo2Black.typeface.json?1490305922150;height:0.5;size:2;value:J O H N   M C N A M A R A" material="color:pink;metalness:0.9;roughness:0.05;sphericalEnvMap:https://cdn.glitch.com/6f8b5a13-fd4d-445d-b9eb-57c735d720ea%2FTextureMap.png?1528781398531"></a-entity>
+
+            <!-- 3D model to be displayed -->
+            <a-entity id="john-model" gltf-model="#john-summer" scale="4 4 4" position="0 0 0" animation-mixer="clip: Idle; loop: repeat" ></a-entity>
+            <a-entity id="john-model" gltf-model="#john-animation" scale="4 4 4" position="0 0 0" animation-mixer="clip: Idle; loop: repeat" ></a-entity>
+
+            <!-- The LinkedIn, email and back button -->
+            <!-- These are clickable and open in new tab -->
+            <a-link id="email" target="_blank" class="clickable link" title="" image="" position="-2 2 2" rotation="-67.42 0 0" scale="1.2 1.2 1.2" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" link="title:." visible="false"><a-box scale="0.8 0.8 1.05" material="src:#emailTexture" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
+            </a-box></a-link>
+            <a-link id="linkedin" target="_blank" class="clickable link" position="2 2 2" title="" image=""  rotation="-67.42 0 0" scale="1.2 1.2 1.2" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" link="title:." visible="false"><a-box scale="0.8 0.8 1.05" material="src:#linkedinTexture" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
+            </a-box></a-link>
+            <a-entity id="back" class="clickable link" position="2 -2 2" rotation="-67.42 0 0" scale="0.8 0.8 0.8" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" visible="false" clickable>
+                <a-box id="back" material="src: /imgs/back-button.png" scale="1.6 1.6 2.1" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
+                </a-box>
+            </a-entity>
+
+            <!-- Speech bubbles -->
+            <!-- These display text when clicked -->
+            <a-plane id="box1" class="clickable link" position="-4 7 0"
+                     height="2.5" material="color: red; opacity: 0"
+                     width="6" visible="false" clickable>
+                <a-image height="3" width="6"
+                         src="/imgs/speech-bubble.png"></a-image>
+            </a-plane>
+            <a-plane id="box2" class="clickable link" position="0 9 0"
+                     height="2.5" material="color: red; opacity: 0"
+                     width="6" visible="false" clickable>
+                <a-image height="3" width="6"
+                         src="/imgs/speech-bubble.png"></a-image>
+            </a-plane>
+            <a-plane id="box3" class="clickable link" position="4 7 0"
+                     height="2.5" material="color: red; opacity: 0"
+                     width="6" visible="false" clickable>
+                <a-image height="3" width="6"
+                         src="/imgs/speech-bubble.png"></a-image>
+            </a-plane>
+
+            <!-- Speech bubble text entities -->
+            <a-entity id="speechBubbleA" position="-1 7.4 0.4" scale="10 10 10"
+                      text="value: Work?; color: black" look-at="#john"
+                      clickable visible="false"></a-entity>
+            <a-entity id="speechBubbleB" position="3 9.4 0.4" scale="10 10 10"
+                      text="value: Education?; color: black" look-at="#john"
+                      clickable visible="false"></a-entity>
+            <a-entity id="speechBubbleC" position="7 7.4 0.4" scale="10 10 10"
+                      text="value: Hobbies?; color: black" look-at="#john"
+                      clickable visible="false"></a-entity>
+        </a-marker>
+
+        <!-- Cursor definition -->
+        <!-- Allows interaction with clickable elements -->
+        <a-camera>
+            <a-cursor color="#ffba70" position="0 0 -1" fuse="true" fuse-timeout="2000" raycaster="objects: .link"></a-cursor>
+        </a-camera>
+    </a-scene>
+
+    <!-- Script for integrating Watson Assistant Chat -->
+    <script>
+        window.watsonAssistantChatOptions = {
+            integrationID: "f771a2bd-1b36-4ce2-85ee-4543d613733a", // The ID of this integration.
+            region: "eu-gb", // The region your integration is hosted in.
+            serviceInstanceID: "cd153831-2882-424a-921f-cd367fc10c99", // The ID of your service instance.
+            onLoad: async (instance) => { await instance.render(); }
+        };
+
+        // Load the Watson Assistant Chat script
+        setTimeout(function(){
+            const t=document.createElement('script');
+            t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+            document.head.appendChild(t);
+        });
+    </script>
+
+    <!-- Script for dynamically changing the 3D model based on the current month -->
+    <script>
+        document.querySelector('a-scene').addEventListener('loaded', function() {
+            let currentMonth = new Date().getMonth();
+            console.log(currentMonth);
+
+            // Define the model source based on the current month
+            let modelSource;
+            if (currentMonth >= 4 && currentMonth <= 7) {
+                modelSource = "#john-summer";
+            } else {
+                modelSource = "#john-animation";
+            }
+
+            // Set the model source
+            document.getElementById('john-model').setAttribute('gltf-model', modelSource);
+        });
+    </script>
+
+    <!--  Loads the main.js file   -->
+    <script src="./js/main.js"></script>
 </body>
