@@ -93,7 +93,7 @@
         <a-entity position="-2 .5 -1.4" rotation="-45.98 -4.56 5.28" scale="0.1 .25 .2" text-geometry="bevelEnabled:true;bevelSize:0.1;bevelThickness:0.1;curveSegments:1;font:https://cdn.glitch.com/c719c986-c0c5-48b8-967c-3cd8b8aa17f3%2Fexo2Black.typeface.json?1490305922150;height:0.5;size:2;value:J O H N   M C N A M A R A" material="color:pink;metalness:0.9;roughness:0.05;sphericalEnvMap:https://cdn.glitch.com/6f8b5a13-fd4d-445d-b9eb-57c735d720ea%2FTextureMap.png?1528781398531"></a-entity>
 
         <!-- linking the marker to the model we want to show -->
-        <a-entity id="john-model" gltf-model="#john-animation" scale="4 4 4" position="0 0 0" animation-mixer="clip: Idle; loop: repeat" ></a-entity>
+        <a-entity id="john-model" gltf-model="#john-summer" scale="4 4 4" position="0 0 0" animation-mixer="clip: Idle; loop: repeat" ></a-entity>
 
         <!-- The linkedin, email and back button -->
         <a-link id="email" target="_blank" class="clickable link" title="" image="" position="-2 2 2" rotation="-67.42 0 0" scale="1.2 1.2 1.2" geometry="primitive:circle;segments:64" material="shader:portal;side:double;visible:false" link="title:." visible="false"><a-box scale="0.8 0.8 1.05" material="src:#emailTexture" position="0 0 0" radius="2" segments-height="84" rotation="-23.450000000000003 0 0" geometry="">
@@ -158,6 +158,24 @@
     t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
     document.head.appendChild(t);
   });
+</script>
+
+<script>
+    document.querySelector('a-scene').addEventListener('loaded', function() {
+        let currentMonth = new Date().getMonth();
+        console.log(currentMonth);
+
+        // Define the model source based on the current month
+        let modelSource;
+        if (currentMonth >= 4 && currentMonth <= 7) {
+            modelSource = "#john-summer";
+        } else {
+            modelSource = "#john-animation";
+        }
+
+        // Set the model source
+        document.getElementById('john-model').setAttribute('gltf-model', modelSource);
+    });
 </script>
 
 <script src="./js/main.js"></script>
