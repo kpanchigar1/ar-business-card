@@ -156,11 +156,11 @@ function showContent() {
             "Try asking about \n my work between \n 2019-Present..."];
 
         let germanOptions = [
-            "Versuchen Sie, nachzufragen \\n meine Arbeit zwischen \\n 1999-2004...",
-            "Versuchen Sie, nachzufragen \\n meine Arbeit zwischen \\n 2004-2012...",
-            "Versuchen Sie, nachzufragen \\n meine Arbeit zwischen \\n 2012-2016...",
-            "Versuchen Sie, nachzufragen \\n meine Arbeit zwischen \\n 2016-2019...",
-            "Versuchen Sie \\n meine Arbeit zwischen \\n 2019-Gegenwärtig..."];
+            "Versuchen Sie, nachzufragen \n meine Arbeit zwischen \n 1999-2004...",
+            "Versuchen Sie, nachzufragen \n meine Arbeit zwischen \n 2004-2012...",
+            "Versuchen Sie, nachzufragen \n meine Arbeit zwischen \n 2012-2016...",
+            "Versuchen Sie, nachzufragen \n meine Arbeit zwischen \n 2016-2019...",
+            "Versuchen Sie \n meine Arbeit zwischen \n 2019-Gegenwärtig..."];
 
         if (language === "german") {
             options = germanOptions;
