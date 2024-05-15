@@ -1,11 +1,13 @@
-// TODO: add documentation
 // TODO: fix T-Pose issue with model
+// Log that main.js has been loaded
 console.log("loaded main.js")
 
+// Variable to track if audio is playing
 let playingAudio = false;
 
+// Function to set up elements and event listeners once window is fully loaded
 window.onload = function(){
-    // check if the browser supports navigator.mediaDevices.getUserMedia
+    // Checks if the browser supports navigator.mediaDevices.getUserMedia
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         // Request the camera
         navigator.mediaDevices.getUserMedia({ video: true }).catch(function(err) {
@@ -13,6 +15,7 @@ window.onload = function(){
         });
     }
 
+    // Create popup elements for language selection
     var popupContainer = document.getElementById('popup-container');
     var popupBox = document.createElement('div');
     var germanButton = document.createElement('button');
@@ -24,8 +27,10 @@ window.onload = function(){
     germanButton.innerText = 'Deutsch';
     englishButton.innerText = 'English';
 
+    // Overview popup displayed upon loading the website
     popupBox.innerHTML = "<div class=popup-content><h2>Hi there!</h2><p>My name is John McNamara and I am a software engineer at IBM. I am passionate about technology and I am always looking for new challenges. If you want to know more about me, feel free to ask me anything! Please choose a language: </p></div>";
 
+    // Set up event listeners for language buttons
     germanButton.addEventListener('click', function() {
         language = "german";
         updateTextContent();
@@ -43,6 +48,7 @@ window.onload = function(){
     popupContainer.appendChild(popupBox);
     console.log("load things working")
 
+    // Function to update text content based on selected language
     function updateTextContent() {
         var workText, educationText, hobbiesText;
         if (language === "german") {
@@ -168,6 +174,7 @@ function showContent() {
             options = englishOptions;
         }
 
+        // Function to shuffle the options
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 let j = Math.floor(Math.random() * (i + 1));
@@ -262,11 +269,12 @@ function showContent() {
     });
 }
 
+// Function to change text content in speech bubbles
 function changeText(text1, text2, text3, colour) {
     console.log("Speech bubble content changes")
     console.log(text1)
 
-    // Get the content element
+    // Get the content elements
     var contentElement1 = document.getElementById('box1');
     var contentElement2 = document.getElementById('box2');
     var contentElement3 = document.getElementById('box3');
@@ -308,15 +316,18 @@ function changeText(text1, text2, text3, colour) {
     contentElement6.setAttribute('visible', 'true');
 }
 
+// Variable to track if overview has already been played
 let overviewPlayed = false;
 
 // Disabling the raycaster component when the page loads to avoid accidental clicks
 document.querySelector('a-cursor').setAttribute('raycaster', 'enabled: false');
 
+// Event listener for marker found
 document.querySelector('a-marker').addEventListener('markerFound', function() {
     // Enable the raycaster component when the marker is found
     document.querySelector('a-cursor').setAttribute('raycaster', 'enabled: true');
 
+    // Play overview audio and display caption if not played yet
     if (!overviewPlayed){
         document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Stand; loop: once');
     }
@@ -345,10 +356,11 @@ document.querySelector('a-marker').addEventListener('markerFound', function() {
         }
     });
 
+
+    // Show email and LinkedIn links
     document.getElementById('email').setAttribute('visible', 'true');
     document.getElementById('email').setAttribute('href', 'mailto:j0nnymac@uk.ibm.com');
     // console.log('set email visible and add href');
-
     document.getElementById('linkedin').setAttribute('visible', 'true');
     document.getElementById('linkedin').setAttribute('href', 'https://uk.linkedin.com/in/jonmcnamara');
 });
@@ -366,6 +378,7 @@ function hideCaption() {
 }
 
 // function to display the back button
+// Displays back button and set up click event listener to reset text content
 function displayBackButton() {
     let backButton = document.getElementById('back');
     backButton.setAttribute('visible', 'true');
