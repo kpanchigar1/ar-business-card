@@ -1,4 +1,3 @@
-// TODO: fix T-Pose issue with model
 // Log that main.js has been loaded
 console.log("loaded main.js")
 
@@ -383,7 +382,6 @@ function displayBackButton() {
     let backButton = document.getElementById('back');
     backButton.setAttribute('visible', 'true');
     backButton.addEventListener('click', function(){
-        // TODO: add german text
         if(language === "german"){
             changeText(
                 "Klicken Sie hier, \n um mehr über meine \n Arbeit zu erfahren",
