@@ -1,11 +1,12 @@
-// TODO: add documentation
-// TODO: fix T-Pose issue with model
+// Log that main.js has been loaded
 console.log("loaded main.js")
 
+// Variable to track if audio is playing
 let playingAudio = false;
 
+// Function to set up elements and event listeners once window is fully loaded
 window.onload = function(){
-    // check if the browser supports navigator.mediaDevices.getUserMedia
+    // Checks if the browser supports navigator.mediaDevices.getUserMedia
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         // Request the camera
         navigator.mediaDevices.getUserMedia({ video: true }).catch(function(err) {
@@ -13,6 +14,7 @@ window.onload = function(){
         });
     }
 
+    // Create popup elements for language selection
     var popupContainer = document.getElementById('popup-container');
     var popupBox = document.createElement('div');
     var germanButton = document.createElement('button');
@@ -24,8 +26,10 @@ window.onload = function(){
     germanButton.innerText = 'Deutsch';
     englishButton.innerText = 'English';
 
+    // Overview popup displayed upon loading the website
     popupBox.innerHTML = "<div class=popup-content><h2>Hi there!</h2><p>My name is John McNamara and I am a software engineer at IBM. I am passionate about technology and I am always looking for new challenges. If you want to know more about me, feel free to ask me anything! Please choose a language: </p></div>";
 
+    // Set up event listeners for language buttons
     germanButton.addEventListener('click', function() {
         language = "german";
         updateTextContent();
@@ -43,6 +47,7 @@ window.onload = function(){
     popupContainer.appendChild(popupBox);
     console.log("load things working")
 
+    // Function to update text content based on selected language
     function updateTextContent() {
         var workText, educationText, hobbiesText;
         if (language === "german") {
@@ -90,7 +95,7 @@ function showContent() {
     contentElement6.setAttribute('visible', 'true');
 
     // Create a dictionary that maps speech bubble text to audio files and captions
-    var speechBubbleToAudioMap = {
+    var speechBubbleToAudioMap= {
         'Click here to learn \n about my work': ['/audio/workHistory.wav', "I have worked at IBM for 24 years, starting as a Technical Integration Consultant in 1999, and I currently work as a UK University Programs Lead. I have a background that includes consultancy, performance, service & product delivery, all of which is underpinned by a passion for innovation. I am also the Chair of the Board for the South Coast Institute of Technology."],
         'Click here to learn \n about my education': ['/audio/education.wav', "I attended the University of Hull from 1991-1994 and achieved a 2 1 in Information Systems. During my degree, I worked in a management position for UCI cinemas."],
         'Click here to learn \n about my hobbies': ['/audio/hobbies.wav', "I enjoy gaming, inventing, hacking, writing, making presentations, Brazilian Jiu-Jitsu, medical service robots and space exploration."],
@@ -106,7 +111,7 @@ function showContent() {
         'Try asking about \n gaming...': ['/audio/gaming.wav', "I have played project Gotham,  Counter-strike, Battlefield, Dirt, Gran Turismo, Halo, and countless others."],
         'Try asking about \n writing...': ['/audio/writing.wav', "I have a wordpress site where I share my thoughts and current work. You can find it at j0nnymac.wordpress.com."],
         'Klicken Sie hier, \n um mehr über meine \n Arbeit zu erfahren': ['/audio/de-workHistory.wav', "Ich arbeite seit 24 Jahren bei IBM, begann 1999 als Berater für technische Integration und arbeite derzeit als Programmleiter für Universitäten in Großbritannien. Ich verfüge über einen Hintergrund, der Beratung, Leistung, Service und Produktlieferung umfasst, und all dies wird durch eine Leidenschaft für Innovation untermauert. Ich bin außerdem Vorstandsvorsitzender des South Coast Institute of Technology."],
-        'Klicken Sie hier, \n um mehr über meine \n Ausbildung zu erfahren': ['/audio/de-education.wav', "Ich besuchte die University of Hull von 1991 bis 1994 und erlangte einen 2 1 in Informationssystemen. Während meines Studiums war ich in einer Führungsposition für UCI-Kinos tätig."],
+        "Klicken Sie hier, \n  um mehr über meine \n Ausbildung zu erfahren": ['/audio/de-education.wav', "Ich besuchte die University of Hull von 1991 bis 1994 und erlangte einen 2 1 in Informationssystemen. Während meines Studiums war ich in einer Führungsposition für UCI-Kinos tätig."],
         'Klicken Sie hier, \n um mehr über meine \n Hobbys zu erfahren': ['/audio/de-hobbies.wav', "Ich genieße das Spielen, Erfinden, Hacken, Schreiben, Präsentieren, brasilianisches Jiu-Jitsu, medizinische Serviceroboter und Weltraumforschung."],
         'Versuchen Sie, nachzufragen \n meine Arbeit zwischen \n 1999-2004...': ['/audio/de-1999-2004.wav', "Ich war technischer Integrationsberater für IBM. In dieser Rolle musste ich mich mit Kunden, von Banken bis hin zu Pharmaunternehmen, an der optimalen Herangehensweise und Umsetzung der Integration ihrer Geschäftssysteme beteiligen."],
         'Versuchen Sie, nachzufragen \n meine Arbeit zwischen \n 2004-2012...': ['/audio/de-2004-2012.wav', "Ich war BPM-Berater für IBM. In dieser Rolle beriet ich Kunden auf der ganzen Welt, um die Anwendung von Goldstandard-Geschäftsprozessmethoden auf neue und bestehende Unternehmen zu leiten und die Effektivität dieser Prozesse durch den Einsatz von BPM-Software zu steigern."],
@@ -129,7 +134,12 @@ function showContent() {
         var caption = speechBubbleToAudioMap[speechBubbleText][1];
         if(!playingAudio){
             audio.play();
-            document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Talk; loop: repeat');
+            if (speechBubbleText === "Try asking about \n brazilian jiu-jitsu..." || speechBubbleText === "Versuchen Sie \n brasilianisches Jiu-Jitsu...") {
+                document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Fight; loop: repeat');
+            }
+            else {
+                document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Talk; loop: repeat');
+            }
             playingAudio = true;
             displayCaption(caption);
         }
@@ -151,11 +161,11 @@ function showContent() {
             "Try asking about \n my work between \n 2019-Present..."];
 
         let germanOptions = [
-            "Versuchen Sie, nachzufragen \\n meine Arbeit zwischen \\n 1999-2004...",
-            "Versuchen Sie, nachzufragen \\n meine Arbeit zwischen \\n 2004-2012...",
-            "Versuchen Sie, nachzufragen \\n meine Arbeit zwischen \\n 2012-2016...",
-            "Versuchen Sie, nachzufragen \\n meine Arbeit zwischen \\n 2016-2019...",
-            "Versuchen Sie \\n meine Arbeit zwischen \\n 2019-Gegenwärtig..."];
+            "Versuchen Sie, nachzufragen \n meine Arbeit zwischen \n 1999-2004...",
+            "Versuchen Sie, nachzufragen \n meine Arbeit zwischen \n 2004-2012...",
+            "Versuchen Sie, nachzufragen \n meine Arbeit zwischen \n 2012-2016...",
+            "Versuchen Sie, nachzufragen \n meine Arbeit zwischen \n 2016-2019...",
+            "Versuchen Sie \n meine Arbeit zwischen \n 2019-Gegenwärtig..."];
 
         if (language === "german") {
             options = germanOptions;
@@ -163,6 +173,7 @@ function showContent() {
             options = englishOptions;
         }
 
+        // Function to shuffle the options
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 let j = Math.floor(Math.random() * (i + 1));
@@ -172,7 +183,11 @@ function showContent() {
         shuffle(options);
         let selectedOptions = options.slice(0, 3);
 
-        changeText(selectedOptions[0], selectedOptions[1], selectedOptions[2], "default");
+        // Only change text if speech bubble text is the default one
+        if (speechBubbleText === "Click here to learn \n about my work" || speechBubbleText === "Klicken Sie hier, \n um mehr über meine \n Arbeit zu erfahren") {
+            changeText(selectedOptions[0], selectedOptions[1], selectedOptions[2], "default");
+        }
+
         displayBackButton();
     });
 
@@ -183,7 +198,12 @@ function showContent() {
         var caption = speechBubbleToAudioMap[speechBubbleText][1];
         if(!playingAudio){
             audio.play();
-            document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Talk; loop: repeat');
+            if (speechBubbleText === "Try asking about \n brazilian jiu-jitsu..." || speechBubbleText === "Versuchen Sie \n brasilianisches Jiu-Jitsu...") {
+                document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Fight; loop: repeat');
+            }
+            else {
+                document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Talk; loop: repeat');
+            }
             playingAudio = true;
             displayCaption(caption);
         }
@@ -192,13 +212,17 @@ function showContent() {
             playingAudio = false;
             hideCaption();
         });
-        if (language === "german"){
-            changeText("Versuchen Sie \n meine Arbeit \n Erfahrung...", "Versuchen Sie \n meine univer...",
-                                               "Versuchen Sie \n mein Abschluss...", "#FF0000");
-        }
-        else{
-            changeText("Try asking about \n my work \n experience...", "Try asking about \n my university...",
-                        "Try asking about \n my degree...", "#FF0000");
+
+        if (speechBubbleText === "Click here to learn \n about my education" || speechBubbleText === "Klicken Sie hier, \n  um mehr über meine \n Ausbildung zu erfahren") {
+            if (language === "german") {
+                changeText(
+                    "Versuchen Sie \n meine Arbeit \n Erfahrung...",
+                    "Versuchen Sie \n meine univer...",
+                    "Versuchen Sie \n mein Abschluss...", "#FF0000");
+            } else {
+                changeText("Try asking about \n my work \n experience...", "Try asking about \n my university...",
+                    "Try asking about \n my degree...", "#FF0000");
+            }
         }
         displayBackButton();
     });
@@ -210,7 +234,12 @@ function showContent() {
         var caption = speechBubbleToAudioMap[speechBubbleText][1];
         if(!playingAudio){
             audio.play();
-            document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Talk; loop: repeat');
+            if (speechBubbleText === "Try asking about \n brazilian jiu-jitsu..." || speechBubbleText === "Versuchen Sie \n brasilianisches Jiu-Jitsu...") {
+                document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Fight; loop: repeat');
+            }
+            else {
+                document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Talk; loop: repeat');
+            }
             playingAudio = true;
             displayCaption(caption);
         }
@@ -219,26 +248,32 @@ function showContent() {
             document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Idle; loop: repeat');
             hideCaption();
         });
-        if (language === "german"){
-            changeText("Versuchen Sie \n brasilianisches Jiu-Jitsu...", "Versuchen Sie \n gaming...", "Versuchen Sie \n Schreiben...",
-                                    "#00FF00");
-        }
-        else{
-            changeText("Try asking about \n brazilian jiu-jitsu...", "Try asking about \n gaming...", "Try asking about \n writing...",
-                        "#00FF00");
+
+        if(speechBubbleText === "Click here to learn \n about my hobbies" || speechBubbleText === "Klicken Sie hier, \n um mehr über meine \n Hobbys zu erfahren") {
+            if (language === "german") {
+                changeText(
+                    "Versuchen Sie \n brasilianisches Jiu-Jitsu...",
+                    "Versuchen Sie \n gaming...",
+                    "Versuchen Sie \n Schreiben...",
+                    "#00FF00");
+            } else {
+                changeText(
+                    "Try asking about \n brazilian jiu-jitsu...",
+                    "Try asking about \n gaming...",
+                    "Try asking about \n writing...",
+                    "#00FF00");
+            }
         }
         displayBackButton();
     });
-
-    // show question form popup
-    // showPopup();
 }
 
+// Function to change text content in speech bubbles
 function changeText(text1, text2, text3, colour) {
     console.log("Speech bubble content changes")
     console.log(text1)
 
-    // Get the content element
+    // Get the content elements
     var contentElement1 = document.getElementById('box1');
     var contentElement2 = document.getElementById('box2');
     var contentElement3 = document.getElementById('box3');
@@ -267,9 +302,9 @@ function changeText(text1, text2, text3, colour) {
     }
 
     // Changing the position of the text
-    contentElement4.setAttribute('position', "-0.8 8 0.2");
-    contentElement5.setAttribute('position', "3.2 12 0.2");
-    contentElement6.setAttribute('position', "7.2 8 0.2");
+    contentElement4.setAttribute('position', "-1.2 7.5 0.2");
+    contentElement5.setAttribute('position', "3.2 9.3 0.2");
+    contentElement6.setAttribute('position', "7 7.5 0.2");
 
     // Set all content to visible
     contentElement1.setAttribute('visible', 'true');
@@ -280,62 +315,54 @@ function changeText(text1, text2, text3, colour) {
     contentElement6.setAttribute('visible', 'true');
 }
 
-// TODO: add a message to the user that the camera is not supported
-
-
+// Variable to track if overview has already been played
 let overviewPlayed = false;
 
 // Disabling the raycaster component when the page loads to avoid accidental clicks
 document.querySelector('a-cursor').setAttribute('raycaster', 'enabled: false');
 
+// Event listener for marker found
 document.querySelector('a-marker').addEventListener('markerFound', function() {
     // Enable the raycaster component when the marker is found
     document.querySelector('a-cursor').setAttribute('raycaster', 'enabled: true');
 
-    // Call the showContent function after 10000 milliseconds (10 seconds)
-    setTimeout(showContent, 10000);
-    setTimeout(showPopup, 10000);
-    
-    if (!overviewPlayed && !playingAudio) {
-        if (language === "german"){
-            var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/de-overview.wav');
-            var caption = "Ich bin John McNamara, IBM Master Inventor, Honorarprofessor, wissenschaftlicher Mitarbeiter, Schlagmann und Leiter derzeit IBM UK University Programs.";
-        }
-        else{
-            var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/overview.wav');
-            var caption = "I’m John McNamara, an IBM Master Inventor, Honorary Professor, Research Fellow, Impact Fellow and I currently lead IBM UK University Programs.";
-        }
-        audio.play();
+    // Play overview audio and display caption if not played yet
+    if (!overviewPlayed){
         document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Stand; loop: once');
-        console.log("Overview audio played.")
-        overviewPlayed = true;
-        playingAudio = true;
-        displayCaption(caption);
-        audio.addEventListener('ended', function(){
-            document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Idle; loop: repeat');
-            playingAudio = false;
-            hideCaption();
-        });
     }
+    document.querySelector('#john-model').addEventListener('animation-finished', function() {
+        if (!overviewPlayed && !playingAudio) {
+            if (language === "german"){
+                var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/de-overview.wav');
+                var caption = "Ich bin John McNamara, IBM Master Inventor, Honorarprofessor, wissenschaftlicher Mitarbeiter, Schlagmann und Leiter derzeit IBM UK University Programs.";
+            }
+            else{
+                var audio = new Audio('https://startling-hummingbird-a198e7.netlify.app/audio/overview.wav');
+                var caption = "I’m John McNamara, an IBM Master Inventor, Honorary Professor, Research Fellow, Impact Fellow and I currently lead IBM UK University Programs.";
+            }
+            audio.play();
+            document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Talk; loop: repeat');
+            console.log("Overview audio played.")
+            overviewPlayed = true;
+            playingAudio = true;
+            displayCaption(caption);
+            audio.addEventListener('ended', function(){
+                document.getElementById('john-model').setAttribute('animation-mixer', 'clip: Idle; loop: repeat');
+                playingAudio = false;
+                hideCaption();
+                showContent();
+            });
+        }
+    });
 
+
+    // Show email and LinkedIn links
     document.getElementById('email').setAttribute('visible', 'true');
     document.getElementById('email').setAttribute('href', 'mailto:j0nnymac@uk.ibm.com');
     // console.log('set email visible and add href');
-
     document.getElementById('linkedin').setAttribute('visible', 'true');
     document.getElementById('linkedin').setAttribute('href', 'https://uk.linkedin.com/in/jonmcnamara');
-    // console.log('set linkedin visible and add href');
 });
-
-// Function to show the question popup
-function hidePopup() {
-    document.getElementById("popup").setAttribute('hidden', 'true');
-}
-
-// Function to hide the question popup
-function showPopup() {
-    document.getElementById("popup").removeAttribute('hidden');
-}
 
 // function to display captions
 function displayCaption(captionText) {
@@ -350,12 +377,23 @@ function hideCaption() {
 }
 
 // function to display the back button
+// Displays back button and set up click event listener to reset text content
 function displayBackButton() {
     let backButton = document.getElementById('back');
     backButton.setAttribute('visible', 'true');
     backButton.addEventListener('click', function(){
-    changeText("\"Click here to learn \\n about my work\"", "Click here to learn \n about my education",
-            "Click here to learn \n about my hobbies", "default");
+        if(language === "german"){
+            changeText(
+                "Klicken Sie hier, \n um mehr über meine \n Arbeit zu erfahren",
+                "Klicken Sie hier, \n  um mehr über meine \n Ausbildung zu erfahren",
+                "Klicken Sie hier, \n um mehr über meine \n Hobbys zu erfahren", "default");
+        }
+        else {
+            changeText(
+                "Click here to learn \n about my work",
+                "Click here to learn \n about my education",
+                "Click here to learn \n about my hobbies", "default");
+        }
         document.getElementById('back').setAttribute('visible', 'false');
     });
 

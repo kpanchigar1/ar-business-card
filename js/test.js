@@ -16,9 +16,11 @@ test("Speech file generator test", async () => {
     textToSpeechGenerator("Testing generator", "test.wav");
     await delay(5000);
 
+    // set source and destination of audio files
     const source = path.join(__dirname, "../", "test.wav");
     const dest = path.join(__dirname, "../audio", "test.wav");
 
+    // check appropriate generation
     fs.rename(source, dest, (err) => {
         if (err) {
         response = "File not generated properly";
@@ -28,6 +30,8 @@ test("Speech file generator test", async () => {
     });
 
     await delay(1000);
+
+    // deletes the file if generated improperly
     fs.unlink("./audio/test.wav",
     (err => {
         if (err) console.log(err);
@@ -39,8 +43,6 @@ test("Speech file generator test", async () => {
     expect(response).toEqual("File generated!"); 
 });
 
-
-//Tests for the Watson Assistant responses, checking replies to certain questions
 test("Watson Assistant Invalid question", async () => {
     response = chatbot("abcdefg1234").then(response => {
         expect(response).toEqual("I'm afraid I don't understand. Please rephrase your question.");
@@ -48,6 +50,7 @@ test("Watson Assistant Invalid question", async () => {
     await delay(1000);
 });
 
+// Test hobbies question
 test("Watson Assistant Hobbies", async () => {
     response = chatbot("Tell me about your hobbies").then(response => {
         expect(response).toEqual("Which hobby would you like to know more about?");
@@ -55,6 +58,7 @@ test("Watson Assistant Hobbies", async () => {
     await delay(1000);
 });
 
+// Test work question
 test("Watson Assistant Work", async () => {
     response = chatbot("Tell me about your work history").then(response => {
         expect(response).toEqual("What period would you like to find out more about?");
@@ -62,6 +66,7 @@ test("Watson Assistant Work", async () => {
     await delay(1000);
 });
 
+// Test education question
 test("Watson Assistant Education", async () => {
     response = chatbot("Tell me about your education history").then(response => {
         expect(response).toEqual("Which part of my education would you like to know more about?");
@@ -69,6 +74,7 @@ test("Watson Assistant Education", async () => {
     await delay(1000);
 });
 
+// Test gaming question (related to hobbies)
 test("Watson Assistant Gaming", async () => {
     response = chatbot("Tell me about gaming").then(response => {
         expect(response).toEqual("I have played project Gotham,  Counter-strike, Battlefield, Dirt, Gran Turismo, Halo, and countless others.");
